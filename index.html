@@ -49,7 +49,7 @@
                     <span>Stake and interest balance</span>
                 </div>
                 <div class="tc-main-info-stake-button">
-                    <button>STAKE CASE</button>
+                    <button class=" button waves-effect waves-light">STAKE CASE</button>
                 </div>
                 <div class="tc-info-block">
                     <span>Avg. Apy Rewards</span>
@@ -131,6 +131,10 @@
         </div>
 
     </div>
-    
+    <script src="assets/waves.min.js"></script>
+    <script type="text/javascript">
+        Waves.attach('.button', ['waves-button', 'waves-float']);
+        Waves.init();
+    </script> 
 </body>
 </html>
