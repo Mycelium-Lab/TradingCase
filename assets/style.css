@@ -1,0 +1,364 @@
+@font-face {
+    font-family: 'SF UI Text';
+    font-style: normal;
+    font-weight: 400;
+    src: local('SF UI Text'), url('https://fonts.cdnfonts.com/s/15008/SFUIText-Regular.woff') format('woff');
+}
+@font-face {
+    font-family: 'SF UI Text';
+    font-style: italic;
+    font-weight: 400;
+    src: local('SF UI Text'), url('https://fonts.cdnfonts.com/s/15008/SFUIText-RegularItalic.woff') format('woff');
+}
+@font-face {
+    font-family: 'SF UI Text';
+    font-style: normal;
+    font-weight: 300;
+    src: local('SF UI Text'), url('https://fonts.cdnfonts.com/s/15008/SFUIText-Light.woff') format('woff');
+}
+@font-face {
+    font-family: 'SF UI Text';
+    font-style: italic;
+    font-weight: 300;
+    src: local('SF UI Text'), url('https://fonts.cdnfonts.com/s/15008/SFUIText-LightItalic.woff') format('woff');
+}
+@font-face {
+    font-family: 'SF UI Text';
+    font-style: normal;
+    font-weight: 500;
+    src: local('SF UI Text'), url('https://fonts.cdnfonts.com/s/15008/SFUIText-Medium.woff') format('woff');
+}
+@font-face {
+    font-family: 'SF UI Text';
+    font-style: italic;
+    font-weight: 500;
+    src: local('SF UI Text'), url('https://fonts.cdnfonts.com/s/15008/SFUIText-MediumItalic.woff') format('woff');
+}
+@font-face {
+    font-family: 'SF UI Text';
+    font-style: normal;
+    font-weight: 600;
+    src: local('SF UI Text'), url('https://fonts.cdnfonts.com/s/15008/SFUIText-Semibold.woff') format('woff');
+}
+@font-face {
+    font-family: 'SF UI Text';
+    font-style: italic;
+    font-weight: 600;
+    src: local('SF UI Text'), url('https://fonts.cdnfonts.com/s/15008/SFUIText-SemiboldItalic.woff') format('woff');
+}
+@font-face {
+    font-family: 'SF UI Text';
+    font-style: normal;
+    font-weight: 700;
+    src: local('SF UI Text'), url('https://fonts.cdnfonts.com/s/15008/SFUIText-Bold.woff') format('woff');
+}
+@font-face {
+    font-family: 'SF UI Text';
+    font-style: italic;
+    font-weight: 700;
+    src: local('SF UI Text'), url('https://fonts.cdnfonts.com/s/15008/SFUIText-BoldItalic.woff') format('woff');
+}
+@font-face {
+    font-family: 'SF UI Text';
+    font-style: normal;
+    font-weight: 800;
+    src: local('SF UI Text'), url('https://fonts.cdnfonts.com/s/15008/SFUIText-Heavy.woff') format('woff');
+}
+@font-face {
+    font-family: 'SF UI Text';
+    font-style: italic;
+    font-weight: 800;
+    src: local('SF UI Text'), url('https://fonts.cdnfonts.com/s/15008/SFUIText-HeavyItalic.woff') format('woff');
+}
+
+body {
+    margin: 0;
+    background: #F3F5F6;
+}
+.container {
+    width: 77.604vw;
+    display: block;
+    margin: 0 auto;
+}
+.tc-wrapper .container {
+    width: 69.219vw;
+}
+
+header {
+    background: #2A3042;
+    width: 100vw;
+    height: 6.302vw;
+}
+.nav {
+    padding: 0 2.089vw 0 3.698vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;    
+    height: 6.302vw;
+}
+.nav-left {
+    display: flex;
+    align-items: center;
+}
+
+.nav-left img {
+    width: 4.323vw;
+    margin-right: 5.938vw;
+}
+.nav-left a {
+    font-family: 'HelveticaNeueCyr';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1.042vw;
+    line-height: 1.250vw;
+    letter-spacing: 0.026vw;
+    color: #717171;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    margin-right: 2.969vw;
+}
+.nav-left a:last-child {
+    margin-right: 0;
+}
+.nav-left a:hover {
+    text-shadow: 0 0 0.042vw #CACACA, 0 0 0.042vw #CACACA;
+    color: #CACACA;
+}
+.nav-left a .icon {
+    margin-right: 0.677vw;
+    display: flex;
+    fill: #626262;
+}
+.nav-left a:nth-child(2) .icon {
+    width: 0.521vw;
+    height: 0.938vw;
+}
+.nav-left a:nth-child(3) .icon {
+    width: 1.042vw;
+    height: 0.781vw;
+}
+.nav-left a:nth-child(4) .icon {
+    width: 1.042vw;
+    height: 0.781vw;
+}
+
+.nav-left a:hover .icon {
+    fill: #CACACA;
+}
+
+.nav-right {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-family: 'HelveticaNeueCyr';
+}
+
+.nav-right a:first-child .icon {
+    width: 1.250vw;
+    height: 1.146vw;
+}
+.nav-right a:first-child {
+    margin-right: 1.667vw
+}
+
+.nav-right a:first-child:hover .icon {
+    fill: #CACACA;
+}
+
+.rank-info {
+    font-style: normal;
+    font-weight: normal;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-right: 0.729vw;
+}
+
+.rank-info div:first-child {
+    font-size: 0.729vw;
+    line-height: 0.885vw;
+    letter-spacing: 0.026vw;
+    color: #717171;
+}
+.rank-info div:nth-child(2) {
+    font-size: 0.625vw;
+    line-height: 0.729vw;
+    color: #D5511B;
+}
+.user-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.user-info .user-avatar {
+    width: 1.563vw;
+    height: 1.563vw;
+    background: #46506F;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    margin-right: 0.573vw;
+}
+.user-info .user-name {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 0.625vw;
+    line-height: 0.729vw;
+    color: #E6E6E6;
+    margin-right: 0.536vw;
+}
+.user-info svg {
+    width: 0.417vw;
+    height: 0.260vw;
+}
+.tc-wrapper {
+    font-family: 'SF UI Text';
+    font-style: normal;
+}
+.tc-main-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4.583vw 0;
+}
+.tc-main-info-balance {
+    font-family: 'HelveticaNeueCyr';
+    font-style: normal;
+    display: flex;
+    flex-direction: column;
+}
+.tc-main-info-balance span:first-child {
+    font-size: 1.563vw;
+    line-height: 1.927vw;
+    font-weight: bold;
+    color: #000000;
+    margin-bottom: 0.417vw;
+}
+.tc-main-info-balance span:last-child {
+    font-weight: normal;
+    font-size: 0.677vw;
+    line-height: 0.833vw;
+    color: #5B5A99;
+}
+button {
+    background: #3B5DE7;
+    border: 0.052vw solid #3B5DE7;
+    box-sizing: border-box;
+    border-radius: 0.260vw;
+    -webkit-border-radius: 0.260vw;
+    -moz-border-radius: 0.260vw;
+    -ms-border-radius: 0.260vw;
+    -o-border-radius: 0.260vw;
+    font-weight: bold;
+    font-size: 0.729vw;
+    line-height: 0.938vw;
+    color: #fff;
+    filter: drop-shadow(0 0.208vw 0.365vw rgba(0, 0, 0, 0.19));
+    -webkit-filter: drop-shadow(0 0.208vw 0.365vw rgba(0, 0, 0, 0.19));
+}
+.tc-main-info-stake-button button {
+    width: 10.208vw;
+    height: 3.177vw;
+}
+.tc-info-block {
+    background: #FFFFFF;
+    box-shadow: 0 0.625vw 1.250vw rgba(18, 38, 63, 0.03);
+    border-radius: 0.208vw;
+    -webkit-border-radius: 0.208vw;
+    -moz-border-radius: 0.208vw;
+    -ms-border-radius: 0.208vw;
+    -o-border-radius: 0.208vw;
+    width: 10.781vw;
+    height: 5.625vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.tc-info-block:last-child {
+    width: 21.198vw;
+}
+.tc-main-info .tc-info-block span{
+    padding-left: 1.123vw
+}
+.tc-info-block span:first-child {
+    font-size: 0.833vw;
+    line-height: 1.250vw;
+    color: #8687A7;
+    margin-bottom: 0.677vw;
+}
+.tc-info-block span:last-child {
+    font-size: 1.250vw;
+    line-height: 1.094vw;
+    color: #495057;
+}
+
+.tc-info-block:nth-child(3) span:last-child {
+    color: #45CB85;
+}
+
+.tc-tables .tc-info-block {
+    width: -webkit-fill-available;
+    height: unset;
+    margin-bottom: 2.188vw;
+    padding: 1.042vw 2.084vw 2.084vw;
+}
+.tc-tables .tc-info-block span:last-child{
+    font-size: 0.781vw;
+    line-height: 0.938vw;
+}
+.tc-tables .tc-info-block span:first-child{
+    margin-bottom: 1.302vw;
+}
+
+/*****TABLICA*****/
+.tg {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+.tg thead {
+    border-top: 0.052vw solid #EFF2F7;
+    border-bottom: 0.052vw solid #EFF2F7;
+}
+.tg td {
+    border-style: solid;
+    border-width: 0px;    
+    font-size: 0.729vw;
+    line-height: 1.094vw;
+    color: #8687A7;
+    overflow: hidden;
+    padding: 0.677vw 0;
+    word-break: normal;
+}
+
+.tg th {
+    border-style: solid;
+    border-width: 0px;    
+    font-size: 0.729vw;
+    font-weight: normal;
+    overflow: hidden;
+    padding: 0.677vw 0;
+    word-break: normal;
+}
+
+.tg .tg-0pky {
+    border-color: inherit;
+    text-align: left;
+    vertical-align: top;
+    color: #8687A7;
+}
+
+.tg .tg-0lax {
+    vertical-align: top;
+    color: #8687A7;
+}
+.tg-recent-activity .tg-0pky:first-child {
+    width: 10%;
+}
+.tg-recent-activity .tg-0lax:last-child {
+    width: 10%;
+}
+/**********************************/
