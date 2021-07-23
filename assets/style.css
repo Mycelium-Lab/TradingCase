@@ -260,6 +260,7 @@ header {
 .tc-wrapper {
     font-family: 'SF UI Text';
     font-style: normal;
+    padding-top: 10.885vw;
 }
 
 .tc-main-info {
@@ -267,7 +268,7 @@ header {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 10.885vw 0 4.583vw;
+    padding: 0 0 4.583vw;
 }
 
 .tc-main-info-balance {
@@ -783,6 +784,9 @@ break {
         width: 7px;
         height: 5px;
     }
+    .tc-wrapper {
+        padding-top: 95px;
+    }
     .tc-wrapper .container {
         width: -moz-available;          
         width: -webkit-fill-available; 
@@ -791,7 +795,7 @@ break {
         padding-right: 30px;
     }
     .tc-main-info {
-        padding: 95px 0 30px;
+        padding: 0 0 30px;
         flex-wrap: wrap;
     }
     .tc-main-info-balance span:first-child {
