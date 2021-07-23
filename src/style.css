@@ -284,6 +284,7 @@ header {
     font-weight: bold;
     color: #000000;
     margin-bottom: 0.417vw;
+    text-align: left;
 }
 
 .tc-main-info-balance span:last-child {
@@ -291,6 +292,7 @@ header {
     font-size: 0.677vw;
     line-height: 0.833vw;
     color: #5B5A99;
+    text-align: left;
 }
 
 .button {
