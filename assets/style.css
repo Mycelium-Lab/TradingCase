@@ -883,3 +883,10 @@ break {
     }
 
 }
+
+/**iphone5**/
+@media screen and (device-aspect-ratio: 40/71) {
+    .tc-main-info-stake-button button {
+        width: 120px;
+    }
+}
