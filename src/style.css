@@ -908,6 +908,7 @@ header {
 .invite-info {
     width: 0.573vw;
     height: 0.573vw;
+    margin-left: 0.3vw;
 }
 .tc-invite-main-info .tc-main-info-balance {
     font-family: SF UI Text;
@@ -1353,6 +1354,7 @@ header {
 .stake-case-order-details-info {
     width: 0.521vw;
     height: 0.521vw;
+    margin-left: 0.3vw;
 }
 .stake-case-order-details .stake-case-header {    
     margin-bottom: 2.865vw;
