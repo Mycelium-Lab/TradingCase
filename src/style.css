@@ -125,7 +125,7 @@ header {
     margin-right: 5.938vw;
 }
 
-.header .menu li a {
+.header .menu li button {
     font-family: 'HelveticaNeueCyr';
     font-style: normal;
     font-weight: normal;
@@ -144,37 +144,37 @@ header {
     -o-transition: 0.05s;
 }
 
-.header .menu li:last-child a {
+.header .menu li:last-child button {
     margin-right: 0;
 }
 
-.header .menu li a:hover {
+.header .menu li button:hover {
     text-shadow: 0 0 0.042vw #CACACA, 0 0 0.042vw #CACACA;
     color: #CACACA;
 }
 
-.header .menu li a .icon {
+.header .menu li button .icon {
     margin-right: 0.677vw;
     display: flex;
     fill: #626262;
 }
 
-.header .menu li:nth-child(1) a .icon {
+.header .menu li:nth-child(1) button .icon {
     width: 0.521vw;
     height: 0.938vw;
 }
 
-.header .menu li:nth-child(2) a .icon {
+.header .menu li:nth-child(2) button .icon {
     width: 1.042vw;
     height: 0.781vw;
 }
 
-.header .menu li:nth-child(3) a .icon {
+.header .menu li:nth-child(3) button .icon {
     width: 1.042vw;
     height: 0.781vw;
 }
 
-.header .menu a:hover .icon {
+.header .menu button:hover .icon {
     transition: 0.2s;
     -webkit-transition: 0.2s;
     -moz-transition: 0.2s;
@@ -742,13 +742,13 @@ header {
         width: 100%;    
     }
 
-    .header .menu li a {
+    .header .menu li button {
         font-size: 13px;
         padding: 1.15rem 1.1rem;
         margin-right: 0;
     }
 
-    .header .menu li a .icon {
+    .header .menu li button .icon {
         display: none;
     }
 
@@ -756,10 +756,10 @@ header {
         display: none;
     }
 
-    .nav-right a:first-child {
+    .nav-right button:first-child {
         margin-right: 13px;
     }
-    .nav-right a:first-child .icon {
+    .nav-right button:first-child .icon {
         width: 17px;
         height: 16px;
     }
