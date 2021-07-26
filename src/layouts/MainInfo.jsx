@@ -1,6 +1,7 @@
 import React from 'react';
 
 function MainInfo(props) {  
+  const { handleChange } = props; 
   return (
     <div className="tc-main-info">
           <div className="tc-main-info-balance">
@@ -8,7 +9,7 @@ function MainInfo(props) {
             <span>Stake and interest balance</span>
           </div>
           <div className="tc-main-info-stake-button">
-            <button className="button" onClick={()=>this.stake()}>STAKE CASE</button>
+            <button className="button" onClick={()=>handleChange('stake')}>STAKE CASE</button>
           </div>
           <div className="break"></div>
           <div className="tc-info-block">

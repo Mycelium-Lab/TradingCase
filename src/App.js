@@ -14,14 +14,18 @@ function App() {
   function handleChange(page){
     setPage(page);
   }
+
   return (
     <div className="App">
       <Header handleChange={handleChange} />
       { page == 'staking' &&
-        <Staiking />
+        <Staiking handleChange={handleChange} />
       }
       { page == 'invite' && 
           <Invite />
+      }
+      { page == 'stake' &&
+          <Stake />
       }
       <script type="text/javascript">
         Waves.attach('.button', ['waves-button', 'waves-float']);

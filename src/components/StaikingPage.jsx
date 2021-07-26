@@ -4,11 +4,12 @@ import TableRecentActivity from '../layouts/TableRecentActivity';
 import TableActiveStakes from '../layouts/TableActiveStakes';
 
 function Staiking(props) {
+  const { handleChange } = props;
     return (
         <div className="tc-wrapper">
           <div className="container">
 
-              <MainInfo />
+              <MainInfo handleChange={handleChange}/>
 
               <div className="tc-tables">
 
