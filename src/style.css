@@ -759,10 +759,10 @@ header {
         display: none;
     }
 
-    .nav-right button:first-child {
+    .nav-right a:first-child {
         margin-right: 13px;
     }
-    .nav-right button:first-child .icon {
+    .nav-right a:first-child .icon {
         width: 17px;
         height: 16px;
     }
