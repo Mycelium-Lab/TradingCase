@@ -908,6 +908,7 @@ header {
 .invite-info {
     width: 0.573vw;
     height: 0.573vw;
+    margin-left: 5px;
 }
 .tc-invite-main-info .tc-main-info-balance {
     font-family: SF UI Text;
@@ -949,6 +950,7 @@ header {
     font-size: 0.833vw;
     line-height: 0.990vw;
     margin-bottom: 0.677vw;
+    text-align: left;
 }
 .referal-progress {
     display: flex;
