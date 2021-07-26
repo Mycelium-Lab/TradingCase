@@ -39,7 +39,7 @@ function ReferalProgress(props) {
             <div className="referal-link-copy">
               <div>Referal link:</div>
               <div id="copy-referal-link">https://stakingcase.com/?src=0xe8d562606f35cb14da3e8fab1174f9b5ae8319c4</div>
-              <button id="referal-copy" className="button waves-button waves-float referal-button">Copy</button>
+              <button id="referal-copy" className="button referal-button">Copy</button>
             </div>
           </div>
     );

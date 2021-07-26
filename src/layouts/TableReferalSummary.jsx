@@ -36,49 +36,49 @@ function TableReferalSummary(params) {
                     <td className="tg-0lax">0</td>
                     <td className="tg-0lax">5%</td>
                     <td className="tg-0lax">0.000</td>
-                    <td className="tg-0lax tc-tables-referal-last-column"><button id="activate" className="button waves-button waves-float referal-button">Activate</button></td>
+                    <td className="tg-0lax tc-tables-referal-last-column"><button id="activate" className="button referal-button">Activate</button></td>
                   </tr>
                   <tr>
                     <td className="tg-0lax">3</td>
                     <td className="tg-0lax">0</td>
                     <td className="tg-0lax">2.5%</td>
                     <td className="tg-0lax">0.000</td>
-                    <td className="tg-0lax tc-tables-referal-last-column"><button id="activate" className="button waves-button waves-float referal-button">Activate</button></td>
+                    <td className="tg-0lax tc-tables-referal-last-column"><button id="activate" className="button referal-button">Activate</button></td>
                   </tr>
                   <tr>
                     <td className="tg-0lax">4</td>
                     <td className="tg-0lax">0</td>
                     <td className="tg-0lax">1.5%</td>
                     <td className="tg-0lax">0.000</td>
-                    <td className="tg-0lax tc-tables-referal-last-column"><button id="activate" className="button waves-button waves-float referal-button">Activate</button></td>
+                    <td className="tg-0lax tc-tables-referal-last-column"><button id="activate" className="button referal-button">Activate</button></td>
                   </tr>
                   <tr>
                     <td className="tg-0lax">5</td>
                     <td className="tg-0lax">0</td>
                     <td className="tg-0lax">1.0%</td>
                     <td className="tg-0lax">0.000</td>
-                    <td className="tg-0lax tc-tables-referal-last-column"><button id="activate" className="button waves-button waves-float referal-button">Activate</button></td>
+                    <td className="tg-0lax tc-tables-referal-last-column"><button id="activate" className="button referal-button">Activate</button></td>
                   </tr>
                   <tr>
                     <td className="tg-0lax">6</td>
                     <td className="tg-0lax">0</td>
                     <td className="tg-0lax">1.0%</td>
                     <td className="tg-0lax">0.000</td>
-                    <td className="tg-0lax tc-tables-referal-last-column"><button id="activate" className="button waves-button waves-float referal-button">Activate</button></td>
+                    <td className="tg-0lax tc-tables-referal-last-column"><button id="activate" className="button referal-button">Activate</button></td>
                   </tr>
                   <tr>
                     <td className="tg-0lax">7</td>
                     <td className="tg-0lax">0</td>
                     <td className="tg-0lax">0.5%</td>
                     <td className="tg-0lax">0.000</td>
-                    <td className="tg-0lax tc-tables-referal-last-column"><button id="activate" className="button waves-button waves-float referal-button">Activate</button></td>
+                    <td className="tg-0lax tc-tables-referal-last-column"><button id="activate" className="button referal-button">Activate</button></td>
                   </tr>
                   <tr>
                     <td className="tg-0lax">8</td>
                     <td className="tg-0lax">0</td>
                     <td className="tg-0lax">0.5%</td>
                     <td className="tg-0lax">0.000</td>
-                    <td className="tg-0lax tc-tables-referal-last-column"><button id="activate" className="button waves-button waves-float referal-button">Activate</button></td>
+                    <td className="tg-0lax tc-tables-referal-last-column"><button id="activate" className="button referal-button">Activate</button></td>
                   </tr>
                 </tbody>
               </table>

@@ -8,7 +8,7 @@ function MainInfo(props) {
             <span>Stake and interest balance</span>
           </div>
           <div className="tc-main-info-stake-button">
-            <button className=" button waves-effect waves-light">STAKE CASE</button>
+            <button className="button" onClick={()=>this.stake()}>STAKE CASE</button>
           </div>
           <div className="break"></div>
           <div className="tc-info-block">

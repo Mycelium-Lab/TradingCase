@@ -2,6 +2,7 @@ import React from 'react';
 import Header from './layouts/Header';
 import Staiking from './components/StaikingPage.jsx';
 import Invite from './components/InvitePage.jsx';
+import Stake from './components/Stake.jsx';
 
 import './App.css';
 import './style.css';

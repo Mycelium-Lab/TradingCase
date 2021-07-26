@@ -121,11 +121,11 @@ header {
 }
 
 .nav-left img {
-    width: 4.323vw;
+    width: 3.229vw;
     margin-right: 5.938vw;
 }
 
-.header .menu li button {
+.header .menu li a {
     font-family: 'HelveticaNeueCyr';
     font-style: normal;
     font-weight: normal;
@@ -142,42 +142,39 @@ header {
     -moz-transition: 0.05s;
     -ms-transition: 0.05s;
     -o-transition: 0.05s;
-    background: transparent;
-    border: none;
-    cursor: pointer;
 }
 
-.header .menu li:last-child button {
+.header .menu li:last-child a {
     margin-right: 0;
 }
 
-.header .menu li button:hover {
+.header .menu li a:hover {
     text-shadow: 0 0 0.042vw #CACACA, 0 0 0.042vw #CACACA;
     color: #CACACA;
 }
 
-.header .menu li button .icon {
+.header .menu li a .icon {
     margin-right: 0.677vw;
     display: flex;
     fill: #626262;
 }
 
-.header .menu li:nth-child(1) button .icon {
+.header .menu li:nth-child(1) a .icon {
     width: 0.521vw;
     height: 0.938vw;
 }
 
-.header .menu li:nth-child(2) button .icon {
+.header .menu li:nth-child(2) a .icon {
     width: 1.042vw;
     height: 0.781vw;
 }
 
-.header .menu li:nth-child(3) button .icon {
+.header .menu li:nth-child(3) a .icon {
     width: 1.042vw;
     height: 0.781vw;
 }
 
-.header .menu button:hover .icon {
+.header .menu a:hover .icon {
     transition: 0.2s;
     -webkit-transition: 0.2s;
     -moz-transition: 0.2s;
@@ -193,16 +190,16 @@ header {
     font-family: 'HelveticaNeueCyr';
 }
 
-.nav-right button:first-child .icon {
+.nav-right a:first-child .icon {
     width: 1.250vw;
     height: 1.146vw;
 }
 
-.nav-right button:first-child {
+.nav-right a:first-child {
     margin-right: 1.667vw
 }
 
-.nav-right button:first-child:hover .icon {
+.nav-right a:first-child:hover .icon {
     fill: #CACACA;
 }
 
@@ -745,13 +742,13 @@ header {
         width: 100%;    
     }
 
-    .header .menu li button {
+    .header .menu li a {
         font-size: 13px;
         padding: 1.15rem 1.1rem;
         margin-right: 0;
     }
 
-    .header .menu li button .icon {
+    .header .menu li a .icon {
         display: none;
     }
 
@@ -759,10 +756,10 @@ header {
         display: none;
     }
 
-    .nav-right button:first-child {
+    .nav-right a:first-child {
         margin-right: 13px;
     }
-    .nav-right button:first-child .icon {
+    .nav-right a:first-child .icon {
         width: 17px;
         height: 16px;
     }
@@ -908,7 +905,6 @@ header {
 .invite-info {
     width: 0.573vw;
     height: 0.573vw;
-    margin-left: 5px;
 }
 .tc-invite-main-info .tc-main-info-balance {
     font-family: SF UI Text;
@@ -950,7 +946,6 @@ header {
     font-size: 0.833vw;
     line-height: 0.990vw;
     margin-bottom: 0.677vw;
-    text-align: left;
 }
 .referal-progress {
     display: flex;
@@ -1245,4 +1240,298 @@ header {
         line-height: 16px;
     }
     
+}
+
+/***** STAKE BLOCK *****/
+.stake-case-amount, .stake-case-order-details {
+    width: 34.896vw;
+    height: 26.042vw;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0.625vw 1.250vw rgba(18, 38, 63, 0.03);
+    border-radius: 0.208vw;
+    -webkit-border-radius: 0.208vw;
+    -moz-border-radius: 0.208vw;
+    -ms-border-radius: 0.208vw;
+    -o-border-radius: 0.208vw;
+    margin-bottom: 4.531vw;
+}
+.stake-case {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-left: -1.667vw;
+    margin-right: -1.667vw;
+}
+.stake-case-header {
+    font-weight: 600;
+    font-size: 1.563vw;
+    line-height: 1.875vw;
+    text-align: center;
+    display: block;
+    margin-bottom: 1.458vw;
+    font-family: HelveticaNeueCyr;
+}
+.stake-case-amount .stake-case-pd{
+    padding: 2.188vw 2.344vw 2.031vw;
+}
+.stake-case-input {
+    margin-bottom: 1.406vw
+}
+.stake-case-input span:first-child{
+    font-size: 0.938vw;
+    line-height: 1.094vw;
+    color: #8687A7;
+    margin-bottom: 0.417vw;
+    display: block;
+}
+.stake-case-input .description {
+    font-size: 0.625vw;
+    line-height: 1.094vw;
+    color: #BDBDBE;
+}
+.stake-case-input .description div {
+    color: #45CB85;
+    display: inline;
+}
+.stake-case-input div {
+    position: relative;
+}
+.stake-case-input div input {
+    border: 0.052vw solid #CED4DA;
+    box-sizing: border-box;
+    border-radius: 0.208vw;
+    -webkit-border-radius: 0.208vw;
+    -moz-border-radius: 0.208vw;
+    -ms-border-radius: 0.208vw;
+    -o-border-radius: 0.208vw;
+    font-size: 0.833vw;
+    line-height: 0.938vw;
+    color: #495057;
+    height: 2.813vw;
+    padding: 0 0 0 1.510vw;
+    width: 100%;
+
+}
+.stake-case-input div .input-button {
+    position: absolute;
+    background: #3B5DE7;
+    right: 0.677vw;
+    top: 0.573vw;
+    width: 4.583vw;
+    height: 1.667vw;
+    font-weight: bold;
+    font-size: 0.625vw;
+    line-height: 0.938vw;
+    color: #fff;
+    border: 0.052vw solid #3B5DE7;
+    box-sizing: border-box;
+    border-radius: 0.167vw;
+    -webkit-border-radius: 0.167vw;
+    -moz-border-radius: 0.167vw;
+    -ms-border-radius: 0.167vw;
+    -o-border-radius: 0.167vw;
+    padding: 0;
+}
+#stake-case-button {
+    width: 100%;
+    background: #3B5DE7;
+    margin-top: 0.729vw;
+    color: #fff;
+    font-size: 0.729vw;
+    line-height: 0.938vw;
+    height: 3.177vw;
+}
+.stake-case-order-details .stake-case-pd {
+    padding: 2.604vw 4.115vw 0 3.802vw;
+}
+.stake-case-order-details-info {
+    width: 0.521vw;
+    height: 0.521vw;
+}
+.stake-case-order-details .stake-case-header {    
+    margin-bottom: 2.865vw;
+}
+.stake-case-order-details-rewards {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 2.865vw;
+}
+.stake-case-order-details-rewards:last-child {
+    margin-bottom: 0;
+}
+.stake-case-order-details div span {
+    font-size: 0.938vw;
+    line-height: 0.938vw;
+    color: #495057;
+}
+.stake-case-order-details div span:last-child {
+    color: #45CB85;
+}
+.stake-case-faq-header {
+    font-weight: 600;
+    font-size: 1.563vw;
+    line-height: 1.875vw;
+    color: #000;
+    margin-bottom: 2.656vw;
+    display: block;
+    text-align: center;
+}
+.stake-case-faq-qa {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.stake-case-faq-qa div{
+    margin-bottom: 2.500vw
+}
+.stake-case-faq-qa div:last-child {
+    text-align: right;
+}
+.stake-case-faq-qa div span {
+    display: block;
+    font-weight: 600;
+    font-size: 1.354vw;
+    line-height: 1.615vw;
+    color: #545B61;
+}
+.stake-case-faq-qa div span:last-child {
+    font-weight: normal;
+    font-size: 1.042vw;
+    line-height: 1.250vw;
+    color: #8687A7;
+    margin-top: 0.781vw;
+}
+
+@media (max-width: 768px) {
+    .stake-case {
+        flex-direction: column;
+        margin-left: -12px;
+        margin-right: -12px;
+        margin-top: -15px;
+        height: 560px;
+        position: relative;
+        box-shadow: 0px 12px 24px rgba(18, 38, 63, 0.03);
+        border-radius: 4px;
+        background: #fff;
+        justify-content: unset;
+    }
+    #stake-case-button {
+        position: absolute;
+        bottom: 21px;
+        font-size: 10px;
+        line-height: 1;
+        height: 31px;
+        margin-top: 0;
+        border: 1px solid #3B5DE7;
+        border-radius: 3.2px;
+        left: 0px;
+        right: 0px;
+        width: 92%;
+        margin: 0 auto;
+    }
+    .stake-case-amount, .stake-case-order-details {
+        width: 100%;
+        height: unset;
+    }
+    .stake-case-header {
+        font-size: 20px;
+        line-height: 24px;
+        margin-bottom: 28px;
+    }
+    .stake-case-amount .stake-case-pd {
+        padding: 24px 15px 0;
+    }
+    .stake-case-input span:first-child {
+        font-size: 13px;
+        line-height: 16px;
+        margin-bottom: 2px;
+    }
+    .stake-case-input div input {
+        border: 1px solid #CED4DA;
+        border-radius: 4px;
+        height: 34px;
+        font-size: 13px;
+        line-height: 18px;
+        padding-left: 11px;
+    }
+    .stake-case-input div .input-button {
+        right: 8px;
+        top: 7px;
+        width: 58px;
+        height: 21.09px;
+        font-weight: bold;
+        font-size: 9px;
+        line-height: 18px;
+        border: 1px solid #3B5DE7;
+        border-radius: 3.2px;
+        -webkit-border-radius: 3.2px;
+        -moz-border-radius: 3.2px;
+        -ms-border-radius: 3.2px;
+        -o-border-radius: 3.2px;
+    }
+    .stake-case-input .description {
+        font-size: 10px;
+        line-height: 21px;
+    }
+    .stake-case-input {
+        margin-bottom: 13px;
+    }
+    .stake-case-amount, .stake-case-order-details {
+        background: transparent;
+        box-shadow: none;
+        border: none;
+    }
+    .stake-case-order-details .stake-case-header {
+        font-size: 14px;
+        line-height: 17px;
+        margin-bottom: 20px;
+    }
+    .stake-case-order-details div span {
+        font-size: 12px;
+        line-height: 18px;
+    }
+    .stake-case-order-details-rewards {
+        margin-bottom: 20px;
+    }
+    .stake-case-order-details-info {
+        width: 8px;
+        height: 8px;
+    }
+    .stake-case-faq {
+        background: #FFFFFF;
+        box-shadow: 0px 12px 24px rgba(18, 38, 63, 0.03);
+        border-radius: 4px;
+        margin-left: -12px;
+        margin-right: -12px;
+        margin-top: 30px;
+        padding: 26px 23px 60px;
+        margin-bottom: 30px;
+
+    }
+    .stake-case-faq-header {
+        font-size: 15px;
+        line-height: 18px;
+        margin-bottom: 27px;
+    }
+    .stake-case-faq-qa {
+        flex-direction: column;
+    }
+    .stake-case-faq-qa div {
+        margin-bottom: 18px;
+    }
+    .stake-case-faq-qa div:last-child {
+        text-align: left;
+    }
+    .stake-case-faq-qa div span {
+        font-size: 13px;
+        line-height: 16px;
+    }
+    .stake-case-faq-qa div span:last-child {
+        font-size: 12px;
+        line-height: 14px;
+        margin-top: 6px;
+    }
 }
