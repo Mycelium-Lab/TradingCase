@@ -1,9 +1,18 @@
 import React from 'react';
 //import {a} from "react-router-dom";
-import logo from '../logo_header.svg';
+import logo from '../logo.png';
+import { Jazzicon } from '@ukstv/jazzicon-react';
+import styled from '@emotion/styled';
+
+const ModifiedJazzicon = styled(Jazzicon)({
+  width: 20,
+  height: 20,
+});
 
 function Header(props) {
+
   const { handleChange, wallet } = props;
+
   return (
       <header>
       <div className="container">
@@ -35,11 +44,11 @@ function Header(props) {
               </svg>
             </a>
             <div className="rank-info">
-              <div>Rank</div>
+              <div>Rank </div>
               <div><span id="rank_info">NO RANK</span> - <span id="cps_info">0.00</span> <span>CSP</span></div>
             </div>
             <div className="user-info">
-              <img className="user-avatar" src="https://via.placeholder.com/50" alt="" />
+              <ModifiedJazzicon classNAme="user-avatar" address={wallet} />
               <div className="user-name">{wallet.slice(0,6)+'...'}</div>
             </div>
           </div>

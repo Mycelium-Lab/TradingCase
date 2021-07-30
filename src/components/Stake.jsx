@@ -43,13 +43,29 @@ function Stake(props) {
   }
 
   function handleChangeStake(event) {
-    setStakeAmount(parseInt(event.target.value));
-    calculate(parseInt(event.target.value), daysAmount);
+    if (event.target.value != "") {
+      setStakeAmount(parseInt(event.target.value));
+      calculate(parseInt(event.target.value), daysAmount);
+    }
+    else setStakeAmount(0);
   }
 
   function handleChangeDays(event) {
-    setDaysAmount(parseInt(event.target.value));
-    calculate(stakeAmount, parseInt(event.target.value));
+    if (event.target.value != "") {
+      setDaysAmount(parseInt(event.target.value));
+      calculate(stakeAmount, parseInt(event.target.value));
+    }
+    else setDaysAmount(0);
+  }
+
+  function handleDaysMax() {
+    setDaysAmount(1000);
+    calculate(stakeAmount, 1000);
+  }
+
+  function handleStakeMax() {
+    setStakeAmount(balance);
+    calculate(balance, daysAmount);
   }
 
   React.useEffect(() => {
@@ -67,7 +83,7 @@ function Stake(props) {
                 <span>Amount to stake</span>
                 <div>
                   <input type="text" value={stakeAmount} onChange={handleChangeStake} />
-                  <button className="button waves-float input-button">MAX</button>
+                  <button className="button waves-float input-button" onClick={()=>handleStakeMax()}>MAX</button>
                 </div>
                 <span className="description">{balance + " CASE available - "}<div>Buy</div></span>
               </div>
@@ -75,7 +91,7 @@ function Stake(props) {
                 <span>Stake time in days</span>
                 <div>
                   <input type="text" value={ daysAmount } min={30} max={1000} onChange={ handleChangeDays }/>
-                  <button className="button input-button">MAX</button>
+                  <button className="button input-button" onClick={()=>handleDaysMax()}>MAX</button>
                 </div>
                 <span className="description">Min. 30 days/ Max. 1,000 days</span>
               </div>

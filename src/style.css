@@ -234,18 +234,6 @@ header {
     align-items: center;
 }
 
-.user-info .user-avatar {
-    width: 1.563vw;
-    height: 1.563vw;
-    background: #46506F;
-    border-radius: 50%;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    -ms-border-radius: 50%;
-    -o-border-radius: 50%;
-    margin-right: 0.573vw;
-}
-
 .user-info .user-name {
     font-style: normal;
     font-weight: normal;
@@ -255,10 +243,6 @@ header {
     margin-right: 0.536vw;
 }
 
-.user-info svg {
-    width: 0.417vw;
-    height: 0.260vw;
-}
 
 .tc-wrapper {
     font-family: 'SF UI Text';
@@ -784,12 +768,9 @@ header {
         margin-right: 10px;
     }
     .user-info .user-name {
+        margin-left: 5px;
         font-size: 10px;
         line-height: 12px;
-    }
-    .user-info svg {
-        width: 7px;
-        height: 5px;
     }
     .tc-wrapper {
         padding-top: 95px;
