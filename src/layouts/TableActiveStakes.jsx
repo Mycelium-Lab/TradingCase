@@ -1,8 +1,8 @@
 import React from 'react';
 
 function TableActiveStakes(props) {
+  const { activeStakes } = props;
   return (
-
     <div className="tc-info-block">
       <span>Active Stakes</span>
       <table className="tg tg-scrollable-table">
@@ -18,24 +18,17 @@ function TableActiveStakes(props) {
           </tr>
         </thead>
         <tbody>
+        {activeStakes.map((row) => (
           <tr>
-            <td className="tg-0lax">1</td>
-            <td className="tg-0lax">2</td>
-            <td className="tg-0lax">3</td>
-            <td className="tg-0lax">4</td>
-            <td className="tg-0lax">5</td>
-            <td className="tg-0lax">6</td>
-            <td className="tg-0lax">7</td>
+            <td className="tg-0lax">{row.stakeAmount}</td>
+            <td className="tg-0lax">{(100*parseFloat(row.apy)).toFixed(2)}</td>
+            <td className="tg-0lax">999</td>
+            <td className="tg-0lax">{row.withdrawnInterestAmount}</td>
+            <td className="tg-0lax">{parseFloat(row.interestAmount).toFixed(2)}</td>
+            <td className="tg-0lax">{(parseFloat(row.interestAmount) + parseFloat(row.stakeAmount)).toFixed(2)}</td>
+            <td className="tg-0lax"><button>Claim Rewards</button></td>
           </tr>
-          <tr>
-            <td className="tg-0lax">1</td>
-            <td className="tg-0lax">2</td>
-            <td className="tg-0lax">3</td>
-            <td className="tg-0lax">4</td>
-            <td className="tg-0lax">5</td>
-            <td className="tg-0lax">6</td>
-            <td className="tg-0lax">7</td>
-          </tr>
+        ))}
         </tbody>
       </table>
     </div>

@@ -3,12 +3,21 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-//import { BrowserRouter, Route, Switch } from "react-router-dom"
+//import { BrowserRouter, Route, Switch } from "react-router-dom";
+import {ApolloClient,
+  InMemoryCache,
+  ApolloProvider
+} from "@apollo/client";
+
+const client = new ApolloClient({
+  uri: 'https://api.thegraph.com/subgraphs/name/knoexus/case-subgraph-kovan',
+  cache: new InMemoryCache()
+});
 
 ReactDOM.render(
-    <div>
+    <ApolloProvider client={client}>
         <App />
-    </div>, 
+    </ApolloProvider>, 
     document.getElementById('root')
 )
 

@@ -3,7 +3,7 @@ import React from 'react';
 import logo from '../logo_header.svg';
 
 function Header(props) {
-  const { handleChange } = props;
+  const { handleChange, wallet } = props;
   return (
       <header>
       <div className="container">
@@ -40,7 +40,7 @@ function Header(props) {
             </div>
             <div className="user-info">
               <img className="user-avatar" src="https://via.placeholder.com/50" alt="" />
-              <div className="user-name">0x3c7a..8k...</div>
+              <div className="user-name">{wallet.slice(0,6)+'...'}</div>
             </div>
           </div>
         </div>

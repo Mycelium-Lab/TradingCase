@@ -25,7 +25,7 @@ function MainInfoReferals(props) {
           <span>0.00 Case</span>
         </div>
         <div className="break" />                
-      </div> 
+        </div> 
     );
 }
 export default MainInfoReferals;

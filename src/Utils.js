@@ -1,6 +1,6 @@
 
-const tokenCase = '0x441666C6F05162b85359e030fF641Cb049D2C07e';
-const stakeCase = '0xcd5C9E1368C1Ce9B405118Ee8C51f7FB0D3fe26b';
+const tokenCase = '0x6F3aa0409916F6682ced176658700D06a726a9A0';
+const stakeCase = '0x3F0144c77a911dd196834a0f87D26Ad8B2CDDdba';
 
 const abiProxy = [
     // balanceOf
@@ -109,14 +109,14 @@ export class contractMethods {
 
     async instanceStake(amount, days){
         
-        await this.contractCase.methods.approve(stakeCase,this.CASE_100).send({from: this.walletAddress});
-        await this.contractStake.methods.stake(this.CASE_100, 50, this.ZERO_ADDR).send({from: this.walletAddress});
+        await this.contractCase.methods.approve(stakeCase,amount*this.CASE_PRECISION).send({from: this.walletAddress});
+        await this.contractStake.methods.stake(amount*this.CASE_PRECISION, days, this.ZERO_ADDR).send({from: this.walletAddress});
     }
     
     async getBalance() {
         this.balanceCase = await this.contractCase.methods.balanceOf(this.walletAddress).call();
         let decimalsCase = await this.contractCase.methods.decimals().call();
-        console.log(decimalsCase);
+        //console.log(decimalsCase);
         this.balanceCase = this.balanceCase / 10**decimalsCase;
         //return [balance];
         return this.balanceCase;

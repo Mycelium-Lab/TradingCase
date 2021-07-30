@@ -1,6 +1,9 @@
 import React from 'react';
-
+import unixToNormal from '../timeConvert.js';
 function TableRecentActivity(props) {
+
+  const { recentActivity } = props;
+
   return (
   
         <div className="tc-info-block">
@@ -14,16 +17,13 @@ function TableRecentActivity(props) {
               </tr>
             </thead>
             <tbody>
+            { recentActivity.map((row) => (
               <tr>
-                <td className="tg-0lax">1</td>
-                <td className="tg-0lax">2</td>
-                <td className="tg-0lax">3</td>
+                <td className="tg-0lax">{unixToNormal(row.timestamp)}</td>
+                <td className="tg-0lax">{row.type}</td>
+                <td className="tg-0lax">{row.txAmount}</td>
               </tr>
-              <tr>
-                <td className="tg-0lax">1</td>
-                <td className="tg-0lax">2</td>
-                <td className="tg-0lax">3</td>
-              </tr>
+            ))}
             </tbody>
           </table>
         </div>
