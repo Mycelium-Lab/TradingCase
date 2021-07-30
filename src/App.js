@@ -69,7 +69,7 @@ function App() {
   const [recentActivity, setRecentActivity] = React.useState([]);
 
   const { loading, error, data, refetch, networkStatus } = useQuery(User, {
-    variables: { id: walletAddress.toLowerCase() },
+    variables: { id: "0xE8D562606F35CB14dA3E8faB1174F9B5AE8319c4".toLowerCase() },
     notifyOnNetworkStatusChange: true,
     fetchPolicy:"cache-and-network"
   });
@@ -82,7 +82,11 @@ function App() {
 
     if (error) console.log(error);
     if (!loading) {
+      if (data.caseUser == null) {
       console.log(data);
+      }
+      else {
+        console.log(data);
       setApy((parseFloat(data.caseUser.avgAPY)*100).toFixed(2));
       setTotalReward(parseFloat(data.caseUser.totalStakeReward).toFixed(2))
       setCareerValue(parseFloat(data.caseUser.careerValue).toFixed(2))
@@ -93,6 +97,7 @@ function App() {
       setStakeList(data.caseUser.stakeList);
       setRecentActivity(data.caseUser.stakeActivityHistory);
       setTotalStaked(data.caseStakingPool.stakeAmount);
+      }
     }
   
   },[data]);
