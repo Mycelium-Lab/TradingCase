@@ -69,7 +69,7 @@ function App() {
   const [recentActivity, setRecentActivity] = React.useState([]);
 
   const { loading, error, data, refetch, networkStatus } = useQuery(User, {
-    variables: { id: "0xE8D562606F35CB14dA3E8faB1174F9B5AE8319c4".toLowerCase() },
+    variables: { id: walletAddress.toLowerCase() },
     notifyOnNetworkStatusChange: true,
     fetchPolicy:"cache-and-network"
   });
