@@ -237,6 +237,7 @@ header {
 .user-info .user-name {
     font-style: normal;
     font-weight: normal;
+    margin-left: 5px;
     font-size: 0.625vw;
     line-height: 0.729vw;
     color: #E6E6E6;
@@ -1023,9 +1024,10 @@ header {
     font-size: 0.833vw;
     line-height: 0.938vw;
 }
-.referal-link-copy div:first-child {    
+.referal-link-copy input:first-child {    
     color: #495057;
     margin-right: 1.667vw;
+    border-style: none;
 }
 #copy-referal-link {
     color: #8687A7;
@@ -1197,11 +1199,11 @@ header {
         font-size: 10px;
         line-height: 18px;
     }
-    .referal-link-copy div:first-child {
+    .referal-link-copy input:first-child {
         margin-right: 5px;
     }
     #copy-referal-link {
-        width: 60%;
+        width: 80%;
         text-overflow: ellipsis;
         white-space: nowrap;
         overflow: hidden;

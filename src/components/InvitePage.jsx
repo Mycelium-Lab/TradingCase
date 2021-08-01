@@ -5,13 +5,14 @@ import TableReferalSummary from '../layouts/TableReferalSummary';
 import TableReferals from '../layouts/TableReferals';
 
 function Invite(props) {
+    const {data, stakedCase, wallet} = props;
     return (
         <div className="tc-wrapper">
         <div className="container">
 
-          <MainInfoReferals />
+          <MainInfoReferals stakedCase={stakedCase} stakersCommission={parseFloat(data.totalCaseCommissionReceived).toFixed(2)}/>
 
-          <ReferalProgress />
+          <ReferalProgress wallet={wallet}/>
           
           <div className="tc-tables tc-tables-referal">
             

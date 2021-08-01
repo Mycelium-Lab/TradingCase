@@ -5,54 +5,31 @@ import Invite from './components/InvitePage.jsx';
 import Stake from './components/Stake.jsx';
 import Web3 from 'web3';
 import { contractMethods } from './Utils.js';
+import { User } from './graph';
 
 import './App.css';
 import './style.css';
 import './helvetica/stylesheet.css';
 
-import {
-  useQuery,
-  gql
-} from "@apollo/client";
+import { useQuery } from "@apollo/client";
+import { createBrowserHistory } from "history";
 
-// запрос к GraphQL для получения событий пополнения ликвидности
-const User = gql`
-  query CaseUser($id: ID!) {
-    caseStakingPool(id: "CaseStakingPool") {
-       id
-       mintedCaseTokens
-       stakeAmount
-    }
-    caseUser(id: $id) {
-      address
-      rank
-      careerValue
-      avgAPY
-      totalStakeReward
-      stakeList(
-          where: { active: true }
-          orderBy: stakeTimestamp
-          orderDirection: desc
-      ) {
-          idx
-          stakeAmount
-          interestAmount
-          withdrawnInterestAmount
-          stakeTimestamp
-          stakeTimeInDays
-          apy
-          active
-      }
-      stakeActivityHistory(orderBy: timestamp, orderDirection: desc) {
-          id
-          type
-          timestamp
-          txAmount
-          txHash
-      }
-    }
-  }
-`;
+const customHistory = createBrowserHistory();
+
+function findGetParameter(parameterName) {
+  var result = null,
+  tmp = [];
+  window.location.search
+      .substr(1)
+      .split("&")
+      .forEach(function (item) {
+        tmp = item.split("=");
+        if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+      });
+  return result;
+}
+
+
 
 function App() {
   const [page, setPage] = React.useState('staking');
@@ -67,9 +44,11 @@ function App() {
   const [stakeList, setStakeList] = React.useState([]);
   const [totalStaked, setTotalStaked] = React.useState(0);
   const [recentActivity, setRecentActivity] = React.useState([]);
+  const [stakedCase, setStakedCase] = React.useState(0.00);
+  const [caseData, setCaseData] = React.useState({});
 
   const { loading, error, data, refetch, networkStatus } = useQuery(User, {
-    variables: { id: walletAddress.toLowerCase() },
+    variables: { id: "0xc0085c2855c8C818B3475762165D10228A1b296d".toLowerCase() },
     notifyOnNetworkStatusChange: true,
     fetchPolicy:"cache-and-network"
   });
@@ -78,25 +57,29 @@ function App() {
     return arr.reduce((a, b) => a + (parseFloat(b[key]) || 0), 0);
   }
 
+  console.log(`%c My src: ${findGetParameter('src')}`, 'color: orange')
+
   React.useEffect(() => {  // хук для обновления данных
 
     if (error) console.log(error);
     if (!loading) {
       if (data.caseUser == null) {
-      console.log(data);
+        console.log(data);
       }
       else {
         console.log(data);
-      setApy((parseFloat(data.caseUser.avgAPY)*100).toFixed(2));
-      setTotalReward(parseFloat(data.caseUser.totalStakeReward).toFixed(2))
-      setCareerValue(parseFloat(data.caseUser.careerValue).toFixed(2))
-      let ActiveStaked = sum(data.caseUser.stakeList,"stakeAmount");
-      let LifetimeRewards = sum(data.caseUser.stakeList,"interestAmount");
-      setLifetimeRewards(LifetimeRewards.toFixed(2));
-      setTotalInterest((ActiveStaked+LifetimeRewards).toFixed(2));
-      setStakeList(data.caseUser.stakeList);
-      setRecentActivity(data.caseUser.stakeActivityHistory);
-      setTotalStaked(data.caseStakingPool.stakeAmount);
+        setApy((parseFloat(data.caseUser.avgAPY)*100).toFixed(2));
+        setTotalReward(parseFloat(data.caseUser.totalStakeReward).toFixed(2))
+        setCareerValue(parseFloat(data.caseUser.careerValue).toFixed(2))
+        let ActiveStaked = sum(data.caseUser.stakeList,"stakeAmount");
+        let LifetimeRewards = sum(data.caseUser.stakeList,"interestAmount");
+        setLifetimeRewards(LifetimeRewards.toFixed(2));
+        setTotalInterest((ActiveStaked+LifetimeRewards).toFixed(2));
+        setStakedCase(ActiveStaked);
+        setStakeList(data.caseUser.stakeList);
+        setRecentActivity(data.caseUser.stakeActivityHistory);
+        setTotalStaked(data.caseStakingPool.stakeAmount);
+        setCaseData(data.caseUser);
       }
     }
   
@@ -121,6 +104,7 @@ function App() {
   start();
 
   function handleChange(page){
+    window.history.pushState(page, 'Title', '/'+page);
     setPage(page);
   }
 
@@ -132,13 +116,13 @@ function App() {
   return (
     <div className="App">
       <Header handleChange={handleChange} wallet={walletAddress}/>
-      { page == 'staking' &&
+      { (window.location.pathname == '/staking' || window.location.pathname == '/') &&
         <Staking totalStaked={totalStaked} handleChange={handleChange} avgAPY={apy} lifetimeRewards={lifetimeRewards} totalInterest={totalInterest} activeStakes={stakeList} recentActivity={recentActivity} />
       }
-      { page == 'invite' && 
-          <Invite />
+      { (window.location.pathname == '/invite') && 
+          <Invite data={caseData} stakedCase={stakedCase} wallet={walletAddress}/>
       }
-      { page == 'stake' &&
+      { (window.location.pathname == '/stake') &&
           <Stake balance={balance} handleStake={handleStake}/>
       }
       <script type="text/javascript">
