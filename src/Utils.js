@@ -107,10 +107,10 @@ export class contractMethods {
         this.contractStake = new this.web3.eth.Contract(abiStake, stakeCase);
       }
 
-    async instanceStake(amount, days){
+    async instanceStake(amount, days, ref){
         
         await this.contractCase.methods.approve(stakeCase,amount*this.CASE_PRECISION).send({from: this.walletAddress});
-        await this.contractStake.methods.stake(amount*this.CASE_PRECISION, days, this.ZERO_ADDR).send({from: this.walletAddress});
+        await this.contractStake.methods.stake(amount*this.CASE_PRECISION, days, ref).send({from: this.walletAddress});
     }
     
     async getBalance() {

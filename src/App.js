@@ -46,9 +46,10 @@ function App() {
   const [recentActivity, setRecentActivity] = React.useState([]);
   const [stakedCase, setStakedCase] = React.useState(0.00);
   const [caseData, setCaseData] = React.useState({});
+  const [ref, setRef] = React.useState('');
 
   const { loading, error, data, refetch, networkStatus } = useQuery(User, {
-    variables: { id: "0xc0085c2855c8C818B3475762165D10228A1b296d".toLowerCase() },
+    variables: { id: walletAddress.toLowerCase() },
     notifyOnNetworkStatusChange: true,
     fetchPolicy:"cache-and-network"
   });
@@ -68,6 +69,7 @@ function App() {
       }
       else {
         console.log(data);
+        setRef(findGetParameter('src'));
         setApy((parseFloat(data.caseUser.avgAPY)*100).toFixed(2));
         setTotalReward(parseFloat(data.caseUser.totalStakeReward).toFixed(2))
         setCareerValue(parseFloat(data.caseUser.careerValue).toFixed(2))
@@ -109,8 +111,8 @@ function App() {
   }
 
   async function handleStake(amount, days) {
-    console.log(`staked ${amount} coins for ${days} days`);
-    await methods.instanceStake(amount, days).then(function(error, result){console.log(error, result)});
+    console.log(`staked ${amount} coins for ${days} days with ref ${ref}`);
+    await methods.instanceStake(amount, days, ref).then(function(error, result){console.log(error, result)});
   }
 
   return (
