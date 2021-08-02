@@ -1,6 +1,10 @@
 import React from 'react';
 
-function TableReferalSummary(params) {
+function TableReferalSummary(props) {
+    const { data } = props;
+    console.table(data);
+    const [tableData, setTableData] = React.useState([]);
+
     return(
         <div className="tc-info-block">
               <span>Referal summary  
@@ -24,62 +28,28 @@ function TableReferalSummary(params) {
                   </tr>
                 </thead>
                 <tbody>
+                { data.map((row) => (
                   <tr>
-                    <td className="tg-0lax">1</td>
-                    <td className="tg-0lax">0</td>
-                    <td className="tg-0lax">8%</td>
-                    <td className="tg-0lax">0.000</td>
-                    <td className="tg-0lax tc-tables-referal-last-column"><span className="activated">Active</span></td>
+                    <td className="tg-0lax">{row.lvl}</td>
+                    <td className="tg-0lax">{row.counts}</td>
+                    <td className="tg-0lax">{`${row.commission}%`}</td>
+                    <td className="tg-0lax">{row.case.toFixed(3)}</td>
+                    { row.lvl === '1' ? (
+                      <td className="tg-0lax tc-tables-referal-last-column">
+                        <span className="activated">
+                          Active
+                        </span>
+                      </td>) : (
+                      <td className="tg-0lax tc-tables-referal-last-column">
+                        <button id="activate" className="button referal-button">
+                          Activate
+                        </button>
+                      </td>
+                      )
+                    }
                   </tr>
-                  <tr>
-                    <td className="tg-0lax">2</td>
-                    <td className="tg-0lax">0</td>
-                    <td className="tg-0lax">5%</td>
-                    <td className="tg-0lax">0.000</td>
-                    <td className="tg-0lax tc-tables-referal-last-column"><button id="activate" className="button referal-button">Activate</button></td>
-                  </tr>
-                  <tr>
-                    <td className="tg-0lax">3</td>
-                    <td className="tg-0lax">0</td>
-                    <td className="tg-0lax">2.5%</td>
-                    <td className="tg-0lax">0.000</td>
-                    <td className="tg-0lax tc-tables-referal-last-column"><button id="activate" className="button referal-button">Activate</button></td>
-                  </tr>
-                  <tr>
-                    <td className="tg-0lax">4</td>
-                    <td className="tg-0lax">0</td>
-                    <td className="tg-0lax">1.5%</td>
-                    <td className="tg-0lax">0.000</td>
-                    <td className="tg-0lax tc-tables-referal-last-column"><button id="activate" className="button referal-button">Activate</button></td>
-                  </tr>
-                  <tr>
-                    <td className="tg-0lax">5</td>
-                    <td className="tg-0lax">0</td>
-                    <td className="tg-0lax">1.0%</td>
-                    <td className="tg-0lax">0.000</td>
-                    <td className="tg-0lax tc-tables-referal-last-column"><button id="activate" className="button referal-button">Activate</button></td>
-                  </tr>
-                  <tr>
-                    <td className="tg-0lax">6</td>
-                    <td className="tg-0lax">0</td>
-                    <td className="tg-0lax">1.0%</td>
-                    <td className="tg-0lax">0.000</td>
-                    <td className="tg-0lax tc-tables-referal-last-column"><button id="activate" className="button referal-button">Activate</button></td>
-                  </tr>
-                  <tr>
-                    <td className="tg-0lax">7</td>
-                    <td className="tg-0lax">0</td>
-                    <td className="tg-0lax">0.5%</td>
-                    <td className="tg-0lax">0.000</td>
-                    <td className="tg-0lax tc-tables-referal-last-column"><button id="activate" className="button referal-button">Activate</button></td>
-                  </tr>
-                  <tr>
-                    <td className="tg-0lax">8</td>
-                    <td className="tg-0lax">0</td>
-                    <td className="tg-0lax">0.5%</td>
-                    <td className="tg-0lax">0.000</td>
-                    <td className="tg-0lax tc-tables-referal-last-column"><button id="activate" className="button referal-button">Activate</button></td>
-                  </tr>
+                  ))
+                }
                 </tbody>
               </table>
             </div>

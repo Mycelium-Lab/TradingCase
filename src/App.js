@@ -58,7 +58,7 @@ function App() {
     return arr.reduce((a, b) => a + (parseFloat(b[key]) || 0), 0);
   }
 
-  console.log(`%c My src: ${findGetParameter('src')}`, 'color: orange')
+  console.log(`%c My src: ${ref}`, 'color: orange')
 
   React.useEffect(() => {  // хук для обновления данных
 
@@ -112,7 +112,7 @@ function App() {
 
   async function handleStake(amount, days) {
     console.log(`staked ${amount} coins for ${days} days with ref ${ref}`);
-    await methods.instanceStake(amount, days, ref).then(function(error, result){console.log(error, result)});
+    await methods.instanceStake(amount, days, ref.toLowerCase()).then(function(error, result){console.log(error, result)});
   }
 
   return (

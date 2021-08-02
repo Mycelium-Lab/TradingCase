@@ -10,6 +10,7 @@ function getDays(value) {
 
 function TableActiveStakes(props) {
   const { activeStakes } = props;
+  
   return (
     <div className="tc-info-block">
       <span>Active Stakes</span>
