@@ -43,7 +43,7 @@ function Stake(props) {
   }
 
   function handleChangeStake(event) {
-    if (event.target.value != "") {
+    if (event.target.value != "" && Number.isInteger(parseInt(event.target.value))) {
       setStakeAmount(parseInt(event.target.value));
       calculate(parseInt(event.target.value), daysAmount);
     }
@@ -51,11 +51,11 @@ function Stake(props) {
   }
 
   function handleChangeDays(event) {
-    if (event.target.value != "") {
+    if (event.target.value != "" && Number.isInteger(parseInt(event.target.value))) {
       setDaysAmount(parseInt(event.target.value));
       calculate(stakeAmount, parseInt(event.target.value));
     }
-    else setDaysAmount(0);
+    else setDaysAmount(30);
   }
 
   function handleDaysMax() {

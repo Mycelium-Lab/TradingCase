@@ -1,3 +1,4 @@
+export { findGetParameter,commissionToStaked };
 
 const tokenCase = '0x6F3aa0409916F6682ced176658700D06a726a9A0';
 const stakeCase = '0x3F0144c77a911dd196834a0f87D26Ad8B2CDDdba';
@@ -108,9 +109,9 @@ export class contractMethods {
       }
 
     async instanceStake(amount, days, ref){
-        
         await this.contractCase.methods.approve(stakeCase,amount*this.CASE_PRECISION).send({from: this.walletAddress});
-        await this.contractStake.methods.stake(amount*this.CASE_PRECISION, days, ref).send({from: this.walletAddress});
+        if (ref===null) await this.contractStake.methods.stake(amount*this.CASE_PRECISION, days, this.ZERO_ADDR).send({from: this.walletAddress});
+        else await this.contractStake.methods.stake(amount*this.CASE_PRECISION, days, ref.toLowerCase()).send({from: this.walletAddress});
     }
     
     async getBalance() {
@@ -122,4 +123,22 @@ export class contractMethods {
         return this.balanceCase;
     }
             
+}
+
+function findGetParameter(parameterName) {
+  var result = null,
+  tmp = [];
+  window.location.search
+      .substr(1)
+      .split("&")
+      .forEach(function (item) {
+        tmp = item.split("=");
+        if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+      });
+  return result;
+}
+
+function commissionToStaked(commission, level) {
+  const percents = [8, 5, 2.5, 1.5, 1.0, 1.0, 0.5, 0.5 ];
+  return parseFloat(commission * (100/percents[level-1])).toFixed(2);
 }

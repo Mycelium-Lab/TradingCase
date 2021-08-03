@@ -11,7 +11,7 @@ const ModifiedJazzicon = styled(Jazzicon)({
 
 function Header(props) {
 
-  const { handleChange, wallet } = props;
+  const { handleChange, wallet, csp } = props;
 
   return (
       <header>
@@ -34,7 +34,14 @@ function Header(props) {
                   Invite friends
                 </button>
               </li>
-              <li><button onClick={()=>handleChange('trade')}><svg viewBox="0 0 16 15" className="icon"><path fillRule="evenodd" clipRule="evenodd" d="M7 7H0V0L2.79289 2.79289L3.85355 1.73222C4.24408 1.3417 4.87724 1.3417 5.26776 1.73222C5.65829 2.12275 5.65829 2.75591 5.26776 3.14644L4.2071 4.2071L7 7ZM15.2678 7.73224H8.26776L11.0607 10.5251L9.99999 11.5858C9.60947 11.9763 9.60947 12.6095 9.99999 13C10.3905 13.3905 11.0237 13.3905 11.4142 13L12.4749 11.9393L15.2678 14.7322V7.73224Z" /></svg>Trade case</button></li>
+              <li>
+                <button>
+                  <svg viewBox="0 0 16 15" className="icon">
+                    <path fillRule="evenodd" clipRule="evenodd" d="M7 7H0V0L2.79289 2.79289L3.85355 1.73222C4.24408 1.3417 4.87724 1.3417 5.26776 1.73222C5.65829 2.12275 5.65829 2.75591 5.26776 3.14644L4.2071 4.2071L7 7ZM15.2678 7.73224H8.26776L11.0607 10.5251L9.99999 11.5858C9.60947 11.9763 9.60947 12.6095 9.99999 13C10.3905 13.3905 11.0237 13.3905 11.4142 13L12.4749 11.9393L15.2678 14.7322V7.73224Z" />
+                  </svg>
+                    Trade case
+                </button>
+              </li>
             </ul>                    
           </div>
           <div className="nav-right">
@@ -45,7 +52,7 @@ function Header(props) {
             </a>
             <div className="rank-info">
               <div>Rank </div>
-              <div><span id="rank_info">NO RANK</span> - <span id="cps_info">0.00</span> <span>CSP</span></div>
+              <div><span id="rank_info">NO RANK</span> - <span id="cps_info">{csp}</span> <span>CSP</span></div>
             </div>
             <div className="user-info">
               <ModifiedJazzicon classNAme="user-avatar" address={wallet} />

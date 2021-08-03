@@ -1031,6 +1031,7 @@ header {
 }
 #copy-referal-link {
     color: #8687A7;
+    border-style: hidden;
 }
 .referal-button {
     background: #3B5DE7;
@@ -1203,7 +1204,9 @@ header {
         margin-right: 5px;
     }
     #copy-referal-link {
-        width: 80%;
+        border-style: hidden;
+        outline: none;
+        width: 75%;
         text-overflow: ellipsis;
         white-space: nowrap;
         overflow: hidden;

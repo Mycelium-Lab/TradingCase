@@ -25,7 +25,6 @@ const User = gql`
         }
         timestamp
         txAmount
-        token
         level
       }
       stakeList(
@@ -47,7 +46,6 @@ const User = gql`
           type
           timestamp
           txAmount
-          txHash
       }
     }
   }

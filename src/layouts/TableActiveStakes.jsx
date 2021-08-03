@@ -10,7 +10,7 @@ function getDays(value) {
 
 function TableActiveStakes(props) {
   const { activeStakes } = props;
-  
+
   return (
     <div className="tc-info-block">
       <span>Active Stakes</span>
@@ -27,8 +27,8 @@ function TableActiveStakes(props) {
           </tr>
         </thead>
         <tbody>
-        {activeStakes.map((row) => (
-          <tr>
+        {activeStakes.map((row, index) => (
+          <tr key={index}>
             <td className="tg-0lax">{row.stakeAmount}</td>
             <td className="tg-0lax">{(100*parseFloat(row.apy)).toFixed(2)}</td>
             <td className="tg-0lax">{getDays(parseInt(row.stakeTimeInDays))}</td>

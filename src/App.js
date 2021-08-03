@@ -4,7 +4,7 @@ import Staking from './components/StakingPage.jsx';
 import Invite from './components/InvitePage.jsx';
 import Stake from './components/Stake.jsx';
 import Web3 from 'web3';
-import { contractMethods } from './Utils.js';
+import { contractMethods, findGetParameter } from './Utils.js';
 import { User } from './graph';
 
 import './App.css';
@@ -14,28 +14,12 @@ import './helvetica/stylesheet.css';
 import { useQuery } from "@apollo/client";
 import { createBrowserHistory } from "history";
 
-const customHistory = createBrowserHistory();
-
-function findGetParameter(parameterName) {
-  var result = null,
-  tmp = [];
-  window.location.search
-      .substr(1)
-      .split("&")
-      .forEach(function (item) {
-        tmp = item.split("=");
-        if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
-      });
-  return result;
-}
-
-
 
 function App() {
-  const [page, setPage] = React.useState('staking');
 
+  const [page, setPage] = React.useState('staking');
   const [balance, setBalance] = React.useState(0);
-  const [walletAddress, setWalletAddress] = React.useState('0x73c38e1498102Cd42E402511455e6F95F8Dd1606');
+  const [walletAddress, setWalletAddress] = React.useState('');
   const [apy, setApy] = React.useState(0.00);
   const [lifetimeRewards, setLifetimeRewards] = React.useState(0.00);
   const [totalInterest, setTotalInterest] = React.useState(0.00);
@@ -62,7 +46,8 @@ function App() {
 
   React.useEffect(() => {  // хук для обновления данных
 
-    if (error) console.log(error);
+    if (error) console.error(error);
+    if (loading) return(<div>Loading...</div>);
     if (!loading) {
       if (data.caseUser == null) {
         console.log(data);
@@ -72,7 +57,7 @@ function App() {
         setRef(findGetParameter('src'));
         setApy((parseFloat(data.caseUser.avgAPY)*100).toFixed(2));
         setTotalReward(parseFloat(data.caseUser.totalStakeReward).toFixed(2))
-        setCareerValue(parseFloat(data.caseUser.careerValue).toFixed(2))
+        setCareerValue(parseFloat(data.caseUser.careerValue*100000000).toFixed(2))
         let ActiveStaked = sum(data.caseUser.stakeList,"stakeAmount");
         let LifetimeRewards = sum(data.caseUser.stakeList,"interestAmount");
         setLifetimeRewards(LifetimeRewards.toFixed(2));
@@ -111,13 +96,13 @@ function App() {
   }
 
   async function handleStake(amount, days) {
-    console.log(`staked ${amount} coins for ${days} days with ref ${ref}`);
+    console.log(`%c staked ${amount} coins for ${days} days with ref ${ref}`, 'color: green');
     await methods.instanceStake(amount, days, ref.toLowerCase()).then(function(error, result){console.log(error, result)});
   }
 
   return (
     <div className="App">
-      <Header handleChange={handleChange} wallet={walletAddress}/>
+      <Header handleChange={handleChange} wallet={walletAddress} csp={careerValue}/>
       { (window.location.pathname == '/staking' || window.location.pathname == '/') &&
         <Staking totalStaked={totalStaked} handleChange={handleChange} avgAPY={apy} lifetimeRewards={lifetimeRewards} totalInterest={totalInterest} activeStakes={stakeList} recentActivity={recentActivity} />
       }

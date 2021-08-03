@@ -17,8 +17,8 @@ function TableRecentActivity(props) {
               </tr>
             </thead>
             <tbody>
-            { recentActivity.map((row) => (
-              <tr>
+            { recentActivity.map((row, index) => (
+              <tr key={index}>
                 <td className="tg-0lax">{unixToNormal(row.timestamp)}</td>
                 <td className="tg-0lax">{row.type}</td>
                 <td className="tg-0lax">{row.txAmount}</td>

@@ -25,7 +25,7 @@ function ReferalProgress(props) {
               </div>
               <div className="referal-progress-line">
                 <div className="progress-wrap progress">
-                  <div className="progress-bar progress" style={{width: '25%'}} />
+                  <div className="progress-bar progress" style={{width: '10%'}} />
                 </div>
               </div>                    
               <div className="referal-rank-next">
