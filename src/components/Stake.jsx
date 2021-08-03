@@ -11,9 +11,7 @@ const ISLOPE = 2 * (10 ** 8);
 const PEAK_PRE = 10 ** 8;
 const Minted = 0;
 
-
 function Stake(props) {
-
   const { balance, handleStake } = props;
 
   const [ daysAmount, setDaysAmount ] = React.useState(1000);
@@ -24,6 +22,7 @@ function Stake(props) {
   const [ InterestRate, setInterestRate ] = React.useState(0);
   const [ apy, setApy ] = React.useState(0);
   const [ RewardTotal, setRewardTotal ] = React.useState(0);
+  const [open, setOpen] = React.useState(false);
 
 
   const calculate = (amount, days) => {
@@ -40,6 +39,11 @@ function Stake(props) {
     setEarlyBonus(EB);
     setBiggerBonus(BB);
 
+  }
+
+  function preHandle() {
+    if (daysAmount > 29) { handleStake(stakeAmount, daysAmount); setOpen(false); }
+    else setOpen(true);
   }
 
   function handleChangeStake(event) {
@@ -95,7 +99,7 @@ function Stake(props) {
                 </div>
                 <span className="description">Min. 30 days/ Max. 1,000 days</span>
               </div>
-              <button id="stake-case-button" className="button" onClick={() => handleStake(stakeAmount, daysAmount)} >STAKE</button>
+              <button id="stake-case-button" className="button" onClick={() => preHandle()} >STAKE</button>
             </div>
           </div>
           <StakeDetails BiggerBonus={BiggerBonus} LongerBonus={LongerBonus} EarlyBonus={EarlyBonus} apy={apy} RewardTotal={RewardTotal} />
