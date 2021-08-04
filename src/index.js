@@ -10,15 +10,20 @@ import {ApolloClient,
   ApolloProvider
 } from "@apollo/client";
 
+import { Provider } from 'react-redux'
+import { configureStore } from './redux/store'
+
 const client = new ApolloClient({
   uri: 'https://api.thegraph.com/subgraphs/name/knoexus/case-subgraph-kovan',
   cache: new InMemoryCache()
 });
 
 ReactDOM.render(
-    <ApolloProvider client={client}>
+    <Provider store={configureStore()}>
+      <ApolloProvider client={client}>
         <App />
-    </ApolloProvider>, 
+      </ApolloProvider>
+    </Provider>,
     document.getElementById('root')
 )
 

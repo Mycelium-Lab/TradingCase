@@ -8,6 +8,9 @@ import Web3 from 'web3';
 import { contractMethods, findGetParameter } from './Utils.js';
 import { User } from './graph';
 
+import { useDispatch, useSelector } from 'react-redux';
+import { openModal } from './redux/modal/actions'
+
 import './App.css';
 import './style.css';
 import './helvetica/stylesheet.css';
@@ -33,7 +36,11 @@ function App() {
   const [caseData, setCaseData] = React.useState({});
   const [ref, setRef] = React.useState('');
 
-  const [isWalletModalOpen, setIsWalletModalOpen] = React.useState(true);
+  const dispatch = useDispatch()
+
+  React.useEffect(() => {
+    dispatch(openModal())
+  })
 
   const { loading, error, data, refetch, networkStatus } = useQuery(User, {
     variables: { id: walletAddress.toLowerCase() },
@@ -105,7 +112,7 @@ function App() {
 
   return (
     <div className="App">
-      <WalletConnectionModal isOpen={isWalletModalOpen}/>
+      <WalletConnectionModal />
       <Header handleChange={handleChange} wallet={walletAddress} csp={careerValue}/>
       { (window.location.pathname == '/staking' || window.location.pathname == '/') &&
         <Staking totalStaked={totalStaked} handleChange={handleChange} avgAPY={apy} lifetimeRewards={lifetimeRewards} totalInterest={totalInterest} activeStakes={stakeList} recentActivity={recentActivity} />

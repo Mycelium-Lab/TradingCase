@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { closeModal } from '../redux/modal/actions'
 import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap'
 import styled from 'styled-components'
 import walletConnectImg from '../assets/images/walletConnect.png'
@@ -26,9 +28,11 @@ const WalletContainer = styled.div`
         }
     `
 
-export default function WalletConnectionModal({isOpen}) {
-    const [modal, setModal] = useState(false)
-    const toggle = () => setModal(!modal)
+export default function WalletConnectionModal() {
+    const isOpen = useSelector(state => state.modal.isOpen)
+    const dispatch = useDispatch()
+
+    const toggle = () => dispatch(closeModal())
 
     const selectWallet = async (wallet) => {
         switch (wallet) {
@@ -56,7 +60,7 @@ export default function WalletConnectionModal({isOpen}) {
                     //   dispatch(setNetworkId(chainId));
                     });
                     
-                    setModal(false)
+                    dispatch(closeModal())
 
                   } catch (err) {
                       console.log(err)
@@ -68,12 +72,8 @@ export default function WalletConnectionModal({isOpen}) {
         }
     }
 
-    useEffect(() => {
-        setModal(isOpen)
-    }, [isOpen])
-
     return (
-        <Modal isOpen={modal} toggle={toggle}>
+        <Modal isOpen={isOpen} toggle={toggle}>
             <ModalHeader toggle={toggle}>Select a Wallet for BSC staking</ModalHeader>
             <ModalBody>
                 <span>Please select a wallet to connect to this dapp:</span>
