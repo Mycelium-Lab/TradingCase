@@ -55,7 +55,6 @@ function App() {
   console.log(`%c My src: ${ref}`, 'color: orange')
 
   React.useEffect(() => {  // хук для обновления данных
-
     if (error) console.error(error);
     if (loading) return(<div>Loading...</div>);
     if (!loading) {
@@ -113,12 +112,12 @@ function App() {
   return (
     <div className="App">
       <WalletConnectionModal />
-      <Header handleChange={handleChange} wallet={walletAddress} csp={careerValue}/>
+      <Header handleChange={handleChange} csp={careerValue}/>
       { (window.location.pathname == '/staking' || window.location.pathname == '/') &&
         <Staking totalStaked={totalStaked} handleChange={handleChange} avgAPY={apy} lifetimeRewards={lifetimeRewards} totalInterest={totalInterest} activeStakes={stakeList} recentActivity={recentActivity} />
       }
       { (window.location.pathname == '/invite') && 
-          <Invite data={caseData} stakedCase={stakedCase} wallet={walletAddress}/>
+          <Invite data={caseData} stakedCase={stakedCase} wallet={'0x000000000000000'}/>
       }
       { (window.location.pathname == '/stake') &&
           <Stake balance={balance} handleStake={handleStake}/>

@@ -1,6 +1,7 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { closeModal } from '../redux/modal/actions'
+import { setAddress, setChainId } from '../redux/wallets/actions'
 import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap'
 import styled from 'styled-components'
 import walletConnectImg from '../assets/images/walletConnect.png'
@@ -42,26 +43,31 @@ export default function WalletConnectionModal() {
                 try {
                     await window.ethereum
                       .request({ method: "net_version" })
-                      .then((netId) => console.log(netId));
+                      .then((netId) => {
+                        console.log(netId)
+                        dispatch(setChainId(netId))
+                      });
 
                     await window.ethereum
                       .request({ method: "eth_requestAccounts" })
-                      .then((response) => console.log(response[0]));
+                      .then((response) => {
+                        console.log(response[0])
+                        dispatch(setAddress(response[0]))
+                      });
         
                     window.web3 = new Web3(window.ethereum);
         
                     window.ethereum.on("accountsChanged", (address) => {
-                        console.log('accounts changed', address)
-                    //   dispatch(setAddress(address));
+                        console.log('accounts changed', address[0])
+                        dispatch(setAddress(address[0]));
                     });
         
                     window.ethereum.on("chainChanged", (chainId) => {
                         console.log('chainId changed', chainId)
-                    //   dispatch(setNetworkId(chainId));
+                        dispatch(setChainId(chainId));
                     });
-                    
-                    dispatch(closeModal())
 
+                    dispatch(closeModal())
                   } catch (err) {
                       console.log(err)
                   }

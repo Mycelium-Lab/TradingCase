@@ -3,6 +3,8 @@ import React from 'react';
 import logo from '../logo.png';
 import { Jazzicon } from '@ukstv/jazzicon-react';
 import styled from '@emotion/styled';
+import { useSelector, useDispatch } from 'react-redux';
+import { openModal } from '../redux/modal/actions'
 
 const ModifiedJazzicon = styled(Jazzicon)({
   width: 20,
@@ -11,7 +13,9 @@ const ModifiedJazzicon = styled(Jazzicon)({
 
 function Header(props) {
 
-  const { handleChange, wallet, csp } = props;
+  const { handleChange, csp } = props;
+  const wallet = useSelector(state => state.wallet.address);
+  const dispatch = useDispatch();
 
   return (
       <header>
@@ -54,7 +58,7 @@ function Header(props) {
               <div>Rank </div>
               <div><span id="rank_info">NO RANK</span> - <span id="cps_info">{csp}</span> <span>CSP</span></div>
             </div>
-            <div className="user-info">
+            <div className="user-info" onClick={() => dispatch(openModal())}>
               <ModifiedJazzicon classNAme="user-avatar" address={wallet} />
               <div className="user-name">{wallet.slice(0,6)+'...'}</div>
             </div>
