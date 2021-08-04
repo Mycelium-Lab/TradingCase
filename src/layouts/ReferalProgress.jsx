@@ -4,15 +4,6 @@ function ReferalProgress(props) {
 
   const { wallet } = props;
 
-  function simpleCopy() {
-    var copyText = window.document.getElementById("copy-referal-link");
-
-    copyText.select();
-    copyText.setSelectionRange(0, 99999);
-
-    window.document.execCommand("copy");
-  }
-
     return (
         <div className="tc-invite-referal">
             <div className="referal-title">The more you share, the more you get</div>
@@ -50,8 +41,8 @@ function ReferalProgress(props) {
             </div>
             <div className="referal-link-copy">
               <div>Referal link:</div>
-              <input id="copy-referal-link" value={`http://${window.location.host}/?src=${wallet.toLowerCase()}`} />
-              <button id="referal-copy" className="button referal-button" onClick={()=>simpleCopy()}>Copy</button>
+              <div id="copy-referal-link">{`http://${window.location.host}/?src=${wallet.toLowerCase()}`}</div>
+              <button id="referal-copy" className="button referal-button" onClick={()=>{navigator.clipboard.writeText(`http://${window.location.host}/?src=${wallet.toLowerCase()}`)}}>Copy</button>
             </div>
           </div>
     );
