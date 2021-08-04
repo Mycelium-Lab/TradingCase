@@ -1028,6 +1028,7 @@ header {
 }
 #copy-referal-link {
     color: #8687A7;
+    width: 80%;
     border-style: hidden;
 }
 .referal-button {

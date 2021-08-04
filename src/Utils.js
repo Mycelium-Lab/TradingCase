@@ -1,7 +1,7 @@
 export { findGetParameter,commissionToStaked };
 
-const tokenCase = '0x6F3aa0409916F6682ced176658700D06a726a9A0';
-const stakeCase = '0x3F0144c77a911dd196834a0f87D26Ad8B2CDDdba';
+const tokenCase = '0x80c8Da4f646b151DBD27625D79a0fD1d79e01eFF';
+const stakeCase = '0xF1955aE5Ba0dAdCA26dE0196dd458f203C17ED89';
 
 const abiProxy = [
     // balanceOf

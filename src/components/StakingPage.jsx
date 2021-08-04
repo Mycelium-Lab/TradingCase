@@ -11,7 +11,7 @@ function Staiking(props) {
 
               <MainInfo totalStaked={totalStaked} handleChange={handleChange} avgAPY={avgAPY} lifetimeRewards={lifetimeRewards} totalInterest={totalInterest}/>
 
-              <div className="tc-tables">
+              <div className="tc-tables tc-tables-referal">
 
                   <TableActiveStakes activeStakes={activeStakes}/>
 
