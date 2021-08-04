@@ -3,6 +3,7 @@ import Header from './layouts/Header';
 import Staking from './components/StakingPage.jsx';
 import Invite from './components/InvitePage.jsx';
 import Stake from './components/Stake.jsx';
+import WalletConnectionModal from './layouts/WalletConnectionModal';
 import Web3 from 'web3';
 import { contractMethods, findGetParameter } from './Utils.js';
 import { User } from './graph';
@@ -31,6 +32,8 @@ function App() {
   const [stakedCase, setStakedCase] = React.useState(0.00);
   const [caseData, setCaseData] = React.useState({});
   const [ref, setRef] = React.useState('');
+
+  const [isWalletModalOpen, setIsWalletModalOpen] = React.useState(true);
 
   const { loading, error, data, refetch, networkStatus } = useQuery(User, {
     variables: { id: walletAddress.toLowerCase() },
@@ -75,20 +78,20 @@ function App() {
   var web3;
   var methods;
 
-  const start = async() => {
-    web3 = new Web3(window.web3.currentProvider);
-    await window.ethereum.enable();
+  // const start = async() => {
+  //   web3 = new Web3(window.web3.currentProvider);
+  //   await window.ethereum.enable();
 
-    methods = new contractMethods(web3);
-    await methods.init();
+  //   methods = new contractMethods(web3);
+  //   await methods.init();
 
-    await methods.getBalance().then(function(result) {
-      setBalance(result);
-    });
-    setWalletAddress(methods.walletAddress);
-  };
+  //   await methods.getBalance().then(function(result) {
+  //     setBalance(result);
+  //   });
+  //   setWalletAddress(methods.walletAddress);
+  // };
 
-  start();
+  // start();
 
   function handleChange(page){
     window.history.pushState(page, 'Title', '/'+page);
@@ -102,6 +105,7 @@ function App() {
 
   return (
     <div className="App">
+      <WalletConnectionModal isOpen={isWalletModalOpen}/>
       <Header handleChange={handleChange} wallet={walletAddress} csp={careerValue}/>
       { (window.location.pathname == '/staking' || window.location.pathname == '/') &&
         <Staking totalStaked={totalStaked} handleChange={handleChange} avgAPY={apy} lifetimeRewards={lifetimeRewards} totalInterest={totalInterest} activeStakes={stakeList} recentActivity={recentActivity} />

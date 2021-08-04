@@ -12,6 +12,7 @@
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
     "@ukstv/jazzicon-react": "^1.0.0",
+    "bootstrap": "^5.0.2",
     "graphql": "^15.5.1",
     "node-waves": "^0.7.6",
     "react": "^17.0.2",
@@ -20,6 +21,9 @@
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
+    "reactstrap": "^8.9.0",
+    "redux": "^4.1.1",
+    "styled-components": "^5.3.0",
     "web-vitals": "^1.1.2",
     "web3": "^1.5.0"
   },
