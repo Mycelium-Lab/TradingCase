@@ -19,7 +19,7 @@ function Invite(props) {
         td.lvl = (i+1).toString();
         td.counts = (data.referLevelUserCounts)[i];
         td.commission = percents[i];
-        td.case = parseFloat(data.referLevelCaseCommissions[i]);
+        td.cases = parseFloat(data.referLevelCaseCommissions[i]);
         tabArr.push(td);
       }
 
