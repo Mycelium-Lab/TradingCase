@@ -14,7 +14,7 @@ function TableActiveStakes(props) {
   return (
     <div className="tc-info-block">
       <span>Active Stakes</span>
-      <table className="tg tg-scrollable-table" style={{textAlign:"center"}}>
+      <table className="tg tg-scrollable-table tg-recent-activity" style={{textAlign:"center"}}>
         <thead>
           <tr>
             <th className="tg-0pky">Staked Case</th>
@@ -23,13 +23,13 @@ function TableActiveStakes(props) {
             <th className="tg-0lax">Claimable Rewards</th>
             <th className="tg-0lax">Total Rewards</th>
             <th className="tg-0lax">Total Case</th>
-            <th className="tg-0lax tc-tables-referal-last-column">Actions</th>
+            <th className="tg-0lax tc-tables-referal-last-column" style={{width:65}}>Actions</th>
           </tr>
         </thead>
         <tbody>
         {activeStakes.map(({stakeAmount, apy, stakeTimeInDays, withdrawnInterestAmount, interestAmount}, index) => (
           <tr key={index}>
-            <td className="tg-0pky">{stakeAmount}</td>
+            <td className="tg-0lax">{stakeAmount}</td>
             <td className="tg-0lax">{(100*parseFloat(apy)).toFixed(2)}</td>
             <td className="tg-0lax">{getDays(parseInt(stakeTimeInDays))}</td>
             <td className="tg-0lax" style={{width:20}}>{withdrawnInterestAmount}</td>
