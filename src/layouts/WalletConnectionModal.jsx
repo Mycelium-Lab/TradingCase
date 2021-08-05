@@ -9,6 +9,7 @@ import metaMaskImg from '../assets/images/metaMask.png'
 import binanceWalletImg from '../assets/images/binanceWallet.png'
 
 import Web3 from 'web3'
+import WalletConnectProvider from '@walletconnect/web3-provider'
 
 const WalletLogo = styled.img` 
         border-radius: 3px;
@@ -57,9 +58,9 @@ export default function WalletConnectionModal() {
         
                     window.web3 = new Web3(window.ethereum);
         
-                    window.ethereum.on("accountsChanged", (address) => {
-                        console.log('accounts changed', address[0])
-                        dispatch(setAddress(address[0]));
+                    window.ethereum.on("accountsChanged", (accounts) => {
+                        console.log('accounts changed', accounts[0])
+                        dispatch(setAddress(accounts[0]));
                     });
         
                     window.ethereum.on("chainChanged", (chainId) => {
@@ -71,7 +72,49 @@ export default function WalletConnectionModal() {
                   } catch (err) {
                       console.log(err)
                   }
+                  break;
             case 'walletConnect':
+                try {
+                    const provider = new WalletConnectProvider({
+                        rpc: {
+                            42: 'https://kovan.infura.io/v3/6f16d7e1465c4c3e890aac99bdfd5deb',
+                            56: 'https://bsc-dataseed.binance.org/',
+                            97: 'https://data-seed-prebsc-1-s1.binance.org:8545/'
+                        }
+                    })
+                    await provider.enable()
+                    window.web3 = new Web3(provider)
+                    const accounts = await window.web3.eth.getAccounts()
+                    if (accounts) {
+                        dispatch(setAddress(accounts[0]))
+                    }
+                    const chainId = await window.web3.eth.getChainId()
+                    if (chainId) {
+                        dispatch(setChainId(chainId))
+                    }
+
+                    // Subscribe to accounts change
+                    provider.on("accountsChanged", (accounts) => {
+                        console.log('accounts changed', accounts[0])
+                        dispatch(setAddress(accounts[0]))
+                    })
+                    
+                    // Subscribe to chainId change
+                    provider.on("chainChanged", (chainId) => {
+                        console.log(chainId)
+                        dispatch(setChainId(chainId))
+                    })
+                    
+                    // Subscribe to session disconnection
+                    provider.on("disconnect", (code, reason) => {
+                        console.log(code, reason)
+                        dispatch(setAddress(''))
+                    })
+
+                    dispatch(closeModal())
+                } catch (err) {
+                    console.log(err)
+                }
                 break;
             default:
                 break;

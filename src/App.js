@@ -117,7 +117,7 @@ function App() {
         <Staking totalStaked={totalStaked} handleChange={handleChange} avgAPY={apy} lifetimeRewards={lifetimeRewards} totalInterest={totalInterest} activeStakes={stakeList} recentActivity={recentActivity} />
       }
       { (window.location.pathname == '/invite') && 
-          <Invite data={caseData} stakedCase={stakedCase} wallet={'0x000000000000000'}/>
+          <Invite data={caseData} stakedCase={stakedCase} wallet={'0x0000000000000000000000000000000000000000'}/>
       }
       { (window.location.pathname == '/stake') &&
           <Stake balance={balance} handleStake={handleStake}/>
