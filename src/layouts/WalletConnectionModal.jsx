@@ -5,7 +5,7 @@ import { setAddress, setChainId } from '../redux/wallets/actions'
 import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap'
 import styled from 'styled-components'
 import walletConnectImg from '../assets/images/walletConnect.png'
-import metaMaskImg from '../assets/images/metaMask.png'
+import metaMaskImg from '../assets/images/metaMask2.png'
 import binanceWalletImg from '../assets/images/binanceWallet.png'
 
 import Web3 from 'web3'
@@ -15,6 +15,8 @@ const WalletLogo = styled.img`
         border-radius: 3px;
         max-width: 60px;
         max-height: 60px;
+        width: 60px;
+        height: 60px;
         padding: 12px;
     `
 
@@ -26,6 +28,9 @@ const WalletContainer = styled.div`
             &:hover {
                 cursor: pointer;
                 background: lightgrey;
+            }
+            & > span {
+                margin-left: 0.5rem;
             }
         }
     `
@@ -122,7 +127,7 @@ export default function WalletConnectionModal() {
     }
 
     return (
-        <Modal isOpen={isOpen} toggle={toggle}>
+        <Modal isOpen={isOpen} toggle={toggle} centered={true}>
             <ModalHeader toggle={toggle}>Select a Wallet for BSC staking</ModalHeader>
             <ModalBody>
                 <span>Please select a wallet to connect to this dapp:</span>
