@@ -3,6 +3,24 @@ import { closeModal } from '../redux/modal/actions'
 import Web3 from 'web3'
 import WalletConnectProvider from '@walletconnect/web3-provider'
 
+const addProvider = (provider, provider_name, dispatch) => {
+    window.web3 = new Web3(provider)
+    dispatch(setProvider(provider))
+    localStorage.setItem('caseCurrentProvider', provider_name)
+} 
+
+const addProviderListeners = (provider, dispatch) => {
+    provider.on("accountsChanged", (accounts) => {
+        dispatch(setAddress(accounts[0]))
+    })
+
+    provider.on("chainChanged", (chainId) => {
+        dispatch(setChainId(chainId))
+    })
+
+    provider.on("disconnect", (code, reason) => {})
+}
+
 export const selectWallet = async (wallet, dispatch) => {
     switch (wallet) {
         case 'binanceWallet':
@@ -21,19 +39,8 @@ export const selectWallet = async (wallet, dispatch) => {
                     dispatch(setAddress(response[0]))
                   })
     
-                window.web3 = new Web3(window.ethereum)
-                dispatch(setProvider(window.ethereum))
-                localStorage.setItem('caseCurrentProvider', 'metaMask')
-    
-                window.ethereum.on("accountsChanged", (accounts) => {
-                    dispatch(setAddress(accounts[0]))
-                })
-    
-                window.ethereum.on("chainChanged", (chainId) => {
-                    dispatch(setChainId(chainId))
-                })
-
-                dispatch(closeModal())
+                addProvider(window.ethereum, 'metaMask', dispatch)
+                addProviderListeners(window.ethereum, dispatch)
               } catch (err) {
                   dispatch(setProvider(null))
               }
@@ -48,9 +55,8 @@ export const selectWallet = async (wallet, dispatch) => {
                     }
                 })
                 await provider.enable()
-                window.web3 = new Web3(provider)
-                dispatch(setProvider(provider))
-                localStorage.setItem('caseCurrentProvider', 'walletConnect')
+
+                addProvider(provider, 'walletConnect', dispatch)
 
                 const accounts = await window.web3.eth.getAccounts()
                 if (accounts) {
@@ -61,18 +67,7 @@ export const selectWallet = async (wallet, dispatch) => {
                     dispatch(setChainId(chainId))
                 }
 
-                provider.on("accountsChanged", (accounts) => {
-                    dispatch(setAddress(accounts[0]))
-                })
-                
-                provider.on("chainChanged", (chainId) => {
-                    dispatch(setChainId(chainId))
-                })
-                
-                provider.on("disconnect", (code, reason) => {
-
-                })
-                dispatch(closeModal())
+                addProviderListeners(provider, dispatch)
             } catch (err) {
                 dispatch(setProvider(null))
             }
@@ -80,6 +75,8 @@ export const selectWallet = async (wallet, dispatch) => {
         default:
             break
     }
+
+    dispatch(closeModal())
 }
 
 export const logout = async (provider, dispatch) => {
