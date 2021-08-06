@@ -13,7 +13,7 @@
     "@testing-library/user-event": "^12.8.3",
     "@ukstv/jazzicon-react": "^1.0.0",
     "@walletconnect/web3-provider": "^1.5.2",
-    "bootstrap": "^5.0.2",
+    "bootstrap": "^4.6.0",
     "graphql": "^15.5.1",
     "node-waves": "^0.7.6",
     "react": "^17.0.2",

@@ -4,12 +4,12 @@ import Staking from './components/StakingPage.jsx';
 import Invite from './components/InvitePage.jsx';
 import Stake from './components/Stake.jsx';
 import WalletConnectionModal from './layouts/WalletConnectionModal';
-import Web3 from 'web3';
 import { contractMethods, findGetParameter } from './Utils.js';
 import { User } from './graph';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { openModal } from './redux/modal/actions'
+import { selectWallet } from './wallets/actions';
+import { openModal } from './redux/modal/actions';
 
 import './App.css';
 import './style.css';
@@ -23,7 +23,6 @@ function App() {
 
   const [page, setPage] = React.useState('staking');
   const [balance, setBalance] = React.useState(0);
-  const [walletAddress, setWalletAddress] = React.useState('');
   const [apy, setApy] = React.useState(0.00);
   const [lifetimeRewards, setLifetimeRewards] = React.useState(0.00);
   const [totalInterest, setTotalInterest] = React.useState(0.00);
@@ -37,13 +36,16 @@ function App() {
   const [ref, setRef] = React.useState('');
 
   const dispatch = useDispatch()
+  const address = useSelector(state => state.wallet.address)
 
   React.useEffect(() => {
-    dispatch(openModal())
-  })
+    const lastProvider = localStorage.getItem('caseCurrentProvider')
+    if (!lastProvider) dispatch(openModal())
+    else start(lastProvider)
+  }, [])
 
   const { loading, error, data, refetch, networkStatus } = useQuery(User, {
-    variables: { id: walletAddress.toLowerCase() },
+    variables: { id: address.toLowerCase() },
     notifyOnNetworkStatusChange: true,
     fetchPolicy:"cache-and-network"
   });
@@ -81,23 +83,18 @@ function App() {
   
   },[data]);
 
-  var web3;
   var methods;
 
-  // const start = async() => {
-  //   web3 = new Web3(window.web3.currentProvider);
-  //   await window.ethereum.enable();
+  const start = async(lastProvider) => {
+    await selectWallet(lastProvider, dispatch);
 
-  //   methods = new contractMethods(web3);
-  //   await methods.init();
+    methods = new contractMethods(window.web3);
+    await methods.init();
 
-  //   await methods.getBalance().then(function(result) {
-  //     setBalance(result);
-  //   });
-  //   setWalletAddress(methods.walletAddress);
-  // };
-
-  // start();
+    await methods.getBalance().then(function(result) {
+      setBalance(result);
+    });
+  };
 
   function handleChange(page){
     window.history.pushState(page, 'Title', '/'+page);

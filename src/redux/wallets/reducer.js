@@ -1,15 +1,23 @@
 import {
     SET_ADDRESS,
     SET_CHAINID,
+    SET_PROVIDER
 } from '../types'
 
 const initialState = {
     chainId: '',
-    address: '0x0000000000000000000000000000000000000000'
+    address: '',
+    provider: null
 }
 
 export default function (state = initialState, action) {
     switch (action.type) {
+        case SET_PROVIDER: {
+            return {
+                ...state,
+                provider: action.payload.provider
+            }
+        }
         case SET_CHAINID:
             return {
                 ...state,
