@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 //import { BrowserRouter, Route, Switch } from "react-router-dom";
@@ -9,15 +10,20 @@ import {ApolloClient,
   ApolloProvider
 } from "@apollo/client";
 
+import { Provider } from 'react-redux'
+import { configureStore } from './redux/store'
+
 const client = new ApolloClient({
   uri: 'https://api.thegraph.com/subgraphs/name/knoexus/case-subgraph-kovan',
   cache: new InMemoryCache()
 });
 
 ReactDOM.render(
-    <ApolloProvider client={client}>
+    <Provider store={configureStore()}>
+      <ApolloProvider client={client}>
         <App />
-    </ApolloProvider>, 
+      </ApolloProvider>
+    </Provider>,
     document.getElementById('root')
 )
 

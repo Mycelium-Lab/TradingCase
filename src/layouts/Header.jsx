@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 //import {a} from "react-router-dom";
 import logo from '../logo.png';
 import { Jazzicon } from '@ukstv/jazzicon-react';
 import styled from '@emotion/styled';
+import { useSelector, useDispatch } from 'react-redux';
+import { logout } from '../wallets/actions';
+import { openModal } from '../redux/modal/actions';
+import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
 const ModifiedJazzicon = styled(Jazzicon)({
   width: 20,
@@ -11,7 +15,14 @@ const ModifiedJazzicon = styled(Jazzicon)({
 
 function Header(props) {
 
-  const { handleChange, wallet, csp } = props;
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const toggle = () => setDropdownOpen(prevState => !prevState);
+
+  const { handleChange, csp } = props;
+
+  const wallet = useSelector(state => state.wallet.address);
+  const provider = useSelector(state => state.wallet.provider);
+  const dispatch = useDispatch();
 
   return (
       <header>
@@ -54,10 +65,25 @@ function Header(props) {
               <div>Rank </div>
               <div><span id="rank_info">NO RANK</span> - <span id="cps_info">{csp}</span> <span>CSP</span></div>
             </div>
-            <div className="user-info">
-              <ModifiedJazzicon classNAme="user-avatar" address={wallet} />
-              <div className="user-name">{wallet.slice(0,6)+'...'}</div>
-            </div>
+            <Dropdown isOpen={dropdownOpen} toggle={toggle}>
+              <DropdownToggle
+                style={{ cursor: 'pointer' }}
+                tag="div"
+                data-toggle="dropdown"
+                aria-expanded={dropdownOpen}
+              >
+              <div className="user-info">
+                <ModifiedJazzicon classNAme="user-avatar" address={wallet} />
+                <div className="user-name">{wallet.slice(0,6)+'...'}</div>
+              </div>
+              </DropdownToggle>
+              <DropdownMenu right className="mt-2">
+                  <DropdownItem header>Manage Wallet</DropdownItem>
+                  <DropdownItem divider />
+                  <DropdownItem onClick={() => dispatch(openModal())}>Connect</DropdownItem>
+                  <DropdownItem style={{color: 'red'}} onClick={() => logout(provider, dispatch)}>Logout</DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
           </div>
         </div>
       </div>
