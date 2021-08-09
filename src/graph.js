@@ -41,6 +41,10 @@ const User = gql`
           apy
           active
       }
+      referredUsers(first:10){
+        address
+        rank
+      }
       stakeActivityHistory(orderBy: timestamp, orderDirection: desc) {
           id
           type

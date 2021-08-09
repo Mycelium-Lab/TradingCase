@@ -1,93 +1,11 @@
+import {abiProxy, abiStake, abiRank} from './constants';
+
 export { findGetParameter,commissionToStaked };
 
-const tokenCase = '0x80c8Da4f646b151DBD27625D79a0fD1d79e01eFF';
-const stakeCase = '0xF1955aE5Ba0dAdCA26dE0196dd458f203C17ED89';
+const tokenCase = '0x33356568c72C1231897aE7B49a448BD0FE74B503';
+const stakeCase = '0x23F9D8f999D103265bE54596fF8C359dC5e3e970';
+const rankCase = '0x4fd9A8367f4Cb26A2FEe304610B241b2560125B3';
 
-const abiProxy = [
-    // balanceOf
-    {
-        "constant": true,
-        "inputs": [{
-            "name": "_owner",
-            "type": "address"
-        }],
-        "name": "balanceOf",
-        "outputs": [{
-            "name": "balance",
-            "type": "uint256"
-        }],
-        "type": "function"
-    },
-    {
-        "constant": true,
-        "inputs": [],
-        "name": "decimals",
-        "outputs": [
-          {
-            "name": "",
-            "type": "uint8"
-          }
-        ],
-        "payable": false,
-        "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "spender",
-          "type": "address"
-        },
-        {
-          "internalType": "uint256",
-          "name": "amount",
-          "type": "uint256"
-        }
-      ],
-      "name": "approve",
-      "outputs": [
-        {
-          "internalType": "bool",
-          "name": "",
-          "type": "bool"
-        }
-      ],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-];
-
-const abiStake = [
-    {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "stakeAmount",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "stakeTimeInDays",
-          "type": "uint256"
-        },
-        {
-          "internalType": "address",
-          "name": "referrer",
-          "type": "address"
-        }
-      ],
-      "name": "stake",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "stakeIdx",
-          "type": "uint256"
-        }
-      ],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    }
-];
 
 export class contractMethods {
     constructor(web) {
@@ -106,12 +24,27 @@ export class contractMethods {
         // Get ERC20 Token contract instance
         this.contractCase = new this.web3.eth.Contract(abiProxy, tokenCase);
         this.contractStake = new this.web3.eth.Contract(abiStake, stakeCase);
+        this.contractRank = new this.web3.eth.Contract(abiRank, rankCase);
       }
 
     async instanceStake(amount, days, ref){
         await this.contractCase.methods.approve(stakeCase,amount*this.CASE_PRECISION).send({from: this.walletAddress});
         if (ref===null) await this.contractStake.methods.stake(amount*this.CASE_PRECISION, days, this.ZERO_ADDR).send({from: this.walletAddress});
         else await this.contractStake.methods.stake(amount*this.CASE_PRECISION, days, ref.toLowerCase()).send({from: this.walletAddress});
+    }
+
+    async instanceWithdraw(idx) {
+      await this.contractStake.methods.withdraw(idx).send({from: this.walletAddress});
+    }
+
+    async instanceRankUp() {
+      await this.contractRank.methods.rankUp(this.walletAddress).send({from: this.walletAddress});
+    }
+
+    async canRankUp() {
+        let canRank = await this.contractRank.methods.canRankUp(this.walletAddress).call();
+        return canRank;
+
     }
     
     async getBalance() {

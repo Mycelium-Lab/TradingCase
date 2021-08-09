@@ -4,7 +4,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 
 function TableReferalSummary(props) {
     const { data, stakedCase } = props;
-    console.table(data);
+    //console.table(data);
     const [tableData, setTableData] = React.useState([]);
 
     return(

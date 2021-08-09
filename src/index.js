@@ -14,7 +14,7 @@ import { Provider } from 'react-redux'
 import { configureStore } from './redux/store'
 
 const client = new ApolloClient({
-  uri: 'https://api.thegraph.com/subgraphs/name/knoexus/case-subgraph-kovan',
+  uri: 'https://api.thegraph.com/subgraphs/name/mycelium-lab/a-subgraph-for-the-case-project',
   cache: new InMemoryCache()
 });
 

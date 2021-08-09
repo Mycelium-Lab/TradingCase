@@ -3,14 +3,16 @@ import MainInfoReferals from '../layouts/MainInfoReferals';
 import ReferalProgress from '../layouts/ReferalProgress';
 import TableReferalSummary from '../layouts/TableReferalSummary';
 import TableReferals from '../layouts/TableReferals';
+import { useSelector, useDispatch } from 'react-redux';
 
 function Invite(props) {
-    const {data, stakedCase, wallet, canRankUp, handleRankUp} = props;
+    const {data, stakedCase, canRankUp, handleRankUp} = props;
     const commissionHistory = data.commissionHistory;
     const percents = ["8", "5", "2.5", "1.5", "1.0", "1.0", "0.5", "0.5" ];
     let tabArr = [];
     const rank = data.rank;
     const csp = parseFloat(data.careerValue*10000000000).toFixed(2);
+    const wallet = useSelector(state => state.wallet.address);
 
     if (Object.keys(data).length === 0) return(<div>Loading..</div>);
     else console.log(commissionHistory);

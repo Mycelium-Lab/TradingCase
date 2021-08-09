@@ -16,8 +16,6 @@ import './style.css';
 import './helvetica/stylesheet.css';
 
 import { useQuery } from "@apollo/client";
-import { createBrowserHistory } from "history";
-
 
 function App() {
 
@@ -68,7 +66,7 @@ function App() {
         console.log(data);
         setRef(findGetParameter('src'));
         setApy((parseFloat(data.caseUser.avgAPY)*100).toFixed(2));
-        setCareerValue(parseFloat(data.caseUser.careerValue*100000000).toFixed(2))
+        setCareerValue(parseFloat(data.caseUser.careerValue*10000000000).toFixed(2))
         let ActiveStaked = sum(data.caseUser.stakeList,"stakeAmount");
         let LifetimeRewards = sum(data.caseUser.stakeList,"interestAmount");
         setLifetimeRewards(LifetimeRewards.toFixed(2));
@@ -81,7 +79,7 @@ function App() {
       }
     }
   
-  },[data]);
+  },[data, error, loading]);
 
   var methods;
 
@@ -124,6 +122,7 @@ function App() {
   return (
     <div className="App">
       <WalletConnectionModal />
+      <Header handleChange={handleChange} data={caseData} />
       { (window.location.pathname === '/staking' || window.location.pathname === '/') &&
         <Staking totalStaked={totalStaked} handleWithdraw={handleWithdraw} handleChange={handleChange} avgAPY={apy} lifetimeRewards={lifetimeRewards} totalInterest={totalInterest} activeStakes={stakeList} recentActivity={recentActivity} />
       }
@@ -131,7 +130,7 @@ function App() {
         <Invite data={caseData} stakedCase={stakedCase} wallet={walletAddress} canRankUp={canRankUp} handleRankUp={handleRankUp}/>
       }
       { (window.location.pathname === '/stake') &&
-        <Stake balance={balance} handleStake={handleStake}/>
+        <Stake balance={balance} handleStake={handleStake} />
       }
       <script type="text/javascript">
         Waves.attach('.button', ['waves-button', 'waves-float']);

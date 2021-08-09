@@ -1278,7 +1278,7 @@ header {
 .stake-case-input .description {
     font-size: 0.625vw;
     line-height: 1.094vw;
-    color: #BDBDBE;
+    color: #000000;
 }
 .stake-case-input .description div {
     color: #45CB85;

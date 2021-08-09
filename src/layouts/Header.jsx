@@ -6,6 +6,7 @@ import styled from '@emotion/styled';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../wallets/actions';
 import { openModal } from '../redux/modal/actions';
+import {rankList} from '../constants';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
 const ModifiedJazzicon = styled(Jazzicon)({
@@ -18,7 +19,10 @@ function Header(props) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggle = () => setDropdownOpen(prevState => !prevState);
 
-  const { handleChange, csp } = props;
+  const { handleChange, data } = props;
+
+  const csp = parseFloat(data.careerValue*10000000000).toFixed(2);
+  const rank = data.rank;
 
   const wallet = useSelector(state => state.wallet.address);
   const provider = useSelector(state => state.wallet.provider);
@@ -63,7 +67,7 @@ function Header(props) {
             </a>
             <div className="rank-info">
               <div>Rank </div>
-              <div><span id="rank_info">NO RANK</span> - <span id="cps_info">{csp}</span> <span>CSP</span></div>
+              <div><span id="rank_info">{rankList[rank]}</span> - <span id="cps_info">{csp}</span> <span>CSP</span></div>
             </div>
             <Dropdown isOpen={dropdownOpen} toggle={toggle}>
               <DropdownToggle

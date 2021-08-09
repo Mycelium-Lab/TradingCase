@@ -5,7 +5,7 @@ import { commissionToStaked } from '../Utils.js';
 function TableReferals(props) {
 
   const { commissionHistory } = props;
-  console.log(commissionHistory);
+  //console.log(commissionHistory);
 
   return (
       <div className="tc-info-block">
