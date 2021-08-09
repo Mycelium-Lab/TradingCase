@@ -11,15 +11,16 @@ const ISLOPE = 2 * (10 ** 8);
 const PEAK_PRE = 10 ** 8;
 const Minted = 0;
 
+const styleBox = {boxShadow: `0 0 3px #CC0000`};
+
 function Stake(props) {
-  const { balance, handleStake } = props;
+  const { balance, handleStake, minted } = props;
 
   const [ daysAmount, setDaysAmount ] = React.useState(1000);
   const [ stakeAmount, setStakeAmount ] = React.useState(10);
   const [ BiggerBonus, setBiggerBonus ] = React.useState(0);
   const [ LongerBonus, setLongerBonus ] = React.useState(0);
   const [ EarlyBonus, setEarlyBonus ] = React.useState(0);
-  const [ InterestRate, setInterestRate ] = React.useState(0);
   const [ apy, setApy ] = React.useState(0);
   const [ RewardTotal, setRewardTotal ] = React.useState(0);
   const [open, setOpen] = React.useState(false);
@@ -47,7 +48,7 @@ function Stake(props) {
   }
 
   function handleChangeStake(event) {
-    if (event.target.value != "" && Number.isInteger(parseInt(event.target.value))) {
+    if (event.target.value !== "" && Number.isInteger(parseInt(event.target.value))) {
       setStakeAmount(parseInt(event.target.value));
       calculate(parseInt(event.target.value), daysAmount);
     }
@@ -55,11 +56,11 @@ function Stake(props) {
   }
 
   function handleChangeDays(event) {
-    if (event.target.value != "" && Number.isInteger(parseInt(event.target.value))) {
+    if (event.target.value !== "" && Number.isInteger(parseInt(event.target.value))) {
       setDaysAmount(parseInt(event.target.value));
       calculate(stakeAmount, parseInt(event.target.value));
     }
-    else setDaysAmount(30);
+    else setDaysAmount(0);
   }
 
   function handleDaysMax() {
@@ -94,7 +95,7 @@ function Stake(props) {
               <div className="stake-case-input">
                 <span>Stake time in days</span>
                 <div>
-                  <input type="text" value={ daysAmount } min={30} max={1000} onChange={ handleChangeDays }/>
+                  <input type="text" value={ daysAmount } style={{boxShadow: open ? `0 0 3px #CC0000` : 'none'}} min={30} max={1000} onChange={ handleChangeDays }/>
                   <button className="button input-button" onClick={()=>handleDaysMax()}>MAX</button>
                 </div>
                 <span className="description">Min. 30 days/ Max. 1,000 days</span>

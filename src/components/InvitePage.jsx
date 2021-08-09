@@ -5,11 +5,12 @@ import TableReferalSummary from '../layouts/TableReferalSummary';
 import TableReferals from '../layouts/TableReferals';
 
 function Invite(props) {
-    const {data, stakedCase, wallet} = props;
+    const {data, stakedCase, wallet, canRankUp, handleRankUp} = props;
     const commissionHistory = data.commissionHistory;
     const percents = ["8", "5", "2.5", "1.5", "1.0", "1.0", "0.5", "0.5" ];
     let tabArr = [];
-    const rank = parseInt(data.rank);
+    const rank = data.rank;
+    const csp = parseFloat(data.careerValue*10000000000).toFixed(2);
 
     if (Object.keys(data).length === 0) return(<div>Loading..</div>);
     else console.log(commissionHistory);
@@ -29,7 +30,7 @@ function Invite(props) {
 
           <MainInfoReferals stakedCase={stakedCase} stakersCommission={parseFloat(data.totalCaseCommissionReceived).toFixed(2)}/>
 
-          <ReferalProgress wallet={wallet}/>
+          <ReferalProgress wallet={wallet} csp={csp} rank={rank} canRankUp={canRankUp} handleRankUp={handleRankUp}/>
           
           <div className="tc-tables tc-tables-referal">
             

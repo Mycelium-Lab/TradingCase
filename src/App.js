@@ -23,17 +23,18 @@ function App() {
 
   const [page, setPage] = React.useState('staking');
   const [balance, setBalance] = React.useState(0);
+  const [walletAddress, setWalletAddress] = React.useState('');
   const [apy, setApy] = React.useState(0.00);
   const [lifetimeRewards, setLifetimeRewards] = React.useState(0.00);
   const [totalInterest, setTotalInterest] = React.useState(0.00);
-  const [totalReward, setTotalReward] = React.useState(0.00);
   const [careerValue, setCareerValue] = React.useState(0.00);
   const [stakeList, setStakeList] = React.useState([]);
   const [totalStaked, setTotalStaked] = React.useState(0);
   const [recentActivity, setRecentActivity] = React.useState([]);
   const [stakedCase, setStakedCase] = React.useState(0.00);
   const [caseData, setCaseData] = React.useState({});
-  const [ref, setRef] = React.useState('');
+  const [canRankUp, setCanRankUp] = React.useState(false);
+  const [ref, setRef] = React.useState('0x0000000000000000000000000000000000000000');
 
   const dispatch = useDispatch()
   const address = useSelector(state => state.wallet.address)
@@ -67,7 +68,6 @@ function App() {
         console.log(data);
         setRef(findGetParameter('src'));
         setApy((parseFloat(data.caseUser.avgAPY)*100).toFixed(2));
-        setTotalReward(parseFloat(data.caseUser.totalStakeReward).toFixed(2))
         setCareerValue(parseFloat(data.caseUser.careerValue*100000000).toFixed(2))
         let ActiveStaked = sum(data.caseUser.stakeList,"stakeAmount");
         let LifetimeRewards = sum(data.caseUser.stakeList,"interestAmount");
@@ -94,7 +94,17 @@ function App() {
     await methods.getBalance().then(function(result) {
       setBalance(result);
     });
+
+     await methods.canRankUp().then(function(result) {
+      console.log(result)
+      setCanRankUp(result);
+    });
   };
+
+  async function handleWithdraw(idx){
+    console.log('withdraw');
+    await methods.instanceWithdraw(idx).then(function(result) {console.log(result)});
+  }
 
   function handleChange(page){
     window.history.pushState(page, 'Title', '/'+page);
@@ -103,26 +113,30 @@ function App() {
 
   async function handleStake(amount, days) {
     console.log(`%c staked ${amount} coins for ${days} days with ref ${ref}`, 'color: green');
-    await methods.instanceStake(amount, days, ref.toLowerCase()).then(function(error, result){console.log(error, result)});
+    await methods.instanceStake(amount, days, ref).then(function(error, result){console.log(error, result)});
+  }
+
+  async function handleRankUp() {
+    console.log("rankUp");
+    await methods.instanceRankUp().then(function(result){console.log(result)});
   }
 
   return (
     <div className="App">
       <WalletConnectionModal />
-      <Header handleChange={handleChange} csp={careerValue}/>
-      { (window.location.pathname == '/staking' || window.location.pathname == '/') &&
-        <Staking totalStaked={totalStaked} handleChange={handleChange} avgAPY={apy} lifetimeRewards={lifetimeRewards} totalInterest={totalInterest} activeStakes={stakeList} recentActivity={recentActivity} />
+      { (window.location.pathname === '/staking' || window.location.pathname === '/') &&
+        <Staking totalStaked={totalStaked} handleWithdraw={handleWithdraw} handleChange={handleChange} avgAPY={apy} lifetimeRewards={lifetimeRewards} totalInterest={totalInterest} activeStakes={stakeList} recentActivity={recentActivity} />
       }
-      { (window.location.pathname == '/invite') && 
-          <Invite data={caseData} stakedCase={stakedCase} wallet={'0x0000000000000000000000000000000000000000'}/>
+      { (window.location.pathname === '/invite') && 
+        <Invite data={caseData} stakedCase={stakedCase} wallet={walletAddress} canRankUp={canRankUp} handleRankUp={handleRankUp}/>
       }
-      { (window.location.pathname == '/stake') &&
-          <Stake balance={balance} handleStake={handleStake}/>
+      { (window.location.pathname === '/stake') &&
+        <Stake balance={balance} handleStake={handleStake}/>
       }
       <script type="text/javascript">
         Waves.attach('.button', ['waves-button', 'waves-float']);
         Waves.init();
-      </script> 
+      </script>
     </div>
     
   );
