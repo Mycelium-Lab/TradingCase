@@ -19,7 +19,7 @@ function MainInfoReferals(props) {
               </svg>
             </Tooltip>
           </span>
-          <span>{`${stakedCase} Case`}</span>
+          <span>{`${stakedCase} CASE`}</span>
         </div>
         <div className="tc-info-block">
           <span>Staker commisions
@@ -29,7 +29,7 @@ function MainInfoReferals(props) {
             </svg>
           </Tooltip>
           </span>
-          <span>{`${stakersCommission} Case`}</span>
+          <span>{`${stakersCommission} CASE`}</span>
         </div>
         <div className="break" />                
         </div> 

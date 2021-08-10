@@ -33,12 +33,12 @@ function MainInfo(props) {
               </svg>
             </Tooltip>
             </span>
-            <span>{`${lifetimeRewards} Case`}</span>
+            <span>{`${lifetimeRewards} CASE`}</span>
           </div>
           <div className="break"></div>
           <div className="tc-info-block">
             <span>Global Staked</span>
-            <span>{`${totalStaked} Case`}</span>
+            <span>{`${totalStaked} CASE`}</span>
           </div>
         </div>
   );

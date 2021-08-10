@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Header from './layouts/Header';
 import Staking from './components/StakingPage.jsx';
 import Invite from './components/InvitePage.jsx';
@@ -6,6 +6,7 @@ import Stake from './components/Stake.jsx';
 import WalletConnectionModal from './layouts/WalletConnectionModal';
 import { contractMethods, findGetParameter } from './Utils.js';
 import { User } from './graph';
+import {Helmet} from 'react-helmet';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { selectWallet } from './wallets/actions';
@@ -36,12 +37,21 @@ function App() {
 
   const dispatch = useDispatch()
   const address = useSelector(state => state.wallet.address)
+  const info = useSelector(state => state.wallet.provider);
+  const methods = useSelector(state => state.wallet.methods);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const lastProvider = localStorage.getItem('caseCurrentProvider')
     if (!lastProvider) dispatch(openModal())
-    else start(lastProvider)
+    else selectWallet(lastProvider, dispatch)
   }, [])
+
+  useEffect(() => {
+    if (address) {
+      console.log('start');
+      start()
+    }
+  }, [address])
 
   const { loading, error, data, refetch, networkStatus } = useQuery(User, {
     variables: { id: address.toLowerCase() },
@@ -81,26 +91,29 @@ function App() {
   
   },[data, error, loading]);
 
-  var methods;
+  const start = async() => {
+    if (info != null) {
+      console.log(localStorage.getItem('caseCurrentProvider'));
+      console.log(info);
+      console.log(methods);
 
-  const start = async(lastProvider) => {
-    await selectWallet(lastProvider, dispatch);
+      await methods.init();
 
-    methods = new contractMethods(window.web3);
-    await methods.init();
+      await methods.getBalance().then(function(result) {
+        console.log(result);
+        setBalance(result);
+      });
 
-    await methods.getBalance().then(function(result) {
-      setBalance(result);
-    });
-
-     await methods.canRankUp().then(function(result) {
-      console.log(result)
-      setCanRankUp(result);
-    });
+      await methods.canRankUp().then(function(result) {
+        console.log(result)
+        setCanRankUp(result);
+      });
+    }
   };
 
   async function handleWithdraw(idx){
-    console.log('withdraw');
+    console.log('withdraw', methods);
+    await methods.init();
     await methods.instanceWithdraw(idx).then(function(result) {console.log(result)});
   }
 
@@ -110,7 +123,9 @@ function App() {
   }
 
   async function handleStake(amount, days) {
+    console.log('stake', methods);
     console.log(`%c staked ${amount} coins for ${days} days with ref ${ref}`, 'color: green');
+    await methods.init();
     await methods.instanceStake(amount, days, ref).then(function(error, result){console.log(error, result)});
   }
 
@@ -132,10 +147,13 @@ function App() {
       { (window.location.pathname === '/stake') &&
         <Stake balance={balance} handleStake={handleStake} />
       }
-      <script type="text/javascript">
-        Waves.attach('.button', ['waves-button', 'waves-float']);
-        Waves.init();
-      </script>
+      <Helmet>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/node-waves/0.7.6/waves.min.js" integrity="sha512-MzXgHd+o6pUd/tm8ZgPkxya3QUCiHVMQolnY3IZqhsrOWQaBfax600esAw3XbBucYB15hZLOF0sKMHsTPdjLFg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script type="text/javascript">          
+          Waves.attach('.button', ['waves-button', 'waves-float']);
+          Waves.init();          
+        </script>
+      </Helmet>
     </div>
     
   );

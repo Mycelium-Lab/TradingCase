@@ -1,12 +1,14 @@
 import {
     SET_ADDRESS,
     SET_CHAINID,
-    SET_PROVIDER
+    SET_PROVIDER,
+    SET_METHODS,
 } from '../types'
 
 const initialState = {
     chainId: '',
     address: '',
+    method: '',
     provider: null
 }
 
@@ -27,6 +29,11 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 address: action.payload.address
+            }
+        case SET_METHODS:
+            return {
+                ...state,
+                methods: action.payload.methods
             }
         default:
             return {

@@ -1,7 +1,8 @@
 import {
     SET_CHAINID,
     SET_ADDRESS,
-    SET_PROVIDER
+    SET_PROVIDER,
+    SET_METHODS,
 } from '../types'
 
 export const setChainId = (chainId) => ({
@@ -17,4 +18,9 @@ export const setAddress = (address) => ({
 export const setProvider = (provider) => ({
     type: SET_PROVIDER,
     payload: { provider }
+})
+
+export const setMethods = (methods) => ({
+    type: SET_METHODS,
+    payload: { methods }
 })

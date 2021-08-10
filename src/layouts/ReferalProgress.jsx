@@ -17,7 +17,7 @@ function ReferalProgress(props) {
             <div className="referal-rank">
               <div className="rank-info">
                 <div>Now</div>
-                <div><span id="rank_info">{rankList[rank]}</span> - <span id="cps_info">{csp}</span> <span> CSP</span></div>
+                <div><span id="rank_info">{rankList[rank].toUpperCase()}</span> - <span id="cps_info">{csp}</span> <span> CSP</span></div>
               </div>
             </div>
             <div className="referal-progress-line">
@@ -28,7 +28,7 @@ function ReferalProgress(props) {
             <div className="referal-rank-next">
               <div className="rank-info">
                 <div>Next</div>
-                <div>{rankList[(parseInt(rank)+1).toString()]}</div>
+                <div>{(rank !='8') ? rankList[(parseInt(rank)+1).toString()].toUpperCase() : "MAX"}</div>
               </div>
             </div>
           </div>

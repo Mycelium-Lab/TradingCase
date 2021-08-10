@@ -89,13 +89,15 @@ body {
 }
 
 .container {
-    width: 77.604vw;
+    width: 77.604vw!important;
+    max-width: 77.604vw!important;
     display: block;
     margin: 0 auto;
 }
 
 .tc-wrapper .container {
-    width: 69.219vw;
+    width: 69.219vw!important;
+    max-width: 69.219vw!important;
 }
 
 header {
@@ -709,7 +711,8 @@ header {
         display: flex;
     }
     header .container {
-        width: 100%;
+        width: 100%!important;
+        max-width: 100%!important;
     }
     .nav {
         padding: 0 25px 0 26px;
@@ -777,9 +780,12 @@ header {
         padding-top: 95px;
     }
     .tc-wrapper .container {
-        width: -moz-available;          
-        width: -webkit-fill-available; 
-        width: fill-available;
+        width: -moz-available!important;          
+        width: -webkit-fill-available!important; 
+        width: fill-available!important;
+        max-width: -moz-available!important;          
+        max-width: -webkit-fill-available!important; 
+        max-width: fill-available!important;
         padding-left: 30px;
         padding-right: 30px;
     }
@@ -1092,7 +1098,7 @@ header {
     width: 15vw;
 }
 .tc-tables-referal-last-column {
-    width: 6vw;
+    width: 10vw!important;
 }
 .tc-tables-referal tr td {
     height: 1.8vw;
@@ -1376,6 +1382,9 @@ header {
 }
 .stake-case-faq-qa div{
     margin-bottom: 2.500vw
+}
+.stake-case-faq-qa div:first-child {
+    text-align: left;
 }
 .stake-case-faq-qa div:last-child {
     text-align: right;

@@ -23,10 +23,13 @@ function Header(props) {
 
   const csp = parseFloat(data.careerValue*10000000000).toFixed(2);
   const rank = data.rank;
+  var validData = true;
 
   const wallet = useSelector(state => state.wallet.address);
   const provider = useSelector(state => state.wallet.provider);
   const dispatch = useDispatch();
+
+  if (Object.keys(data).length === 0) validData = false;
 
   return (
       <header>
@@ -67,7 +70,7 @@ function Header(props) {
             </a>
             <div className="rank-info">
               <div>Rank </div>
-              <div><span id="rank_info">{rankList[rank]}</span> - <span id="cps_info">{csp}</span> <span>CSP</span></div>
+              <div><span id="rank_info">{validData ? rankList[rank].toUpperCase(): "NO RANK"}</span> - <span id="cps_info">{validData ? csp: "0.00"}</span> <span>CSP</span></div>
             </div>
             <Dropdown isOpen={dropdownOpen} toggle={toggle}>
               <DropdownToggle

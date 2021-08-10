@@ -1,13 +1,17 @@
-import { setChainId, setProvider, setAddress } from '../redux/wallets/actions'
+import { setChainId, setProvider, setAddress, setMethods } from '../redux/wallets/actions'
 import { closeModal } from '../redux/modal/actions'
 import Web3 from 'web3'
+import { contractMethods} from '../Utils.js';
 import WalletConnectProvider from '@walletconnect/web3-provider'
 
 const addProvider = (provider, provider_name, dispatch) => {
     window.web3 = new Web3(provider)
     dispatch(setProvider(provider))
+    let methods = new contractMethods(window.web3);
+    dispatch(setMethods(methods));
     localStorage.setItem('caseCurrentProvider', provider_name)
-} 
+}
+
 
 const addProviderListeners = (provider, dispatch) => {
     provider.on("accountsChanged", (accounts) => {
@@ -41,6 +45,7 @@ export const selectWallet = async (wallet, dispatch) => {
     
                 addProvider(window.ethereum, 'metaMask', dispatch)
                 addProviderListeners(window.ethereum, dispatch)
+
               } catch (err) {
                   dispatch(setProvider(null))
               }
