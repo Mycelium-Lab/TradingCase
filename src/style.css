@@ -266,6 +266,7 @@ header {
     font-style: normal;
     display: flex;
     flex-direction: column;
+    width: 13vw;
 }
 
 .tc-main-info-balance span:first-child {
@@ -333,7 +334,7 @@ header {
 }
 
 .tc-info-block:last-child {
-    width: 21.198vw;
+    width: 17.5vw;
 }
 
 .tc-main-info .tc-info-block span {
@@ -898,6 +899,7 @@ header {
 .tc-invite-main-info .tc-main-info-balance {
     font-family: SF UI Text;
     margin-right: 1.8vw;
+    width: unset;
 }
 .tc-invite-main-info .tc-main-info-balance span:first-child {
     font-size: 1.250vw;
@@ -907,6 +909,9 @@ header {
     font-size: 0.938vw;
     line-height: 1.094vw;
     width: 38.281vw;
+}
+.tc-invite-main-info .tc-info-block:nth-child(3) {
+    margin-right: 1vw;
 }
 .tc-invite-main-info .tc-info-block:nth-child(4) span:last-child {
     color: inherit;
@@ -1036,6 +1041,7 @@ header {
     color: #8687A7;
     width: 80%;
     border-style: hidden;
+    text-align: left;
 }
 .referal-button {
     background: #3B5DE7;
@@ -1086,6 +1092,7 @@ header {
 }
 .tc-tables-referal .tg th {
     font-weight: bold;
+    vertical-align: middle;
 }
 .tg .tg-0pky {
     width: 3.125vw;
@@ -1120,6 +1127,13 @@ header {
 }
 /* mobile referals */
 @media (max-width: 768px) {
+    .tc-main-info-balance {
+        width: unset;
+        max-width: 50%;    
+    }
+    .tc-invite-main-info .tc-main-info-balance {
+        max-width: 100%;
+    }
     .tc-invite-main-info .tc-main-info-balance {
         margin-right: 0;
     }

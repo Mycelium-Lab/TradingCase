@@ -39,7 +39,7 @@ function TableReferalSummary(props) {
                 <td className="tg-0lax">{lvl}</td>
                 <td className="tg-0lax">{counts}</td>
                 <td className="tg-0lax">{`${commission}%`}</td>
-                <td className="tg-0lax">{cases.toFixed(3)}</td>
+                <td className="tg-0lax">{`${cases.toFixed(2)}`}</td>
                 { levelCost[parseInt(lvl)] <= parseInt(stakedCase) ? (
                   <td className="tg-0lax tc-tables-referal-last-column">
                     <span className="activated">

@@ -111,14 +111,15 @@ function App() {
     }
   };
 
-  async function handleWithdraw(idx){
+  async function handleWithdraw(idx) {
     console.log('withdraw', methods);
     await methods.init();
     await methods.instanceWithdraw(idx).then(function(result) {console.log(result)});
   }
 
-  function handleChange(page){
-    window.history.pushState(page, 'Title', '/'+page);
+  function handleChange(page) {
+    console.log(page);
+    window.history.pushState(page, 'Title', `/${page}`);
     setPage(page);
   }
 
@@ -149,9 +150,10 @@ function App() {
       }
       <Helmet>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/node-waves/0.7.6/waves.min.js" integrity="sha512-MzXgHd+o6pUd/tm8ZgPkxya3QUCiHVMQolnY3IZqhsrOWQaBfax600esAw3XbBucYB15hZLOF0sKMHsTPdjLFg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <script type="text/javascript">          
+        <script type="text/javascript">
+          Waves.init();
           Waves.attach('.button', ['waves-button', 'waves-float']);
-          Waves.init();          
+                    
         </script>
       </Helmet>
     </div>
