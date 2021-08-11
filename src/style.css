@@ -383,8 +383,9 @@ header {
 }
 
 .tg thead {
-    border-top: 0.052vw solid #EFF2F7;
-    border-bottom: 0.052vw solid #EFF2F7;
+    border-top: 1px solid #EFF2F7;
+    border-bottom: 1px solid #EFF2F7;
+    border-width: 2px;
 }
 
 .tg td {
@@ -403,6 +404,8 @@ header {
 }
 
 .tg th {
+    border-top: 0.5vw solid #EFF2F7;
+    border-bottom: 0.5vw solid #EFF2F7;
     border-style: solid;
     border-width: 0px;
     font-size: 0.729vw;
@@ -860,8 +863,8 @@ header {
         text-align: center;
     }
     .tg thead {
-        border-top: 1px solid #EFF2F7;
-        border-bottom: 1px solid #EFF2F7;
+        border-top: 2px solid #EFF2F7;
+        border-bottom: 2px solid #EFF2F7;
     }
     .tg th {
         font-size: 11px;

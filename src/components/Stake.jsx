@@ -75,6 +75,7 @@ function Stake(props) {
 
   React.useEffect(() => {
     calculate(stakeAmount, daysAmount);
+    window.scrollTo(0, 0);
   });
 
   return (

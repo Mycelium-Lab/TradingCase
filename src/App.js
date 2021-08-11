@@ -38,6 +38,7 @@ function App() {
   const address = useSelector(state => state.wallet.address)
   const info = useSelector(state => state.wallet.provider);
   const methods = useSelector(state => state.wallet.methods);
+  console.log(methods, info);
 
   useEffect(() => {
     const lastProvider = localStorage.getItem('caseCurrentProvider')
@@ -91,10 +92,8 @@ function App() {
   },[data, error, loading]);
 
   const start = async() => {
+    console.log(`%c ${info}`, 'color: red')
     if (info != null) {
-      console.log(localStorage.getItem('caseCurrentProvider'));
-      console.log(info);
-      console.log(methods);
 
       await methods.init();
 
@@ -139,13 +138,13 @@ function App() {
       <WalletConnectionModal />
       <Header handleChange={handleChange} data={caseData} />
       { (window.location.pathname === '/staking' || window.location.pathname === '/') &&
-        <Staking totalStaked={totalStaked} handleWithdraw={handleWithdraw} handleChange={handleChange} avgAPY={apy} lifetimeRewards={lifetimeRewards} totalInterest={totalInterest} activeStakes={stakeList} recentActivity={recentActivity} />
+        <Staking totalStaked={totalStaked} handleWithdraw={handleWithdraw} handleChange={handleChange} avgAPY={apy} lifetimeRewards={lifetimeRewards} totalInterest={totalInterest} activeStakes={stakeList} recentActivity={recentActivity} page={page}/>
       }
       { (window.location.pathname === '/invite') && 
-        <Invite data={caseData} stakedCase={stakedCase} wallet={walletAddress} canRankUp={canRankUp} handleRankUp={handleRankUp}/>
+        <Invite data={caseData} handleChange={handleChange} stakedCase={stakedCase} wallet={walletAddress} canRankUp={canRankUp} handleRankUp={handleRankUp} page={page}/>
       }
       { (window.location.pathname === '/stake') &&
-        <Stake balance={balance} handleStake={handleStake} referrer={ref} />
+        <Stake balance={balance} handleStake={handleStake} referrer={ref} page={page}/>
       }
     </div>
     

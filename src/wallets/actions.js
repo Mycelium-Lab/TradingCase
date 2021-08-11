@@ -7,7 +7,7 @@ import WalletConnectProvider from '@walletconnect/web3-provider'
 const addProvider = (provider, provider_name, dispatch) => {
     window.web3 = new Web3(provider);
     dispatch(setProvider(provider));
-    window.web3.enable();
+    //window.web3.enable();
     let methods = new contractMethods(window.web3);
     dispatch(setMethods(methods));
     localStorage.setItem('caseCurrentProvider', provider_name)

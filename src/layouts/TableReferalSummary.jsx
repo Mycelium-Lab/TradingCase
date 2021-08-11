@@ -5,7 +5,6 @@ import Tooltip from '@material-ui/core/Tooltip';
 function TableReferalSummary(props) {
     const { data, stakedCase, handleChange } = props;
     //console.table(data);
-    const [tableData, setTableData] = React.useState([]);
 
     return(
         <div className="tc-info-block">
