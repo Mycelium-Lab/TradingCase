@@ -51,7 +51,7 @@ function App() {
       console.log('start');
       start()
     }
-  }, [address])
+  }, [methods])
 
   const { loading, error, data, refetch, networkStatus } = useQuery(User, {
     variables: { id: address.toLowerCase() },
