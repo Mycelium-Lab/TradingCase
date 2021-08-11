@@ -1399,10 +1399,10 @@ header {
     margin-bottom: 2.500vw
 }
 .stake-case-faq-qa div:first-child {
-    text-align: left;
+    text-align: center;
 }
 .stake-case-faq-qa div:last-child {
-    text-align: right;
+    text-align: center;
 }
 .stake-case-faq-qa div span {
     display: block;
