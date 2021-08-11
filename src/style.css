@@ -1112,7 +1112,7 @@ header {
     vertical-align: middle!important;
 }
 .tc-tables-referal tr {
-    border-bottom: 0.104vw solid #EFF2F7;
+    border-bottom: 1px solid #EFF2F7;
 }
 .tc-tables-referal tr:last-child {
     border-bottom: none;
