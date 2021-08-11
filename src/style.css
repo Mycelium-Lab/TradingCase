@@ -1254,7 +1254,6 @@ header {
 /***** STAKE BLOCK *****/
 .stake-case-amount, .stake-case-order-details {
     width: 34.896vw;
-    height: 26.042vw;
     background: #fff;
     display: flex;
     flex-direction: column;
@@ -1265,6 +1264,8 @@ header {
     -ms-border-radius: 0.208vw;
     -o-border-radius: 0.208vw;
     margin-bottom: 4.531vw;
+    margin-left: 2vw;
+    padding-bottom: 5vh;
 }
 .stake-case {
     display: flex;
@@ -1547,4 +1548,17 @@ header {
         line-height: 14px;
         margin-top: 6px;
     }
+}
+
+.button {
+    background-position: center!important;
+    transition: background 0.8s!important;
+}
+.button:hover {
+    background: #1b42e0 radial-gradient(circle, transparent 1%, #1b42e0 1%) center/15000%!important;
+}
+.button:active {
+    background-color: #6276c7!important;
+    background-size: 100%!important;
+    transition: background 0s!important;
 }

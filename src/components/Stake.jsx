@@ -14,7 +14,7 @@ const Minted = 0;
 const styleBox = {boxShadow: `0 0 3px #CC0000`};
 
 function Stake(props) {
-  const { balance, handleStake, minted } = props;
+  const { balance, handleStake, minted, referrer } = props;
 
   const [ daysAmount, setDaysAmount ] = React.useState(1000);
   const [ stakeAmount, setStakeAmount ] = React.useState(10);
@@ -88,7 +88,7 @@ function Stake(props) {
                 <span>Amount to stake</span>
                 <div>
                   <input type="text" value={stakeAmount} onChange={handleChangeStake} />
-                  <button className="button waves-float input-button" onClick={()=>handleStakeMax()}>MAX</button>
+                  <button className="button input-button" onClick={()=>handleStakeMax()}>MAX</button>
                 </div>
                 <span className="description">{balance + " CASE available - "}<div>Buy</div></span>
               </div>
@@ -103,7 +103,7 @@ function Stake(props) {
               <button id="stake-case-button" className="button" onClick={() => preHandle()} >STAKE</button>
             </div>
           </div>
-          <StakeDetails BiggerBonus={BiggerBonus} LongerBonus={LongerBonus} EarlyBonus={EarlyBonus} apy={apy} RewardTotal={RewardTotal} />
+          <StakeDetails referrer={referrer} BiggerBonus={BiggerBonus} LongerBonus={LongerBonus} EarlyBonus={EarlyBonus} apy={apy} RewardTotal={RewardTotal} />
         </div>
         <StakeFaq />
       </div>

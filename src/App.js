@@ -4,9 +4,8 @@ import Staking from './components/StakingPage.jsx';
 import Invite from './components/InvitePage.jsx';
 import Stake from './components/Stake.jsx';
 import WalletConnectionModal from './layouts/WalletConnectionModal';
-import { contractMethods, findGetParameter } from './Utils.js';
+import { findGetParameter } from './Utils.js';
 import { User } from './graph';
-import {Helmet} from 'react-helmet';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { selectWallet } from './wallets/actions';
@@ -74,7 +73,7 @@ function App() {
       }
       else {
         console.log(data);
-        setRef(findGetParameter('src'));
+        if (findGetParameter('src')!=null) setRef(findGetParameter('src'));
         setApy((parseFloat(data.caseUser.avgAPY)*100).toFixed(2));
         setCareerValue(parseFloat(data.caseUser.careerValue*10000000000).toFixed(2))
         let ActiveStaked = sum(data.caseUser.stakeList,"stakeAmount");
@@ -84,9 +83,9 @@ function App() {
         setStakedCase(ActiveStaked);
         setStakeList(data.caseUser.stakeList);
         setRecentActivity(data.caseUser.stakeActivityHistory);
-        setTotalStaked(data.caseStakingPool.stakeAmount);
         setCaseData(data.caseUser);
       }
+      setTotalStaked(data.caseStakingPool.stakeAmount);
     }
   
   },[data, error, loading]);
@@ -136,7 +135,7 @@ function App() {
   }
 
   return (
-    <div className="App">
+    <div className="App" page={page}>
       <WalletConnectionModal />
       <Header handleChange={handleChange} data={caseData} />
       { (window.location.pathname === '/staking' || window.location.pathname === '/') &&
@@ -146,16 +145,8 @@ function App() {
         <Invite data={caseData} stakedCase={stakedCase} wallet={walletAddress} canRankUp={canRankUp} handleRankUp={handleRankUp}/>
       }
       { (window.location.pathname === '/stake') &&
-        <Stake balance={balance} handleStake={handleStake} />
+        <Stake balance={balance} handleStake={handleStake} referrer={ref} />
       }
-      <Helmet>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/node-waves/0.7.6/waves.min.js" integrity="sha512-MzXgHd+o6pUd/tm8ZgPkxya3QUCiHVMQolnY3IZqhsrOWQaBfax600esAw3XbBucYB15hZLOF0sKMHsTPdjLFg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <script type="text/javascript">
-          Waves.init();
-          Waves.attach('.button', ['waves-button', 'waves-float']);
-                    
-        </script>
-      </Helmet>
     </div>
     
   );

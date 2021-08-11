@@ -8,7 +8,7 @@ function MainInfoReferals(props) {
         <div className="tc-main-info tc-invite-main-info">
         <div className="tc-main-info-balance">
           <span>Invite friends and you'll both get bonus</span>
-          <span>Know someone curious about crypto? You’ll both receive bonus when they stake СASE tokens or invest on CASEDEFI!.</span>
+          <span>Know someone curious about crypto? You’ll both receive bonus when they stake СASE tokens or invest on TradingCase!.</span>
         </div>
         <div className="break" />
         <div className="tc-info-block">

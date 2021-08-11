@@ -50,6 +50,7 @@ const User = gql`
           type
           timestamp
           txAmount
+          txHash
       }
     }
   }

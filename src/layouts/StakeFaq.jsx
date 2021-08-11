@@ -8,7 +8,7 @@ export default function StakeFaq(props) {
 	        <div className="stake-case-faq-qa">
 	          <div>
 	            <span>What is CASE?</span>
-	            <span>CASE is the token that fuels the CASEDEFI Platform.</span>
+	            <span>CASE is the token that fuels the TradingCase Platform.</span>
 	          </div>
 	          <div>
 	            <span>What are the benefits to stake CASE?</span>
