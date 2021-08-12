@@ -1,10 +1,36 @@
 import React from 'react';
 import { levelCost } from '../constants';
 import Tooltip from '@material-ui/core/Tooltip';
+import { useSelector } from 'react-redux';
+
+function sum(arr, key) {
+    return arr.reduce((a, b) => a + (parseFloat(b[key]) || 0), 0);
+}
 
 function TableReferalSummary(props) {
-    const { data, stakedCase, handleChange } = props;
+    const { handleChange } = props;
     //console.table(data);
+
+    const data = useSelector(state => state.info.user);
+    let stakedCase = sum(data.stakeList,"stakeAmount");
+
+    const percents = ["8", "5", "2.5", "1.5", "1.0", "1.0", "0.5", "0.5" ];
+    let tabArr = [];
+
+    if (Object.keys(data).length === 0) {
+      stakedCase = "0.00";
+    }
+    else {
+
+      for (var i=0; i<8; i++) {
+        let td = {};
+        td.lvl = (i+1).toString();
+        td.counts = (data.referLevelUserCounts)[i];
+        td.commission = percents[i];
+        td.cases = parseFloat(data.referLevelCaseCommissions[i]);
+        tabArr.push(td);
+      }
+    }
 
     return(
         <div className="tc-info-block">
@@ -33,7 +59,7 @@ function TableReferalSummary(props) {
               </tr>
             </thead>
             <tbody>
-            { data.map(({lvl, counts, commission, cases}, index) => (
+            { tabArr.map(({lvl, counts, commission, cases}, index) => (
               <tr key={index}>
                 <td className="tg-0lax">{lvl}</td>
                 <td className="tg-0lax">{counts}</td>

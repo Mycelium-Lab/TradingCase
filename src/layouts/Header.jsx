@@ -19,8 +19,9 @@ function Header(props) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggle = () => setDropdownOpen(prevState => !prevState);
 
-  const { handleChange, data } = props;
+  const { handleChange } = props;
 
+  const data = useSelector(state => state.info.user);
   const csp = parseFloat(data.careerValue*10000000000).toFixed(2);
   const rank = data.rank;
   var validData = true;

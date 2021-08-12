@@ -22,12 +22,6 @@ function App() {
 
   const [page, setPage] = React.useState('staking');
   const [balance, setBalance] = React.useState(0);
-  const [walletAddress, setWalletAddress] = React.useState('');
-  const [apy, setApy] = React.useState(0.00);
-  const [lifetimeRewards, setLifetimeRewards] = React.useState(0.00);
-  const [totalInterest, setTotalInterest] = React.useState(0.00);
-  const [careerValue, setCareerValue] = React.useState(0.00);
-  const [totalStaked, setTotalStaked] = React.useState(0);
   const [stakedCase, setStakedCase] = React.useState(0.00);
   const [caseData, setCaseData] = React.useState({});
   const [canRankUp, setCanRankUp] = React.useState(false);
@@ -72,14 +66,8 @@ function App() {
       if (data.caseUser != null) {
         console.log('dispatch', data.caseUser);
         dispatch(setUser(data.caseUser));
-        setApy((parseFloat(data.caseUser.avgAPY)*100).toFixed(2));
-        setCareerValue(parseFloat(data.caseUser.careerValue*10000000000).toFixed(2))
         let ActiveStaked = sum(data.caseUser.stakeList,"stakeAmount");
-        let LifetimeRewards = sum(data.caseUser.stakeList,"interestAmount");
-        setLifetimeRewards(LifetimeRewards.toFixed(2));
-        setTotalInterest((ActiveStaked+LifetimeRewards).toFixed(2));
         setStakedCase(ActiveStaked);
-        setCaseData(data.caseUser);
       }
       dispatch(setGlobal(data.caseStakingPool));
     }
@@ -117,12 +105,12 @@ function App() {
   return (
     <div className="App" page={page}>
       <WalletConnectionModal />
-      <Header handleChange={handleChange} data={caseData} />
+      <Header handleChange={handleChange} />
       { (window.location.pathname === '/staking' || window.location.pathname === '/') &&
         <Staking handleChange={handleChange}/>
       }
       { (window.location.pathname === '/invite') && 
-        <Invite data={caseData} handleChange={handleChange} stakedCase={stakedCase} wallet={walletAddress} canRankUp={canRankUp} handleRankUp={handleRankUp} page={page}/>
+        <Invite data={caseData} handleChange={handleChange} stakedCase={stakedCase} wallet={address} canRankUp={canRankUp} handleRankUp={handleRankUp} page={page}/>
       }
       { (window.location.pathname === '/stake') &&
         <Stake balance={balance} referrer={ref}/>
