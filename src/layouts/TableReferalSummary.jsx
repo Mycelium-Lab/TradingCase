@@ -33,8 +33,8 @@ function TableReferalSummary(props) {
               </tr>
             </thead>
             <tbody>
-            { data.map(({lvl, counts, commission, cases}) => (
-              <tr>
+            { data.map(({lvl, counts, commission, cases}, index) => (
+              <tr key={index}>
                 <td className="tg-0lax">{lvl}</td>
                 <td className="tg-0lax">{counts}</td>
                 <td className="tg-0lax">{`${commission}%`}</td>

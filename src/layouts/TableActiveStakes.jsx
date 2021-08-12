@@ -20,8 +20,10 @@ const calculate = (amount, days, timestamp, withdrawn) => {
 
 function TableActiveStakes(props) {
 
-  const activeStakes = useSelector(state => state.info.user.stakeList);
+  var activeStakes = useSelector(state => state.info.user.stakeList);
   const methods = useSelector(state => state.wallet.methods);
+
+  if (activeStakes === undefined) activeStakes = [];
 
   async function handleWithdraw(idx) {
     console.log('withdraw', methods);

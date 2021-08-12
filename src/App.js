@@ -9,7 +9,7 @@ import { User } from './graph';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { selectWallet } from './wallets/actions';
-import { setUser } from './redux/info/actions';
+import { setUser, setGlobal } from './redux/info/actions';
 import { openModal } from './redux/modal/actions';
 
 import './App.css';
@@ -70,7 +70,7 @@ function App() {
     if (loading) return(<div>Loading...</div>);
     if (!loading) {
       if (data.caseUser != null) {
-        console.log('dispatch');
+        console.log('dispatch', data.caseUser);
         dispatch(setUser(data.caseUser));
         setApy((parseFloat(data.caseUser.avgAPY)*100).toFixed(2));
         setCareerValue(parseFloat(data.caseUser.careerValue*10000000000).toFixed(2))
@@ -81,7 +81,7 @@ function App() {
         setStakedCase(ActiveStaked);
         setCaseData(data.caseUser);
       }
-      setTotalStaked(data.caseStakingPool.stakeAmount);
+      dispatch(setGlobal(data.caseStakingPool));
     }
   
   },[data, error, loading]);
@@ -119,13 +119,13 @@ function App() {
       <WalletConnectionModal />
       <Header handleChange={handleChange} data={caseData} />
       { (window.location.pathname === '/staking' || window.location.pathname === '/') &&
-        <Staking totalStaked={totalStaked} handleChange={handleChange} avgAPY={apy} lifetimeRewards={lifetimeRewards} totalInterest={totalInterest} page={page}/>
+        <Staking handleChange={handleChange}/>
       }
       { (window.location.pathname === '/invite') && 
         <Invite data={caseData} handleChange={handleChange} stakedCase={stakedCase} wallet={walletAddress} canRankUp={canRankUp} handleRankUp={handleRankUp} page={page}/>
       }
       { (window.location.pathname === '/stake') &&
-        <Stake balance={balance} referrer={ref} page={page}/>
+        <Stake balance={balance} referrer={ref}/>
       }
     </div>
     

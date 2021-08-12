@@ -21,8 +21,8 @@ function TableReferals(props) {
             </tr>
           </thead>
           <tbody>
-          { commissionHistory.map(({timestamp, txAmount, user, level}) => (
-            <tr>
+          { commissionHistory.map(({timestamp, txAmount, user, level}, index) => (
+            <tr key={index}>
               <td className="tg-0lax">{unixToNormal(timestamp)}</td>
               <td className="tg-0lax">{`${commissionToStaked(txAmount, level)} CASE`}</td>
               <td className="tg-0lax">{`${parseFloat(txAmount).toFixed(2)} CASE`}</td>

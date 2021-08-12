@@ -1,8 +1,30 @@
 import React from 'react';
 import Tooltip from '@material-ui/core/Tooltip';
+import { useSelector } from 'react-redux';
+
+function sum(arr, key) {
+    return arr.reduce((a, b) => a + (parseFloat(b[key]) || 0), 0);
+  }
 
 function MainInfo(props) {  
-  const { handleChange, avgAPY, lifetimeRewards, totalInterest, totalStaked } = props;
+  const { handleChange } = props;
+
+  const user = useSelector(state => state.info.user);
+  const totalStaked = useSelector(state => state.info.global.stakeAmount);
+  console.log(user);
+
+  var avgAPY = 0.00;
+  var totalInterest = 0.00;
+  var lifetimeRewards = 0.00;
+
+  if (Object.keys(user).length !== 0) {
+    console.log(user);
+    avgAPY = (parseFloat(user.avgAPY)*100).toFixed(2);
+    let ActiveStaked = sum(user.stakeList,"stakeAmount");
+    let LifetimeRewards = sum(user.stakeList,"interestAmount");
+    totalInterest = (ActiveStaked+LifetimeRewards).toFixed(2);
+    lifetimeRewards = LifetimeRewards.toFixed(2);
+  }
   
   return (
     <div className="tc-main-info">
