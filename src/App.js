@@ -9,6 +9,7 @@ import { User } from './graph';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { selectWallet } from './wallets/actions';
+import { setUser } from './redux/info/actions';
 import { openModal } from './redux/modal/actions';
 
 import './App.css';
@@ -38,7 +39,6 @@ function App() {
   const address = useSelector(state => state.wallet.address)
   const info = useSelector(state => state.wallet.provider);
   const methods = useSelector(state => state.wallet.methods);
-  console.log(methods, info);
 
   useEffect(() => {
     const lastProvider = localStorage.getItem('caseCurrentProvider')
@@ -51,7 +51,6 @@ function App() {
 
   useEffect(() => {
     if (address) {
-      console.log('start');
       start()
     }
   }, [methods])
@@ -66,18 +65,15 @@ function App() {
     return arr.reduce((a, b) => a + (parseFloat(b[key]) || 0), 0);
   }
 
-
   console.log(`%c My src: ${ref}`, 'color: orange')
 
   React.useEffect(() => {  // хук для обновления данных
     if (error) console.error(error);
     if (loading) return(<div>Loading...</div>);
     if (!loading) {
-      if (data.caseUser == null) {
-        console.log(data);
-      }
-      else {
-        console.log(data);
+      if (data.caseUser != null) {
+        console.log('dispatch');
+        dispatch(setUser(data.caseUser));
         setApy((parseFloat(data.caseUser.avgAPY)*100).toFixed(2));
         setCareerValue(parseFloat(data.caseUser.careerValue*10000000000).toFixed(2))
         let ActiveStaked = sum(data.caseUser.stakeList,"stakeAmount");
@@ -95,28 +91,20 @@ function App() {
   },[data, error, loading]);
 
   const start = async() => {
-    console.log(`%c ${info}`, 'color: red')
     if (info != null) {
 
       await methods.init();
 
       await methods.getBalance().then(function(result) {
-        console.log(result);
         setBalance(result);
       });
 
       await methods.canRankUp().then(function(result) {
-        console.log(result)
         setCanRankUp(result);
       });
     }
   };
 
-  async function handleWithdraw(idx) {
-    console.log('withdraw', methods);
-    await methods.init();
-    await methods.instanceWithdraw(idx).then(function(result) {console.log(result)});
-  }
 
   function handleChange(page) {
     console.log(page);
@@ -124,12 +112,6 @@ function App() {
     setPage(page);
   }
 
-  async function handleStake(amount, days) {
-    console.log('stake', methods);
-    console.log(`%c staked ${amount} coins for ${days} days with ref ${ref}`, 'color: green');
-    await methods.init();
-    await methods.instanceStake(amount, days, ref).then(function(error, result){console.log(error, result)});
-  }
 
   async function handleRankUp() {
     console.log("rankUp");
@@ -141,13 +123,13 @@ function App() {
       <WalletConnectionModal />
       <Header handleChange={handleChange} data={caseData} />
       { (window.location.pathname === '/staking' || window.location.pathname === '/') &&
-        <Staking totalStaked={totalStaked} handleWithdraw={handleWithdraw} handleChange={handleChange} avgAPY={apy} lifetimeRewards={lifetimeRewards} totalInterest={totalInterest} activeStakes={stakeList} recentActivity={recentActivity} page={page}/>
+        <Staking totalStaked={totalStaked} handleChange={handleChange} avgAPY={apy} lifetimeRewards={lifetimeRewards} totalInterest={totalInterest} recentActivity={recentActivity} page={page}/>
       }
       { (window.location.pathname === '/invite') && 
         <Invite data={caseData} handleChange={handleChange} stakedCase={stakedCase} wallet={walletAddress} canRankUp={canRankUp} handleRankUp={handleRankUp} page={page}/>
       }
       { (window.location.pathname === '/stake') &&
-        <Stake balance={balance} handleStake={handleStake} referrer={ref} page={page}/>
+        <Stake balance={balance} referrer={ref} page={page}/>
       }
     </div>
     

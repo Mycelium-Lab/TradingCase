@@ -4,7 +4,7 @@ import TableRecentActivity from '../layouts/TableRecentActivity';
 import TableActiveStakes from '../layouts/TableActiveStakes';
 
 function Staiking(props) {
-  const { handleWithdraw, handleChange, avgAPY, lifetimeRewards, totalInterest, activeStakes, recentActivity, totalStaked } = props;
+  const { handleChange, avgAPY, lifetimeRewards, totalInterest, recentActivity, totalStaked } = props;
     return (
         <div className="tc-wrapper">
           <div className="container">
@@ -13,7 +13,7 @@ function Staiking(props) {
 
               <div className="tc-tables tc-tables-referal">
 
-                  <TableActiveStakes activeStakes={activeStakes} handleWithdraw={handleWithdraw}/>
+                  <TableActiveStakes />
 
                   <TableRecentActivity recentActivity={recentActivity}/>
 

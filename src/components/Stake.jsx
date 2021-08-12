@@ -1,6 +1,7 @@
 import React from 'react';
 import StakeDetails from '../layouts/StakeDetails';
 import StakeFaq from '../layouts/StakeFaq';
+import { useSelector } from 'react-redux';
 //import calculate from 'function';
 
 const PRECISION = 10 ** 18;
@@ -14,8 +15,8 @@ const Minted = 0;
 const styleBox = {boxShadow: `0 0 3px #CC0000`};
 
 function Stake(props) {
-  const { balance, handleStake, minted, referrer } = props;
-
+  const methods = useSelector(state => state.wallet.methods);
+  const { balance, minted, referrer } = props;
   const [ daysAmount, setDaysAmount ] = React.useState(1000);
   const [ stakeAmount, setStakeAmount ] = React.useState(10);
   const [ BiggerBonus, setBiggerBonus ] = React.useState(0);
@@ -25,6 +26,11 @@ function Stake(props) {
   const [ RewardTotal, setRewardTotal ] = React.useState(0);
   const [open, setOpen] = React.useState(false);
 
+  async function handleStake(amount, days) {
+    console.log(`%c staked ${amount} coins for ${days} days with ref ${referrer}`, 'color: green');
+    await methods.init();
+    await methods.instanceStake(amount, days, referrer).then(function(error, result){console.log(error, result)});
+  }
 
   const calculate = (amount, days) => {
 

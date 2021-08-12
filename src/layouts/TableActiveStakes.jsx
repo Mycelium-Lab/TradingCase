@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 function getDays(value, timestamp) {
   var today = new Date(); // сегодня
@@ -10,17 +11,23 @@ function getDays(value, timestamp) {
   return `${days}d ${hours}h ${minutes}m`;
 }
 
-
 const calculate = (amount, days, timestamp, withdrawn) => {
   var today = new Date(); // сегодня
   var start = new Date(parseInt(timestamp)*1000);
   var ends = new Date(start.getTime()+1000*60*60*24*days);
-  //console.log(`%c ${parseInt(amount)*(today - start)/(ends-start)-withdrawn}`, 'color red')
   return (parseInt(amount)*(today - start)/(ends-start)-withdrawn);
   }
 
 function TableActiveStakes(props) {
-  const { activeStakes, handleWithdraw, second } = props;
+
+  const activeStakes = useSelector(state => state.info.user.stakeList);
+  const methods = useSelector(state => state.wallet.methods);
+
+  async function handleWithdraw(idx) {
+    console.log('withdraw', methods);
+    await methods.init();
+    await methods.instanceWithdraw(idx).then(function(result) {console.log(result)});
+  }
 
   const calculateTimeLeft = () => {
     let seconds = new Date().getTime();
@@ -45,7 +52,7 @@ function TableActiveStakes(props) {
   });
 
   return (
-    <div className="tc-info-block" id={second}>
+    <div className="tc-info-block">
       <span>Active Stakes</span>
       <table className="tg tg-scrollable-table tg-recent-activity" style={{textAlign:"center"}}>
         <thead>
