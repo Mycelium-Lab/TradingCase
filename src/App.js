@@ -27,9 +27,7 @@ function App() {
   const [lifetimeRewards, setLifetimeRewards] = React.useState(0.00);
   const [totalInterest, setTotalInterest] = React.useState(0.00);
   const [careerValue, setCareerValue] = React.useState(0.00);
-  const [stakeList, setStakeList] = React.useState([]);
   const [totalStaked, setTotalStaked] = React.useState(0);
-  const [recentActivity, setRecentActivity] = React.useState([]);
   const [stakedCase, setStakedCase] = React.useState(0.00);
   const [caseData, setCaseData] = React.useState({});
   const [canRankUp, setCanRankUp] = React.useState(false);
@@ -81,8 +79,6 @@ function App() {
         setLifetimeRewards(LifetimeRewards.toFixed(2));
         setTotalInterest((ActiveStaked+LifetimeRewards).toFixed(2));
         setStakedCase(ActiveStaked);
-        setStakeList(data.caseUser.stakeList);
-        setRecentActivity(data.caseUser.stakeActivityHistory);
         setCaseData(data.caseUser);
       }
       setTotalStaked(data.caseStakingPool.stakeAmount);
@@ -123,7 +119,7 @@ function App() {
       <WalletConnectionModal />
       <Header handleChange={handleChange} data={caseData} />
       { (window.location.pathname === '/staking' || window.location.pathname === '/') &&
-        <Staking totalStaked={totalStaked} handleChange={handleChange} avgAPY={apy} lifetimeRewards={lifetimeRewards} totalInterest={totalInterest} recentActivity={recentActivity} page={page}/>
+        <Staking totalStaked={totalStaked} handleChange={handleChange} avgAPY={apy} lifetimeRewards={lifetimeRewards} totalInterest={totalInterest} page={page}/>
       }
       { (window.location.pathname === '/invite') && 
         <Invite data={caseData} handleChange={handleChange} stakedCase={stakedCase} wallet={walletAddress} canRankUp={canRankUp} handleRankUp={handleRankUp} page={page}/>

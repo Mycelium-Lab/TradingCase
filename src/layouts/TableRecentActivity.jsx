@@ -1,8 +1,10 @@
 import React from 'react';
 import unixToNormal from '../timeConvert.js';
+import { useSelector } from 'react-redux';
+
 function TableRecentActivity(props) {
 
-  const { recentActivity } = props;
+  const recentActivity = useSelector(state => state.info.user.stakeActivityHistory);
 
   return (
   

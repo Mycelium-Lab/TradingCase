@@ -2,7 +2,8 @@ import React from 'react';
 import Tooltip from '@material-ui/core/Tooltip';
 
 function MainInfo(props) {  
-  const { handleChange, avgAPY, lifetimeRewards, totalInterest, totalStaked } = props; 
+  const { handleChange, avgAPY, lifetimeRewards, totalInterest, totalStaked } = props;
+  
   return (
     <div className="tc-main-info">
           <div className="tc-main-info-balance">
