@@ -44,6 +44,9 @@ function App() {
     const lastProvider = localStorage.getItem('caseCurrentProvider')
     if (!lastProvider) dispatch(openModal())
     else selectWallet(lastProvider, dispatch)
+    if (findGetParameter('src')!=null) {
+      setRef(findGetParameter('src'));
+    }
   }, [])
 
   useEffect(() => {
@@ -63,6 +66,7 @@ function App() {
     return arr.reduce((a, b) => a + (parseFloat(b[key]) || 0), 0);
   }
 
+
   console.log(`%c My src: ${ref}`, 'color: orange')
 
   React.useEffect(() => {  // хук для обновления данных
@@ -74,13 +78,6 @@ function App() {
       }
       else {
         console.log(data);
-        if (findGetParameter('src')!=null) {
-          setRef(findGetParameter('src'));
-          console.log(ref);
-        }
-        else {
-          console.log(findGetParameter('src'));
-        }
         setApy((parseFloat(data.caseUser.avgAPY)*100).toFixed(2));
         setCareerValue(parseFloat(data.caseUser.careerValue*10000000000).toFixed(2))
         let ActiveStaked = sum(data.caseUser.stakeList,"stakeAmount");
