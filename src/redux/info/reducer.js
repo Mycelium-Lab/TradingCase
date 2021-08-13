@@ -1,11 +1,15 @@
 import {
     SET_USER,
-    SET_GLOBAL
+    SET_GLOBAL,
+    SET_BALANCE,
+    SET_PATH
 } from '../types'
 
 const initialState = {
     user: {},
-    global: {}
+    global: {},
+    balance: 0.00,
+    path: '/staking'
 }
 
 export default function (state = initialState, action) {
@@ -20,6 +24,18 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 global: action.payload.global
+            }
+        }
+        case SET_BALANCE: {
+            return {
+                ...state,
+                balance: action.payload.balance
+            }
+        }
+        case SET_PATH: {
+            return {
+                ...state,
+                path: action.payload.path
             }
         }
         default:

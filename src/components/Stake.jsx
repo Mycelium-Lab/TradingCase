@@ -24,7 +24,7 @@ function Stake(props) {
   const [ EarlyBonus, setEarlyBonus ] = React.useState(0);
   const [ apy, setApy ] = React.useState(0);
   const [ RewardTotal, setRewardTotal ] = React.useState(0);
-  const [open, setOpen] = React.useState(false);
+  const [ open, setOpen] = React.useState(false);
 
   async function handleStake(amount, days) {
     console.log(`%c staked ${amount} coins for ${days} days with ref ${referrer}`, 'color: green');

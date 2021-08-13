@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import Header from './layouts/Header';
 import Staking from './components/StakingPage.jsx';
 import Invite from './components/InvitePage.jsx';
@@ -20,17 +20,17 @@ import { useQuery } from "@apollo/client";
 
 function App() {
 
-  const [page, setPage] = React.useState('staking');
-  const [balance, setBalance] = React.useState(0);
-  const [stakedCase, setStakedCase] = React.useState(0.00);
-  const [caseData, setCaseData] = React.useState({});
-  const [canRankUp, setCanRankUp] = React.useState(false);
-  const [ref, setRef] = React.useState('0x0000000000000000000000000000000000000000');
+  const [balance, setBalance] = useState(0);
+  const [canRankUp, setCanRankUp] = useState(false);
+  const [ref, setRef] = useState('0x0000000000000000000000000000000000000000');
 
   const dispatch = useDispatch()
   const address = useSelector(state => state.wallet.address)
   const info = useSelector(state => state.wallet.provider);
   const methods = useSelector(state => state.wallet.methods);
+  const path = useSelector(state => state.info.path);
+
+  console.log(path);
 
   useEffect(() => {
     const lastProvider = localStorage.getItem('caseCurrentProvider')
@@ -59,7 +59,7 @@ function App() {
 
   console.log(`%c My src: ${ref}`, 'color: orange')
 
-  React.useEffect(() => {  // хук для обновления данных
+  useEffect(() => {  // хук для обновления данных
     if (error) console.error(error);
     if (loading) return(<div>Loading...</div>);
     if (!loading) {
@@ -67,7 +67,6 @@ function App() {
         console.log('dispatch', data.caseUser);
         dispatch(setUser(data.caseUser));
         let ActiveStaked = sum(data.caseUser.stakeList,"stakeAmount");
-        setStakedCase(ActiveStaked);
       }
       dispatch(setGlobal(data.caseStakingPool));
     }
@@ -89,30 +88,19 @@ function App() {
     }
   };
 
-
-  function handleChange(page) {
-    console.log(page);
-    window.history.pushState(page, 'Title', `/${page}`);
-    setPage(page);
-  }
-
-
-  async function handleRankUp() {
-    console.log("rankUp");
-    await methods.instanceRankUp().then(function(result){console.log(result)});
-  }
-
   return (
-    <div className="App" page={page}>
+    <div className="App" page={path}>
       <WalletConnectionModal />
-      <Header handleChange={handleChange} />
-      { (window.location.pathname === '/staking' || window.location.pathname === '/') &&
-        <Staking handleChange={handleChange}/>
+
+      <Header />
+      <div>{path}</div>
+      { (path === '/staking' || path === '/') &&
+        <Staking/>
       }
-      { (window.location.pathname === '/invite') && 
-        <Invite data={caseData} handleChange={handleChange} stakedCase={stakedCase} wallet={address} canRankUp={canRankUp} handleRankUp={handleRankUp} page={page}/>
+      { (path === '/invite') && 
+        <Invite canRankUp={canRankUp}/>
       }
-      { (window.location.pathname === '/stake') &&
+      { (path === '/stake') &&
         <Stake balance={balance} referrer={ref}/>
       }
     </div>

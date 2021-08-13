@@ -8,6 +8,7 @@ import { logout } from '../wallets/actions';
 import { openModal } from '../redux/modal/actions';
 import {rankList} from '../constants';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import { setPath } from '../redux/info/actions';
 
 const ModifiedJazzicon = styled(Jazzicon)({
   width: 20,
@@ -19,8 +20,6 @@ function Header(props) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggle = () => setDropdownOpen(prevState => !prevState);
 
-  const { handleChange } = props;
-
   const data = useSelector(state => state.info.user);
   const csp = parseFloat(data.careerValue*10000000000).toFixed(2);
   const rank = data.rank;
@@ -31,6 +30,11 @@ function Header(props) {
   const dispatch = useDispatch();
 
   if (Object.keys(data).length === 0) validData = false;
+
+  function handleChange(page) {
+    window.history.pushState(page, 'Title', `/${page}`);
+    dispatch(setPath(`/${page}`));
+  }
 
   return (
       <header>

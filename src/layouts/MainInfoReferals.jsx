@@ -1,9 +1,21 @@
 import React from 'react';
 import Tooltip from '@material-ui/core/Tooltip';
+import { useSelector } from 'react-redux';
+
+function sum(arr, key) {
+    return arr.reduce((a, b) => a + (parseFloat(b[key]) || 0), 0);
+}
 
 function MainInfoReferals(props) {
-    const { stakedCase, stakersCommission } = props;
-    console.log(stakersCommission);
+    const { stakersCommission } = props;
+
+    const user = useSelector(state => state.info.user);
+    var stakedCase = 0.00;
+
+    if (Object.keys(user).length !== 0) {
+      stakedCase = sum(user.stakeList,"stakeAmount");
+    }
+
     return (
         <div className="tc-main-info tc-invite-main-info">
         <div className="tc-main-info-balance">
