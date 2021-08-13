@@ -4,23 +4,24 @@ import TableRecentActivity from '../layouts/TableRecentActivity';
 import TableActiveStakes from '../layouts/TableActiveStakes';
 
 function Staiking(props) {
-  const { handleWithdraw, handleChange, avgAPY, lifetimeRewards, totalInterest, activeStakes, recentActivity, totalStaked } = props;
-    return (
-        <div className="tc-wrapper">
-          <div className="container">
 
-              <MainInfo totalStaked={totalStaked} handleChange={handleChange} avgAPY={avgAPY} lifetimeRewards={lifetimeRewards} totalInterest={totalInterest}/>
+  function handleChange(page) {
+    window.history.pushState(page, 'Title', `/${page}`);
+  }
 
-              <div className="tc-tables tc-tables-referal">
+  return (
+      <div className="tc-wrapper">
+        <div className="container">
+            <MainInfo  handleChange={handleChange} />
+            <div className="tc-tables tc-tables-referal">
 
-                  <TableActiveStakes activeStakes={activeStakes} handleWithdraw={handleWithdraw}/>
+                <TableActiveStakes />
+                <TableRecentActivity />
 
-                  <TableRecentActivity recentActivity={recentActivity}/>
-
-              </div>
-          </div>
-      </div>
-    );
+            </div>
+        </div>
+    </div>
+  );
 }
 
 export default Staiking;

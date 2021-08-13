@@ -1,8 +1,36 @@
 import React from 'react';
 import Tooltip from '@material-ui/core/Tooltip';
+import { useSelector, useDispatch } from 'react-redux';
+import { setPath } from '../redux/info/actions';
+
+function sum(arr, key) {
+    return arr.reduce((a, b) => a + (parseFloat(b[key]) || 0), 0);
+}
 
 function MainInfo(props) {  
-  const { handleChange, avgAPY, lifetimeRewards, totalInterest, totalStaked } = props; 
+
+  const dispatch = useDispatch();
+  const user = useSelector(state => state.info.user);
+  const totalStaked = useSelector(state => state.info.global.stakeAmount);
+
+  var avgAPY = 0.00;
+  var totalInterest = 0.00;
+  var lifetimeRewards = 0.00;
+
+  if (Object.keys(user).length !== 0) {
+    console.log(user);
+    avgAPY = (parseFloat(user.avgAPY)*100).toFixed(2);
+    let ActiveStaked = sum(user.stakeList,"stakeAmount");
+    let LifetimeRewards = sum(user.stakeList,"interestAmount");
+    totalInterest = (ActiveStaked+LifetimeRewards).toFixed(2);
+    lifetimeRewards = LifetimeRewards.toFixed(2);
+  }
+
+  function handleChange(page) {
+    window.history.pushState(page, 'Title', `/${page}`);
+    dispatch(setPath(`/${page}`));
+  }
+  
   return (
     <div className="tc-main-info">
           <div className="tc-main-info-balance">
