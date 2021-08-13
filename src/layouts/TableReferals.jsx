@@ -1,11 +1,17 @@
 import React from 'react';
 import unixToNormal from '../timeConvert.js';
 import { commissionToStaked } from '../Utils.js';
+import { useSelector } from 'react-redux';
 
 function TableReferals(props) {
 
-  const { commissionHistory } = props;
+  const data = useSelector(state => state.info.user);
+  var commissionHistory = [];
+
+  if (Object.keys(data).length !== 0) {
+    commissionHistory =data.commissionHistory;
   //console.log(commissionHistory);
+  }
 
   return (
       <div className="tc-info-block">

@@ -4,14 +4,13 @@ import { useSelector } from 'react-redux';
 
 function sum(arr, key) {
     return arr.reduce((a, b) => a + (parseFloat(b[key]) || 0), 0);
-  }
+}
 
 function MainInfo(props) {  
   const { handleChange } = props;
 
   const user = useSelector(state => state.info.user);
   const totalStaked = useSelector(state => state.info.global.stakeAmount);
-  console.log(user);
 
   var avgAPY = 0.00;
   var totalInterest = 0.00;

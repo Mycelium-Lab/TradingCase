@@ -12,22 +12,30 @@ function TableReferalSummary(props) {
     //console.table(data);
 
     const data = useSelector(state => state.info.user);
-    let stakedCase = sum(data.stakeList,"stakeAmount");
+    let stakedCase = 0.00;
 
     const percents = ["8", "5", "2.5", "1.5", "1.0", "1.0", "0.5", "0.5" ];
-    let tabArr = [];
+    var tabArr = [];
 
-    if (Object.keys(data).length === 0) {
-      stakedCase = "0.00";
-    }
-    else {
-
+    if (Object.keys(data).length !== 0) {
+      
+      stakedCase = sum(data.stakeList,"stakeAmount");
       for (var i=0; i<8; i++) {
         let td = {};
         td.lvl = (i+1).toString();
         td.counts = (data.referLevelUserCounts)[i];
         td.commission = percents[i];
         td.cases = parseFloat(data.referLevelCaseCommissions[i]);
+        tabArr.push(td);
+      }
+    }
+    else {
+      for (var i=0; i<8; i++) {
+        let td = {};
+        td.lvl = (i+1).toString();
+        td.counts = 0;
+        td.commission = percents[i];
+        td.cases = 0.00;
         tabArr.push(td);
       }
     }
