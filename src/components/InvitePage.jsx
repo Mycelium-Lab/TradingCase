@@ -36,6 +36,8 @@ function Invite(props) {
     function handleChange(page) {
       console.log(page);
       window.history.pushState(page, 'Title', `/${page}`);
+      const navEvent = new PopStateEvent('popstate');
+      window.dispatchEvent(navEvent);
     }
 
     async function handleRankUp() {

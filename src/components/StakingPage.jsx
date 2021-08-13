@@ -7,12 +7,14 @@ function Staiking(props) {
 
   function handleChange(page) {
     window.history.pushState(page, 'Title', `/${page}`);
+    const navEvent = new PopStateEvent('popstate');
+    window.dispatchEvent(navEvent);
   }
 
   return (
       <div className="tc-wrapper">
         <div className="container">
-            <MainInfo  handleChange={handleChange} />
+            <MainInfo />
             <div className="tc-tables tc-tables-referal">
 
                 <TableActiveStakes />

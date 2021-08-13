@@ -970,6 +970,7 @@ header {
 }
 .referal-rank-next .rank-info {
     margin-right: 0;
+    text-align: left;
 }
 .referal-rank .rank-info {
     align-items: flex-start;
@@ -999,6 +1000,7 @@ header {
 }
 
 .referal-downlines {
+    position: relative;
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
@@ -1006,6 +1008,7 @@ header {
     font-size: 0.833vw;
     line-height: 0.990vw;
     margin-bottom: 1.667vw;
+    margin-right: 1%;
 }
 .referal-downlines div:first-child {
     margin-right: 1.094vw;
@@ -1399,11 +1402,12 @@ header {
     margin-bottom: 2.500vw
 }
 .stake-case-faq-qa div:first-child {
-    text-align: center;
+    text-align: left;
 }
 .stake-case-faq-qa div:last-child {
-    text-align: center;
+    text-align: right;
 }
+
 .stake-case-faq-qa div span {
     display: block;
     font-weight: 600;
@@ -1417,6 +1421,11 @@ header {
     line-height: 1.250vw;
     color: #8687A7;
     margin-top: 0.781vw;
+}
+
+.rank-up{
+   position: absolute;
+   left: 0
 }
 
 @media (max-width: 768px) {
@@ -1447,9 +1456,10 @@ header {
         margin: 0 auto;
     }
     .stake-case-amount, .stake-case-order-details {
-        width: 100%;
-        height: unset;
+    margin-left: 0;
+    padding-bottom: 0;
     }
+    
     .stake-case-header {
         font-size: 20px;
         line-height: 24px;

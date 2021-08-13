@@ -3,6 +3,7 @@ import Header from './layouts/Header';
 import Staking from './components/StakingPage.jsx';
 import Invite from './components/InvitePage.jsx';
 import Stake from './components/Stake.jsx';
+import Route from './components/Route.jsx';
 import WalletConnectionModal from './layouts/WalletConnectionModal';
 import { findGetParameter } from './Utils.js';
 import { User } from './graph';
@@ -28,9 +29,6 @@ function App() {
   const address = useSelector(state => state.wallet.address)
   const info = useSelector(state => state.wallet.provider);
   const methods = useSelector(state => state.wallet.methods);
-  const path = useSelector(state => state.info.path);
-
-  console.log(path);
 
   useEffect(() => {
     const lastProvider = localStorage.getItem('caseCurrentProvider')
@@ -66,7 +64,6 @@ function App() {
       if (data.caseUser != null) {
         console.log('dispatch', data.caseUser);
         dispatch(setUser(data.caseUser));
-        let ActiveStaked = sum(data.caseUser.stakeList,"stakeAmount");
       }
       dispatch(setGlobal(data.caseStakingPool));
     }
@@ -84,25 +81,25 @@ function App() {
 
       await methods.canRankUp().then(function(result) {
         setCanRankUp(result);
+        console.log(canRankUp);
       });
     }
   };
 
   return (
-    <div className="App" page={path}>
+    <div className="App">
       <WalletConnectionModal />
 
       <Header />
-      <div>{path}</div>
-      { (path === '/staking' || path === '/') &&
-        <Staking/>
-      }
-      { (path === '/invite') && 
-        <Invite canRankUp={canRankUp}/>
-      }
-      { (path === '/stake') &&
-        <Stake balance={balance} referrer={ref}/>
-      }
+      <Route path="/staking">
+        <Staking />
+      </Route>
+      <Route path="/invite">
+        <Invite canRankUp={canRankUp} />
+      </Route>
+      <Route path="/stake">
+        <Stake balance={balance} referrer={ref} />
+      </Route>
     </div>
     
   );
