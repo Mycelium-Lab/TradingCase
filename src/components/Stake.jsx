@@ -49,7 +49,7 @@ function Stake(props) {
   }
 
   function preHandle() {
-    if (daysAmount > 29) { handleStake(stakeAmount, daysAmount); setOpen(false); }
+    if (daysAmount > 29 && daysAmount < 1001) { handleStake(stakeAmount, daysAmount); setOpen(false); }
     else setOpen(true);
   }
 

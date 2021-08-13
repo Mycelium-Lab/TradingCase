@@ -1,7 +1,6 @@
 import React from 'react';
 import Tooltip from '@material-ui/core/Tooltip';
-import { useSelector, useDispatch } from 'react-redux';
-import { setPath } from '../redux/info/actions';
+import { useSelector } from 'react-redux';
 
 function sum(arr, key) {
     return arr.reduce((a, b) => a + (parseFloat(b[key]) || 0), 0);
@@ -9,7 +8,6 @@ function sum(arr, key) {
 
 function MainInfo(props) {  
 
-  const dispatch = useDispatch();
   const user = useSelector(state => state.info.user);
   const totalStaked = useSelector(state => state.info.global.stakeAmount);
 
@@ -28,7 +26,8 @@ function MainInfo(props) {
 
   function handleChange(page) {
     window.history.pushState(page, 'Title', `/${page}`);
-    dispatch(setPath(`/${page}`));
+    const navEvent = new PopStateEvent('popstate');
+    window.dispatchEvent(navEvent);
   }
   
   return (

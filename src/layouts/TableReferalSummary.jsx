@@ -1,8 +1,7 @@
 import React from 'react';
 import { levelCost } from '../constants';
 import Tooltip from '@material-ui/core/Tooltip';
-import { useSelector, useDispatch } from 'react-redux';
-import { setPath } from '../redux/info/actions';
+import { useSelector } from 'react-redux';
 
 
 function sum(arr, key) {
@@ -12,7 +11,6 @@ function sum(arr, key) {
 function TableReferalSummary(props) {
 
     const data = useSelector(state => state.info.user);
-    const dispatch = useDispatch();
     let stakedCase = 0.00;
 
     const percents = ["8", "5", "2.5", "1.5", "1.0", "1.0", "0.5", "0.5" ];
@@ -43,7 +41,8 @@ function TableReferalSummary(props) {
 
     function handleChange(page) {
       window.history.pushState(page, 'Title', `/${page}`);
-      dispatch(setPath(`/${page}`));
+      const navEvent = new PopStateEvent('popstate');
+      window.dispatchEvent(navEvent);
     }
 
     return(

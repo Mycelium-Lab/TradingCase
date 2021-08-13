@@ -33,7 +33,8 @@ function Header(props) {
 
   function handleChange(page) {
     window.history.pushState(page, 'Title', `/${page}`);
-    dispatch(setPath(`/${page}`));
+    const navEvent = new PopStateEvent('popstate');
+    window.dispatchEvent(navEvent);
   }
 
   return (
