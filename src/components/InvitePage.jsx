@@ -54,9 +54,7 @@ function Invite(props) {
           <ReferalProgress wallet={wallet} csp={csp} rank={rank} canRankUp={canRankUp} handleRankUp={handleRankUp}/>
           
           <div className="tc-tables tc-tables-referal">
-            
             <TableReferalSummary/>
-
             <TableReferals/>
           </div>
         </div>
