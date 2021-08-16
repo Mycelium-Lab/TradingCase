@@ -94,6 +94,9 @@ function App() {
       <Route path="/staking">
         <Staking />
       </Route>
+      <Route path="/">
+        <Staking />
+      </Route>
       <Route path="/invite">
         <Invite canRankUp={canRankUp} />
       </Route>
