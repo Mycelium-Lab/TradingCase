@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { closeModal } from '../redux/modal/actions'
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
 import { logout, selectWallet } from '../wallets/actions'
-import styled from 'styled-components'
+import styled from '@emotion/styled'
 import walletConnectImg from '../assets/images/walletConnect.png'
 import metaMaskImg from '../assets/images/metaMask2.png'
 import binanceWalletImg from '../assets/images/binanceWallet.png'
@@ -36,7 +36,25 @@ const WalletContainer = styled.div`
         }
     `
 
+const TipsContainer = styled.div`
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        & > span.span__wallet-question {
+            color: #007bff;
+            &:hover {
+                cursor: pointer;
+                text-decoration: underline;
+            }
+        }
+        & > span.span__wallet-explanation {
+            margin-top: 1.1rem;
+            font-size: 0.88rem;
+        }
+`
+
 export default function WalletConnectionModal() {
+    const [tipsOpen, setTipsOpen] = useState(false)
     const isOpen = useSelector(state => state.modal.isOpen)
     const provider = useSelector(state => state.wallet.provider)
     const dispatch = useDispatch()
@@ -56,25 +74,31 @@ export default function WalletConnectionModal() {
             <ModalBody>
                 <span>Please select a wallet to connect to this dapp:</span>
                 <WalletContainer>
-                    <div onClick={() => changeWallet('walletConnect', dispatch)}>
-                        <WalletLogo src={walletConnectImg}></WalletLogo>
-                        <span>Wallet Connect</span>
-                        {provider?.isWalletConnect && <span className="isSelected">selected</span>}
-                    </div>
                     <div onClick={() => changeWallet('metaMask', dispatch)}>
                         <WalletLogo src={metaMaskImg}></WalletLogo>
                         <span>MetaMask</span>
                         {provider?.isMetaMask && <span className="isSelected">selected</span>}
                     </div>
-                    <div onClick={() => changeWallet('binanceWallet', dispatch)}>
-                        <WalletLogo src={binanceWalletImg}></WalletLogo>
-                        <span>Binance Chain Wallet</span>
-                        {/* implement isSelected */}
+                    <div onClick={() => changeWallet('walletConnect', dispatch)}>
+                        <WalletLogo src={walletConnectImg}></WalletLogo>
+                        <span>WalletConnect</span>
+                        {provider?.isWalletConnect && <span className="isSelected">selected</span>}
                     </div>
                 </WalletContainer>
+                <div class="mt-3 alert alert-warning" role="alert">
+                    Please also make sure that your selected network is  <a href="https://www.binance.org/en/smartChain" class="alert-link">Binance Smart Chain Mainnet</a> (ChainID: 56 / 0x38).
+                </div>
             </ModalBody>
             <ModalFooter>
-                <a href="#">What is a wallet?</a>
+                <TipsContainer>
+                    <span className="span__wallet-question" onClick={() => setTipsOpen(!tipsOpen)}>What is a wallet?</span>
+                    { 
+                        tipsOpen && 
+                        <span className="span__wallet-explanation">
+                            Wallets are used to send, receive, and store digital assets like Ether. Wallets come in many forms. They are either built into your browser, an extension added to your browser, a piece of hardware plugged into your computer or even an app on your phone. For more information about wallets, see <a href="https://docs.ethhub.io/using-ethereum/wallets/intro-to-ethereum-wallets/">this</a> explanation.
+                        </span>
+                    }
+                </TipsContainer>
             </ModalFooter>
         </Modal>
     )
