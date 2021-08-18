@@ -50,7 +50,7 @@ function TableActiveStakes(props) {
   React.useEffect(() => {
     setTimeout(() => {
       setTimeLeft(calculateTimeLeft());
-    }, 10000);
+    }, 2000);
   });
 
   return (
@@ -74,7 +74,7 @@ function TableActiveStakes(props) {
             <td className="tg-0lax">{`${stakeAmount} CASE`}</td>
             <td className="tg-0lax">{`${(100*parseFloat(apy)).toFixed(2)}%`}</td>
             <td className="tg-0lax">{getDays(parseInt(stakeTimeInDays), parseInt(stakeTimestamp))}</td>
-            <td className="tg-0lax">{`${calculate(interestAmount, stakeTimeInDays, stakeTimestamp, withdrawnInterestAmount).toFixed(2)} CASE`}</td>
+            <td className="tg-0lax">{`${calculate(interestAmount, stakeTimeInDays, stakeTimestamp, withdrawnInterestAmount).toFixed(8)} CASE`}</td>
             <td className="tg-0lax">{`${parseFloat(interestAmount).toFixed(2)} CASE`}</td>
             <td className="tg-0lax">{`${(parseFloat(interestAmount) + parseFloat(stakeAmount)).toFixed(2)} CASE`}</td>
             <td className="tg-0lax" style={{width:85}}><button className="button referal-button" onClick={()=>handleWithdraw(idx)}>Claim Rewards</button></td>
