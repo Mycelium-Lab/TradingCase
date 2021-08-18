@@ -1,5 +1,6 @@
 import React from 'react';
 import unixToNormal from '../timeConvert.js';
+import { typeWithSpaces } from '../constants.js'
 import { useSelector } from 'react-redux';
 
 function TableRecentActivity(props) {
@@ -22,8 +23,8 @@ function TableRecentActivity(props) {
             <tbody>
             { recentActivity.map(({timestamp, type, txHash, txAmount}, index) => (
               <tr key={index}>
-                <td className="tg-0lax">{unixToNormal(timestamp)}</td>
-                <td className="tg-0lax">{type}<br/>
+                <td className="tg-0lax">{unixToNormal(timestamp)[0]}<br/>{unixToNormal(timestamp)[1]}</td>
+                <td className="tg-0lax">{typeWithSpaces[type]}<br/>
                   <a href={`https://kovan.etherscan.io/tx/${txHash}`} style={{color:"#eabc4e"}}>
                     Tx details&nbsp;
                     <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width={8} height={8} viewBox="0 0 16 16" fill="none">

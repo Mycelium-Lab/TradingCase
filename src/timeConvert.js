@@ -4,7 +4,11 @@ export default function unixToNormal(unix_timestamp) {  // переводит в
   var day = date.getDate();
   var month = date.getMonth()+1;
   var year = date.getFullYear();
-  if (month < 11) return day + '/0' + month + '/' + year;
-  else return day + '/' + month + '/' + year;
+  var hour = date.getHours();
+  var minute = date.getMinutes();
+  var second = date.getSeconds();
+
+  if (month < 10) return [`${day}.0${month}.${year}`,`${hour}:${minute}:${second}`];
+  else return [`${day}.${month}.${year}`,`${hour}:${minute}:${second}`];
 }
 

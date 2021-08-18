@@ -65,7 +65,7 @@ function MainInfo(props) {
           <div className="break"></div>
           <div className="tc-info-block">
             <span>Global Staked</span>
-            <span>{`${totalStaked} CASE`}</span>
+            <span>{`${parseFloat(totalStaked).toFixed(2)} CASE`}</span>
           </div>
         </div>
   );

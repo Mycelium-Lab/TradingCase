@@ -266,7 +266,7 @@ header {
     font-style: normal;
     display: flex;
     flex-direction: column;
-    width: 13vw;
+    /* width: 13vw; */
 }
 
 .tc-main-info-balance span:first-child {
@@ -326,19 +326,20 @@ header {
     -moz-border-radius: 0.208vw;
     -ms-border-radius: 0.208vw;
     -o-border-radius: 0.208vw;
-    width: 10.781vw;
-    height: 5.625vw;
+    /* width: 10.781vw;
+    height: 5.625vw; */
+    padding: 1.3vw 1.123vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
 .tc-info-block:last-child {
-    width: 17.5vw;
+    min-width: 25%;
 }
 
 .tc-main-info .tc-info-block span {
-    padding-left: 1.123vw;
+    padding-left: unset;
     text-align: left;
 }
 
@@ -851,7 +852,7 @@ header {
         margin-bottom: 7px;
     }
     .tc-info-block span:last-child {
-        font-size: 18px;
+        font-size: 16px;
         line-height: 21px;
     }
     .tc-main-info .tc-info-block span {
@@ -1388,6 +1389,11 @@ header {
 .stake-case-order-details-rewards:last-child {
     margin-bottom: 0;
 }
+.stake-case-order-details-rewards .stake-case-order-details-info {
+    width: unset;
+    height: unset;
+    vertical-align: top;
+}
 .stake-case-order-details div span {
     font-size: 0.938vw;
     line-height: 0.938vw;
@@ -1528,6 +1534,7 @@ header {
     .stake-case-order-details-info {
         width: 8px;
         height: 8px;
+        margin-left: 1vw;
     }
     .stake-case-faq {
         background: #FFFFFF;
@@ -1585,6 +1592,11 @@ header {
 .stake-case-faq-qa div:last-child {
     text-align: right;
 }
+.stake-case-amount, .stake-case-order-details {
+    margin-left: 0;
+    padding-bottom: 0;
+    width: 100%;
+}
 .referal-rank-next .rank-info div:nth-child(2), .referal-rank .rank-info div:nth-child(2) {
     text-align: left;
 }
@@ -1592,11 +1604,6 @@ header {
     position: relative
 }
 @media (max-width: 768px) {
-    .stake-case-amount, .stake-case-order-details {
-        margin-left: 0;
-        padding-bottom: 0;
-        width: 100%;
-    }
     .stake-case-faq-qa div:last-child {
         text-align: left;
     }
