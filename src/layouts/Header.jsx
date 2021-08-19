@@ -69,11 +69,6 @@ function Header(props) {
             </ul>                    
           </div>
           <div className="nav-right">
-            <a href="#">
-              <svg className="icon" viewBox="0 0 24 22" fill="#555968" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12.9491 14.377L10.1782 11.616L10.2109 11.583C12.0591 9.51181 13.4399 7.06118 14.2582 4.4H17.4545V2.2H9.81818V0H7.63636V2.2H0V4.4H12.1855C11.4545 6.512 10.2982 8.525 8.72727 10.285C7.71273 9.152 6.87273 7.909 6.20727 6.6H4.02545C4.82182 8.393 5.91273 10.087 7.27636 11.616L1.72364 17.138L3.27273 18.7L8.72727 13.2L12.12 16.621L12.9491 14.377ZM19.0909 8.8H16.9091L12 22H14.1818L15.4036 18.7H20.5855L21.8182 22H24L19.0909 8.8ZM16.2327 16.5L18 11.737L19.7673 16.5H16.2327Z" />
-              </svg>
-            </a>
             <div className="rank-info">
               <div>Rank </div>
               <div><span id="rank_info">{validData ? rankList[rank].toUpperCase(): "NO RANK"}</span> - <span id="cps_info">{validData ? csp: "0.00"}</span> <span>CSP</span></div>
