@@ -9,7 +9,8 @@ const initialState = {
     chainId: '',
     address: '',
     method: '',
-    provider: null
+    provider: null,
+    correntChainId: process.env.NODE_ENV === 'development' ? '42' : '56'
 }
 
 export default function (state = initialState, action) {

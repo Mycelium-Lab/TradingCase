@@ -18,6 +18,7 @@ import './style.css';
 import './helvetica/stylesheet.css';
 
 import { useQuery } from "@apollo/client";
+import WrongNetworkModal from './layouts/WrongNetworkModal';
 
 function App() {
 
@@ -89,6 +90,7 @@ function App() {
   return (
     <div className="App">
       <WalletConnectionModal />
+      <WrongNetworkModal />
 
       <Header />
       <Route path="/staking">
