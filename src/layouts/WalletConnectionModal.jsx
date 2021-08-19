@@ -70,7 +70,7 @@ export default function WalletConnectionModal() {
 
     return (
         <Modal isOpen={isOpen} toggle={toggle} centered={true}>
-            <ModalHeader toggle={toggle}>Select a Wallet for BSC staking</ModalHeader>
+            <ModalHeader toggle={toggle}>Select a Wallet for BSC Staking</ModalHeader>
             <ModalBody>
                 <span>Please select a wallet to connect to this dapp:</span>
                 <WalletContainer>
@@ -85,8 +85,8 @@ export default function WalletConnectionModal() {
                         {provider?.isWalletConnect && <span className="isSelected">selected</span>}
                     </div>
                 </WalletContainer>
-                <div class="mt-3 alert alert-warning" role="alert">
-                    Please also make sure that your selected network is  <a href="https://www.binance.org/en/smartChain" class="alert-link">Binance Smart Chain Mainnet</a> (ChainID: 56 / 0x38).
+                <div className="mt-3 alert alert-warning" role="alert">
+                    Please also make sure that your selected network is  <a href="https://www.binance.org/en/smartChain" className="alert-link">Binance Smart Chain Mainnet</a> (ChainID: 56 / 0x38).
                 </div>
             </ModalBody>
             <ModalFooter>

@@ -20,7 +20,15 @@ const addProviderListeners = (provider, dispatch) => {
     })
 
     provider.on("chainChanged", (chainId) => {
-        dispatch(setChainId(chainId))
+        let convertedChainId
+        if (provider.isWalletConnect) {
+            console.log('h1')
+            convertedChainId = parseInt(chainId).toString()
+        }
+        else {
+            convertedChainId = parseInt(chainId, 16).toString()
+        }
+        dispatch(setChainId(convertedChainId))
     })
 
     provider.on("disconnect", (code, reason) => {})
@@ -35,7 +43,7 @@ export const selectWallet = async (wallet, dispatch) => {
                 await window.ethereum
                   .request({ method: "net_version" })
                   .then((netId) => {
-                    dispatch(setChainId(netId))
+                    dispatch(setChainId(netId.toString()))
                   })
 
                 await window.ethereum
@@ -70,7 +78,7 @@ export const selectWallet = async (wallet, dispatch) => {
                 }
                 const chainId = await window.web3.eth.getChainId()
                 if (chainId) {
-                    dispatch(setChainId(chainId))
+                    dispatch(setChainId(chainId.toString()))
                 }
 
                 addProviderListeners(provider, dispatch)

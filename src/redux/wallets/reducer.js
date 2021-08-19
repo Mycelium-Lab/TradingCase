@@ -9,7 +9,8 @@ const initialState = {
     chainId: '',
     address: '',
     method: '',
-    provider: null
+    provider: null,
+    correntChainId: '42' // chain in production to '56'
 }
 
 export default function (state = initialState, action) {
