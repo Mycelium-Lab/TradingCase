@@ -22,7 +22,6 @@ const addProviderListeners = (provider, dispatch) => {
     provider.on("chainChanged", (chainId) => {
         let convertedChainId
         if (provider.isWalletConnect) {
-            console.log('h1')
             convertedChainId = parseInt(chainId).toString()
         }
         else {
@@ -61,9 +60,16 @@ export const selectWallet = async (wallet, dispatch) => {
               break
         case 'walletConnect':
             try {
+                const infuraId = process.env.REACT_APP_INFURA_PROJECT_ID
                 const provider = new WalletConnectProvider({
                     rpc: {
-                        42: 'https://kovan.infura.io/v3/6f16d7e1465c4c3e890aac99bdfd5deb',
+                        1: `https://mainnet.infura.io/v3/${infuraId}`,
+                        3: `https://ropsten.infura.io/v3/${infuraId}`,
+                        4: `https://rinkeby.infura.io/v3/${infuraId}`,
+                        5: `https://goerli.infura.io/v3/${infuraId}`,
+                        42: `https://kovan.infura.io/v3/${infuraId}`,
+                        137: 'https://rpc-mainnet.maticvigil.com/',
+                        // what we do need
                         56: 'https://bsc-dataseed.binance.org/',
                         97: 'https://data-seed-prebsc-1-s1.binance.org:8545/'
                     }

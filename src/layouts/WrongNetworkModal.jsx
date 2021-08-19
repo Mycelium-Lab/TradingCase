@@ -12,7 +12,6 @@ export default function WrongNetworkModal() {
     const isMainModalOpen = useSelector(state => state.modal.isOpen)
 
     useEffect(() => {
-        console.log(currentChainId, correctChainId)
         if (currentChainId && correctChainId) {
             if (correctChainId !== currentChainId) {
                 setIsOpen(true)
