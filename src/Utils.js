@@ -27,10 +27,13 @@ export class contractMethods {
         this.contractRank = new this.web3.eth.Contract(abiRank, rankCase);
       }
 
-    async instanceStake(amount, days, ref){
-        await this.contractCase.methods.approve(stakeCase,amount*this.CASE_PRECISION).send({from: this.walletAddress});
+    async instanceStake(amount, days, ref) {
         if (ref===null) await this.contractStake.methods.stake(amount*this.CASE_PRECISION, days, this.ZERO_ADDR).send({from: this.walletAddress});
         else await this.contractStake.methods.stake(amount*this.CASE_PRECISION, days, ref.toLowerCase()).send({from: this.walletAddress});
+    }
+
+    async instanceApprove(amount) {
+        await this.contractCase.methods.approve(stakeCase,amount*this.CASE_PRECISION).send({from: this.walletAddress});
     }
 
     async instanceWithdraw(idx) {

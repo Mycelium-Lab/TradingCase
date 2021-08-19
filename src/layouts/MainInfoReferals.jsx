@@ -3,7 +3,13 @@ import Tooltip from '@material-ui/core/Tooltip';
 import { useSelector } from 'react-redux';
 
 function sum(arr, key) {
-    return arr.reduce((a, b) => a + (parseFloat(b[key]) || 0), 0);
+    var a = 0.00;
+    arr.map((row)=>{
+      if (row.active === true) {
+        a += parseFloat(row[key]);
+      }
+    })
+    return a.toFixed(2);
 }
 
 function MainInfoReferals(props) {
