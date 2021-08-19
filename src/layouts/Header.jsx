@@ -83,6 +83,9 @@ function Header(props) {
               <div className="user-info">
                 <ModifiedJazzicon classNAme="user-avatar" address={wallet} />
                 <div className="user-name">{wallet.slice(0,6)+'...'}</div>
+                <svg width="8" height="5" viewBox="0 0 8 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M6.896 1L3.94807 4L1.00015 1" stroke="#E5E5E5"/>
+                </svg>
               </div>
               </DropdownToggle>
               <DropdownMenu right className="mt-2">
