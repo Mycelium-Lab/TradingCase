@@ -14,12 +14,13 @@ export default function StakingModal(props) {
     async function handleApprove() {
         console.log(loading);
         console.log(`%c approve ${amount} coins`, 'color: green');
+
+        setIsApproved(1);
         await methods.init();
         await methods.instanceApprove(amount).then(function(result) {
             if (result !== undefined) {
                 console.log(result);
                 setLoading(false);
-                setIsApproved(1);
             }
             else {
                 console.log('undef');
