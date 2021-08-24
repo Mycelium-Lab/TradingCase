@@ -108,8 +108,8 @@ function Header(props) {
               <DropdownMenu right className="mt-2">
                   <DropdownItem text>Manage Wallet</DropdownItem>
                   <DropdownItem divider />
-                  <DropdownItem header onClick={() => dispatch(openModal())}>Connect</DropdownItem>
-                  <DropdownItem header style={{color: 'red'}} onClick={() => logout(provider, dispatch)}>Logout</DropdownItem>
+                  <DropdownItem onClick={() => dispatch(openModal())}>Connect</DropdownItem>
+                  <DropdownItem style={{color: 'red'}} onClick={() => logout(provider, dispatch)}>Logout</DropdownItem>
               </DropdownMenu>
             </Dropdown>
           </div>

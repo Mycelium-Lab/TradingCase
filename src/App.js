@@ -52,9 +52,6 @@ function App() {
     fetchPolicy:"cache-and-network"
   });
 
-  function sum(arr, key) {
-    return arr.reduce((a, b) => a + (parseFloat(b[key]) || 0), 0);
-  }
 
   console.log(`%c My src: ${ref}`, 'color: orange')
 
@@ -94,10 +91,10 @@ function App() {
 
       <Header />
       <Route path="/staking">
-        <Staking />
+        <Staking refetch={refetch}/>
       </Route>
       <Route path="/">
-        <Staking />
+        <Staking refetch={refetch}/>
       </Route>
       <Route path="/invite">
         <Invite canRankUp={canRankUp} />

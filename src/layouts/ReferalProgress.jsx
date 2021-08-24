@@ -6,13 +6,18 @@ function ReferalProgress(props) {
 
   const { canRankUp, handleRankUp } = props;
   const data = useSelector(state => state.info.user);
-  const csp = parseFloat(data.careerValue*10000000000).toFixed(2);
+  var csp = 0.00;
+  
   var downlines = 0;
-  var progress = Math.floor((csp / cspToLevel[parseInt(rank)])*100);
-  console.log(progress);
-  if (progress > 100) progress = 100;
+  var progress = 0;
   var rank = "0";
-  if (Object.keys(data).length !== 0) rank = data.rank;
+  if (Object.keys(data).length !== 0) {
+    rank = data.rank;
+    csp = parseFloat(data.careerValue*10000000000).toFixed(2);
+    progress = Math.floor((csp / cspToLevel[parseInt(rank)])*100);
+    console.log(progress);
+    if (progress > 100) progress = 100;
+  }
   if (rank === "0") downlines = 2;
   else {
     if (Object.keys(data).length !== 0) {
