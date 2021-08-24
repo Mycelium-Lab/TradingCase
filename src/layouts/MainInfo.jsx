@@ -6,6 +6,11 @@ function sum(arr, key) {
     return arr.reduce((a, b) => a + (parseFloat(b[key]) || 0), 0);
 }
 
+function threeCommas(str) {
+  var num = str.toString().split('.')
+  return `${num[0].replace(/\B(?=(\d{3})+(?!\d))/g, " ")}.${num[1].slice(0,2)}`;
+}
+
 function MainInfo(props) {  
 
   const user = useSelector(state => state.info.user);
@@ -29,11 +34,13 @@ function MainInfo(props) {
     const navEvent = new PopStateEvent('popstate');
     window.dispatchEvent(navEvent);
   }
+
+
   
   return (
     <div className="tc-main-info">
           <div className="tc-main-info-balance">
-            <span>{`${totalInterest} CASE`}</span>
+            <span>{`${threeCommas(totalInterest)} CASE`}</span>
             <span>Stake and interest balance</span>
           </div>
           <div className="tc-main-info-stake-button">
@@ -60,12 +67,12 @@ function MainInfo(props) {
               </svg>
             </Tooltip>
             </span>
-            <span>{`${lifetimeRewards} CASE`}</span>
+            <span>{`${threeCommas(lifetimeRewards)} CASE`}</span>
           </div>
           <div className="break"></div>
           <div className="tc-info-block">
             <span>Global Staked</span>
-            <span>{`${parseFloat(totalStaked).toFixed(2)} CASE`}</span>
+            <span>{`${threeCommas(totalStaked)} CASE`}</span>
           </div>
         </div>
   );
