@@ -71,9 +71,13 @@ export const selectWallet = async (wallet, dispatch) => {
                         137: 'https://rpc-mainnet.maticvigil.com/',
                         // what we do need
                         56: 'https://bsc-dataseed.binance.org/',
-                        97: 'https://data-seed-prebsc-1-s1.binance.org:8545/'
+                        97: 'https://data-seed-prebsc-2-s2.binance.org:8545/'
                     }
                 })
+
+                delete provider.__proto__.request;
+                provider.hasOwnProperty("request") && delete provider.request;
+                
                 await provider.enable()
 
                 addProvider(provider, 'walletConnect', dispatch)

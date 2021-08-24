@@ -1,7 +1,9 @@
-import React from 'react';
+import React, {useState} from 'react';
 import StakeDetails from '../layouts/StakeDetails';
 import StakeFaq from '../layouts/StakeFaq';
 import { useSelector } from 'react-redux';
+
+import StakingModal from '../layouts/StakingModal';
 //import calculate from 'function';
 
 const PRECISION = 10 ** 18;
@@ -12,24 +14,24 @@ const ISLOPE = 2 * (10 ** 8);
 const PEAK_PRE = 10 ** 8;
 const Minted = 0;
 
-const styleBox = {boxShadow: `0 0 3px #CC0000`};
 
 function Stake(props) {
-  const methods = useSelector(state => state.wallet.methods);
-  const { balance, minted, referrer } = props;
-  const [ daysAmount, setDaysAmount ] = React.useState(1000);
-  const [ stakeAmount, setStakeAmount ] = React.useState(10);
-  const [ BiggerBonus, setBiggerBonus ] = React.useState(0);
-  const [ LongerBonus, setLongerBonus ] = React.useState(0);
-  const [ EarlyBonus, setEarlyBonus ] = React.useState(0);
-  const [ apy, setApy ] = React.useState(0);
-  const [ RewardTotal, setRewardTotal ] = React.useState(0);
-  const [ open, setOpen] = React.useState(false);
+  const { balance, referrer } = props;
+  const [modalOpen, setModalOpen] = useState(false);
+  const [ daysAmount, setDaysAmount ] = useState(1000);
+  const [ stakeAmount, setStakeAmount ] = useState(10);
+  const [ BiggerBonus, setBiggerBonus ] = useState(0);
+  const [ LongerBonus, setLongerBonus ] = useState(0);
+  const [ EarlyBonus, setEarlyBonus ] = useState(0);
+  const [ apy, setApy ] = useState(0);
+  const [ RewardTotal, setRewardTotal ] =useState(0);
+  const [ open, setOpen] = useState(false);
 
   async function handleStake(amount, days) {
     console.log(`%c staked ${amount} coins for ${days} days with ref ${referrer}`, 'color: green');
-    await methods.init();
-    await methods.instanceStake(amount, days, referrer).then(function(error, result){console.log(error, result)});
+    setModalOpen(true);
+    //await methods.init();
+    //await methods.instanceStake(amount, days, referrer).then(function(error, result){console.log(error, result)});
   }
 
   const calculate = (amount, days) => {
@@ -46,6 +48,10 @@ function Stake(props) {
     setEarlyBonus(EB);
     setBiggerBonus(BB);
 
+  }
+
+  function setClose() {
+    setModalOpen(false);
   }
 
   function preHandle() {
@@ -86,6 +92,7 @@ function Stake(props) {
 
   return (
       <div className="tc-wrapper" id="stake-window">
+      <StakingModal amount={stakeAmount} open={modalOpen} setClose={setClose} days={daysAmount} referrer={referrer} />
       <div className="container">
         <div className="stake-case">
           <div className="stake-case-amount">

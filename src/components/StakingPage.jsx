@@ -1,15 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import MainInfo from '../layouts/MainInfo';
 import TableRecentActivity from '../layouts/TableRecentActivity';
 import TableActiveStakes from '../layouts/TableActiveStakes';
 
 function Staiking(props) {
 
-  function handleChange(page) {
-    window.history.pushState(page, 'Title', `/${page}`);
-    const navEvent = new PopStateEvent('popstate');
-    window.dispatchEvent(navEvent);
-  }
+  const { refetch } = props;
+
+  useEffect(() => {
+    refetch();
+    console.log('update');
+  }, [])
+  
 
   return (
       <div className="tc-wrapper">

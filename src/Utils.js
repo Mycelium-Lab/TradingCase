@@ -4,10 +4,11 @@ export { findGetParameter,commissionToStaked };
 
 const tokenCase = '0x33356568c72C1231897aE7B49a448BD0FE74B503';
 const stakeCase = '0x23F9D8f999D103265bE54596fF8C359dC5e3e970';
-const rankCase = '0x4fd9A8367f4Cb26A2FEe304610B241b2560125B3';
+const rankCase = '0x23F9D8f999D103265bE54596fF8C359dC5e3e970';
 
 
 export class contractMethods {
+
     constructor(web) {
         this.web3 = web;
         this.CASE_PRECISION = 10 ** 8;
@@ -27,10 +28,43 @@ export class contractMethods {
         this.contractRank = new this.web3.eth.Contract(abiRank, rankCase);
       }
 
-    async instanceStake(amount, days, ref){
-        await this.contractCase.methods.approve(stakeCase,amount*this.CASE_PRECISION).send({from: this.walletAddress});
-        if (ref===null) await this.contractStake.methods.stake(amount*this.CASE_PRECISION, days, this.ZERO_ADDR).send({from: this.walletAddress});
-        else await this.contractStake.methods.stake(amount*this.CASE_PRECISION, days, ref.toLowerCase()).send({from: this.walletAddress});
+    instanceStake(amount, days, ref) {
+        if (ref===null) {
+            return new Promise((resolve, reject) => {
+                return this.contractStake.methods.stake((amount*this.CASE_PRECISION).toString(), days.toString(), this.ZERO_ADDR).send({from: this.walletAddress},function(error, receipt){
+                    console.log('reciept then',receipt);
+                }).on('receipt', function(receipt) {
+                    console.log('receipt', receipt);
+                    resolve(receipt.transactionHash);
+                    reject('rejected');
+                })
+                .on('error', function(error){console.log('error',error)});
+            });
+        }
+        else {
+            return new Promise((resolve, reject) => {
+                return this.contractStake.methods.stake((amount*this.CASE_PRECISION).toString(), days.toString(), ref.toLowerCase()).send({from: this.walletAddress},function(error, receipt){
+                    console.log('reciept then',receipt);
+                }).on('receipt', function(receipt) {
+                    console.log('receipt', receipt);
+                    resolve(receipt.transactionHash);
+                });
+            });
+        }
+    }
+
+    instanceApprove(amount) {
+        return new Promise((resolve, reject) => {
+            return this.contractCase.methods.approve(stakeCase,(amount*this.CASE_PRECISION).toString()).send({from: this.walletAddress},function(error, receipt){
+                console.log('tx then',receipt);
+                if (receipt === undefined) {
+                    resolve(receipt);
+                }
+            }).on('receipt', function(receipt) {
+                    console.log('receipt', receipt);
+                    resolve(receipt);
+                });
+        });
     }
 
     async instanceWithdraw(idx) {
@@ -44,7 +78,6 @@ export class contractMethods {
     async canRankUp() {
         let canRank = await this.contractRank.methods.canRankUp(this.walletAddress).call();
         return canRank;
-
     }
     
     async getBalance() {
