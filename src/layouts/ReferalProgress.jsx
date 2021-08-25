@@ -1,16 +1,20 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {rankList, cspToLevel} from '../constants';
 import { useSelector } from 'react-redux';
 
 function ReferalProgress(props) {
 
-  const { canRankUp, handleRankUp } = props;
+  const { handleRankUp } = props;
   const data = useSelector(state => state.info.user);
+  const methods = useSelector(state => state.wallet.methods);
+  const wallet = useSelector(state => state.wallet.address);
+
   var csp = 0.00;
-  
+  var [canRankUp, setCanRankUp] = useState(false);
   var downlines = 0;
   var progress = 0;
   var rank = "0";
+
   if (Object.keys(data).length !== 0) {
     rank = data.rank;
     csp = parseFloat(data.careerValue*10000000000).toFixed(2);
@@ -18,6 +22,7 @@ function ReferalProgress(props) {
     console.log(progress);
     if (progress > 100) progress = 100;
   }
+
   if (rank === "0") downlines = 2;
   else {
     if (Object.keys(data).length !== 0) {
@@ -28,8 +33,23 @@ function ReferalProgress(props) {
       if (downlines>2) downlines = 2;
     }
   }
-  const wallet = useSelector(state => state.wallet.address);
+  
+  const chainId = useSelector(state => state.wallet.chainId);
+  async function start() {
+    await methods.init();
+    await methods.canRankUp().then(function(result) {
+          setCanRankUp(result);
+          console.log(result);
+          console.log(canRankUp);
+        });
+  }
 
+  useEffect(()=>{
+    console.log('lol kek');
+    if (methods !== undefined) {
+      start();
+    }
+  },[methods]);
 
     return (
       <div className="tc-invite-referal">
@@ -55,7 +75,7 @@ function ReferalProgress(props) {
           </div>
           <div className="referal-downlines">
             { canRankUp &&
-              <button className="button referal-button rank-up" style={{marginRight:430}}onClick={()=>handleRankUp()}>RankUp</button>
+              <button disabled={chainId!==42} className="button referal-button rank-up" style={{marginRight:430}}onClick={()=>handleRankUp()}>RankUp</button>
             }
             <div>Downlines for rank up:</div>
             <div>
