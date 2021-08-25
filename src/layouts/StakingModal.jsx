@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Modal, ModalHeader, ModalBody, ModalFooter, Button, Spinner } from 'reactstrap'
+import { Modal, ModalHeader, ModalBody, ModalFooter, Spinner } from 'reactstrap'
 import { useSelector } from 'react-redux'
 import styled from '@emotion/styled'
 
@@ -10,6 +10,13 @@ export default function StakingModal(props) {
     const [isApproved, setIsApproved] = useState(0);
     const [txHash, setTxHash] = useState('');
     const [loading, setLoading] = useState(false);
+
+    const Button = styled.button`
+        width: 7rem;
+        &:disabled {
+            opacity: 0.3;
+        }
+    `
 
     async function handleApprove() {
         console.log(loading);
@@ -47,23 +54,39 @@ export default function StakingModal(props) {
         setClose();
     }
 
+    function getTextStatus() {
+        switch (isApproved) {
+            case 0:
+                return `Approve staking ${amount} CASE for ${days} days.`;
+            case 1:
+                return `Approve successful. Stake ${amount} CASE for ${days} days.`;
+            case 2:
+                return `Successfully staked ${amount} CASE for ${days} days!`;
+            default:
+                return '';
+        }
+    }
+
     return (
-        <Modal isOpen={open} toggle={close} centered={true} style={{width:250}}>
+        <Modal isOpen={open} toggle={close} centered={true} size='md' style={{padding: '1rem'}}>
             <ModalHeader toggle={close}>    
+                Confirm Staking
             </ModalHeader>
-            <ModalBody centered={true} style={{justifyContent: 'center', display:'flex'}}>
-                <Spinner style={loading ? { width: '4rem', height: '4rem'} : { width: '4rem', height: '4rem', display:'none' }} />
-            </ModalBody>
-            <ModalBody centered={true} style={{justifyContent: 'center', display:'flex', flexDirection: 'column'}}>
-                <span>{(isApproved!==2) ? `Staking ${amount} CASE for ${days} days`: `Staked ${amount} CASE for ${days} days`}</span>
+            <ModalBody style={{justifyContent: 'center', textAlign: 'center', display:'flex', alignItems: 'center', flexDirection: 'column'}}>
+                { loading && <Spinner style={{ width: '4rem', height: '4rem'}} /> }
+                <span className={loading ? 'mt-3' : ''}>
+                    {
+                        loading ? 'Submitting transaction...' : getTextStatus()
+                    }
+                </span>
                 {
-                    isApproved===2 &&
-                    <a href={`https://kovan.etherscan.io/tx/${txHash}`} style={{color:"#eabc4e"}}>Транзакция</a>
+                    isApproved === 2 &&
+                    <a className='mt-2' href={`https://kovan.etherscan.io/tx/${txHash}`} style={{color:"#eabc4e"}}>View Transcation</a>
                 }
             </ModalBody>
-            <ModalFooter centered={true} style={{justifyContent: 'center'}}>
-                <Button outline color="primary" style={{width:85}} disabled={isApproved} onClick={() => {setLoading(true);handleApprove()}}>Approve</Button>
-                <Button outline disabled={isApproved!==1} style={{width:85}} onClick={() => {setLoading(true); handleStake()}}>Stake</Button>
+            <ModalFooter style={{justifyContent: 'center'}}>
+                <Button className="btn btn-outline-primary" disabled={isApproved || loading} onClick={(isApproved || loading) ? () => {} : () => {setLoading(true);handleApprove()}}>Approve</Button>
+                <Button className="btn btn-outline-secondary" disabled={isApproved !== 1 || loading} onClick={(isApproved !== 1 || loading) ? () => {} : () => {setLoading(true); handleStake()}}>Stake</Button>
             </ModalFooter>
         </Modal>
     )
