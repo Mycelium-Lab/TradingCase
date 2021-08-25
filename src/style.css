@@ -1577,8 +1577,7 @@ header {
 }
 .button:disabled, .button[disabled] {
     pointer-events: none;
-    background-color: #77a1b5;
-    border-color:  #77a1b5;
+    opacity: 0.3;
 }
 
 

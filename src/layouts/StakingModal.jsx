@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Modal, ModalHeader, ModalBody, ModalFooter, Button, Spinner } from 'reactstrap'
+import { Modal, ModalHeader, ModalBody, ModalFooter, Spinner } from 'reactstrap'
 import { useSelector } from 'react-redux'
 import styled from '@emotion/styled'
 
@@ -15,7 +15,6 @@ export default function StakingModal(props) {
         console.log(loading);
         console.log(`%c approve ${amount} coins`, 'color: green');
 
-        setIsApproved(2);
         await methods.init();
         await methods.instanceApprove(amount).then(function(result) {
             if (result !== undefined) {
@@ -32,7 +31,6 @@ export default function StakingModal(props) {
 
     async function handleStake() {
 
-        setIsApproved(2);
         console.log(`%c staked ${amount} coins for ${days} days with ref ${referrer}`, 'color: green');
         //await methods.init();
         await methods.instanceStake(amount, days, referrer).then(function(result) {
@@ -40,10 +38,7 @@ export default function StakingModal(props) {
                 console.log(result);
                 setTxHash(result);
                 setLoading(false);
-                setIsApproved(3);
-            }
-            else {
-                setIsApproved(1);
+                setIsApproved(2);
             }
         });
       }
@@ -91,6 +86,7 @@ export default function StakingModal(props) {
                     isApproved === 2 &&
                     <a className='mt-2' href={`https://kovan.etherscan.io/tx/${txHash}`} style={{color:"#eabc4e"}}>View Transcation</a>
                 }
+
             </ModalBody>
             <ModalFooter style={{justifyContent: 'center'}}>
                 <Button className="btn btn-outline-primary" disabled={isApproved || loading} onClick={(isApproved || loading) ? () => {} : () => {setLoading(true);handleApprove()}}>Approve</Button>

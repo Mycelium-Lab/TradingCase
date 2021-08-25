@@ -24,11 +24,12 @@ export class contractMethods {
         this.contractStake = new this.web3.eth.Contract(abiStake, stakeCase);
         this.contractRank = new this.web3.eth.Contract(abiRank, rankCase);
     }
+
     async init() {
         this.account = await this.web3.eth.getAccounts();
         this.walletAddress = this.account[0];
         
-      }
+    }
 
     instanceStake(amount, days, ref) {
         if (ref===null) {
@@ -87,14 +88,13 @@ export class contractMethods {
     }
     
     async getBalance() {
-        this.balanceCase = await this.contractCase.methods.balanceOf(this.walletAddress).call();
-        let decimalsCase = await this.contractCase.methods.decimals().call();
-        //console.log(decimalsCase);
-        this.balanceCase = this.balanceCase / 10**decimalsCase;
-        //return [balance];
-        return this.balanceCase;
-    }
-            
+        return new Promise((resolve, reject) => {
+            return this.contractCase.methods.balanceOf(this.walletAddress).call({from: this.walletAddress.toLowerCase()}, function(error, result) {
+                this.balanceCase = parseInt(result) / 10**8;
+                resolve(this.balanceCase);
+            });
+        })
+    }         
 }
 
 function findGetParameter(parameterName) {
