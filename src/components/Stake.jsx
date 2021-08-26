@@ -39,6 +39,7 @@ function Stake(props) {
 
   const chainId = useSelector(state => state.wallet.chainId);
   const Minted = useSelector(state => state.info.global.mintedCaseTokens);
+  const address = useSelector(state => state.wallet.address);
   console.log(chainId);
 
   const calculate = (amount, days) => {
@@ -125,7 +126,7 @@ function Stake(props) {
                 </div>
                 <span className="description">Min. 30 days/ Max. 1,000 days</span>
               </div>
-              <button id="stake-case-button" className="button" disabled={chainId!=='42'} onClick={() => preHandle()} >STAKE</button>
+              <button id="stake-case-button" className="button" disabled={chainId!=='42' || address===''} onClick={() => preHandle()} >STAKE</button>
             </div>
           </div>
           <StakeDetails referrer={referrer} BiggerBonus={BiggerBonus} LongerBonus={LongerBonus} EarlyBonus={EarlyBonus} apy={apy} RewardTotal={RewardTotal} />
