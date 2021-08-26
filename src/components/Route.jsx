@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 const Route = ({ path, children }) => {
-
+    const paths = ['/', '/stake', '/staking', '/invite']
     const [currentPath, setCurrentPath] = useState(window.location.pathname);
     useEffect(() => {
         
@@ -15,9 +15,7 @@ const Route = ({ path, children }) => {
         };
     }, [])
 
-    return currentPath === path
-    ? children
-    : null;
+    return ((currentPath === path) || (!paths.includes(currentPath) && !path)) ? children : null
 }
 
 export default Route;
