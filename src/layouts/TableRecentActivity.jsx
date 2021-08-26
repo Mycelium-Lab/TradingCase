@@ -21,7 +21,7 @@ function TableRecentActivity(props) {
               </tr>
             </thead>
             <tbody>
-            { recentActivity.map(({timestamp, type, txHash, txAmount}, index) => (
+            { recentActivity.length > 0 && [...recentActivity].sort((a, b) => Number(b.timestamp) - Number(a.timestamp)).map(({timestamp, type, txHash, txAmount}, index) => (
               <tr key={index}>
                 <td className="tg-0lax">{unixToNormal(timestamp)[0]}<br/>{unixToNormal(timestamp)[1]}</td>
                 <td className="tg-0lax">{typeWithSpaces[type]}<br/>
