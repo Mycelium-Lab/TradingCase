@@ -1071,13 +1071,10 @@ header {
     font-weight: unset;    
 }
 .referal-button:hover {
-    font-size: 0.625vw;
-    line-height: 0.938vw;
     background-color: #1b42e0;
     border-color: #1a3fd5;
     color: #fff;
     font-weight: unset;
-    border: 0.052vw solid #3B5DE7;
 }
 .referal-link-copy .referal-button {
     position: absolute;
@@ -1447,7 +1444,6 @@ header {
         justify-content: unset;
     }
     #stake-case-button {
-        position: absolute;
         bottom: 21px;
         font-size: 10px;
         line-height: 1;
