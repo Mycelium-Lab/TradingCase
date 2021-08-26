@@ -27,7 +27,7 @@ function TableReferals(props) {
             </tr>
           </thead>
           <tbody>
-          { commissionHistory.map(({timestamp, txAmount, user, level}, index) => (
+          { commissionHistory.length > 0 && [...commissionHistory].sort((a, b) => Number(b.timestamp) - Number(a.timestamp)).map(({timestamp, txAmount, user, level}, index) => (
             <tr key={index}>
               <td className="tg-0lax"> { 
                 unixToNormal(timestamp)[0]

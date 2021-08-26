@@ -19,6 +19,7 @@ import './helvetica/stylesheet.css';
 
 import { useQuery } from "@apollo/client";
 import WrongNetworkModal from './layouts/WrongNetworkModal';
+import NotFound from './components/NotFound';
 
 function App() {
 
@@ -97,6 +98,9 @@ function App() {
       </Route>
       <Route path="/stake">
         <Stake balance={balance} referrer={ref} />
+      </Route>
+      <Route>
+        <NotFound/>
       </Route>
     </div>
     
