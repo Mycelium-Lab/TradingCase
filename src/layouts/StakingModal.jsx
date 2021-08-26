@@ -88,10 +88,18 @@ export default function StakingModal(props) {
                 }
 
             </ModalBody>
+            { isApproved !== 2 &&
             <ModalFooter style={{justifyContent: 'center'}}>
-                <Button className="btn btn-outline-primary" disabled={isApproved || loading} onClick={(isApproved || loading) ? () => {} : () => {setLoading(true);handleApprove()}}>Approve</Button>
-                <Button className="btn btn-outline-secondary" disabled={isApproved !== 1 || loading} onClick={(isApproved !== 1 || loading) ? () => {} : () => {setLoading(true); handleStake()}}>Stake</Button>
+                <button id="stake-case-button" className="button" disabled={isApproved || loading} onClick={(isApproved || loading) ? () => {} : () => {setLoading(true);handleApprove()}}>Approve</button>
+                <button id="stake-case-button" className="button" disabled={isApproved !== 1 || loading} onClick={(isApproved !== 1 || loading) ? () => {} : () => {setLoading(true); handleStake()}}>Stake</button>
             </ModalFooter>
+            }
+            { isApproved === 2 &&
+            <ModalFooter style={{justifyContent: 'center'}}>
+                <button id="stake-case-button" className="button"  onClick={close()}>Close</button>
+            </ModalFooter>
+            }
+
         </Modal>
     )
 }
