@@ -10,7 +10,6 @@ function sum(arr, key) {
 }
 
 function Invite(props) {
-    var { canRankUp} = props;
     const data = useSelector(state => state.info.user);
     const wallet = useSelector(state => state.wallet.address);
     const methods = useSelector(state => state.wallet.methods);
@@ -26,24 +25,12 @@ function Invite(props) {
     if (Object.keys(data).length === 0) {
       csp = "0.00";
       rank = "0";
-      canRankUp = false;
       commissionHistory = [];
       commissionRecieved = '0.00';
       referLevelUserCounts = [0,0,0,0,0,0,0,0];
       
     }
 
-    function handleChange(page) {
-      console.log(page);
-      window.history.pushState(page, 'Title', `/${page}`);
-      const navEvent = new PopStateEvent('popstate');
-      window.dispatchEvent(navEvent);
-    }
-
-    async function handleRankUp() {
-      console.log("rankUp");
-      await methods.instanceRankUp().then(function(result){console.log(result)});
-    }
 
     return (
         <div className="tc-wrapper">
@@ -51,7 +38,7 @@ function Invite(props) {
 
           <MainInfoReferals stakersCommission={parseFloat(commissionRecieved).toFixed(2)}/>
 
-          <ReferalProgress wallet={wallet} csp={csp} rank={rank} canRankUp={canRankUp} handleRankUp={handleRankUp}/>
+          <ReferalProgress />
           
           <div className="tc-tables tc-tables-referal">
             <TableReferalSummary/>

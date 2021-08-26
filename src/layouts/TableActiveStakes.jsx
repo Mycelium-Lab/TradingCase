@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { useSelector } from 'react-redux';
+import WithdrawModal from './WithdrawModal';
 
 function getDays(value, timestamp) {
   var today = new Date(); // сегодня
@@ -20,16 +21,26 @@ const calculate = (amount, days, timestamp, withdrawn) => {
 
 function TableActiveStakes(props) {
 
+  const { refetch } = props;
+
   var activeStakes = useSelector(state => state.info.user.stakeList);
   const methods = useSelector(state => state.wallet.methods);
   const chainId = useSelector(state => state.wallet.chainId);
+  const [Idx, setIdx] = useState(-1);
+  const [Amount, setAmount] = useState(0);
+  const [open, setOpen] = useState(false);
 
   if (activeStakes === undefined) activeStakes = [];
 
-  async function handleWithdraw(idx) {
+  function handleWithdraw(idx, amount) {
     console.log('withdraw', methods);
-    await methods.init();
-    await methods.instanceWithdraw(idx).then(function(result) {console.log(result)});
+    setIdx(idx);
+    setAmount(amount);
+    setOpen(true);
+  }
+
+  function setClose() {
+    setOpen(false);
   }
 
   const calculateTimeLeft = () => {
@@ -56,6 +67,7 @@ function TableActiveStakes(props) {
 
   return (
     <div className="tc-info-block">
+      <WithdrawModal open={open} idx={Idx} amount={Amount} setClose={setClose} refetch={refetch}/>
       <span>Active Stakes</span>
       <table className="tg tg-scrollable-table tg-recent-activity" style={{textAlign:"center"}}>
         <thead>
@@ -78,7 +90,7 @@ function TableActiveStakes(props) {
             <td className="tg-0lax">{`${calculate(interestAmount, stakeTimeInDays, stakeTimestamp, withdrawnInterestAmount).toFixed(8)} CASE`}</td>
             <td className="tg-0lax">{`${parseFloat(interestAmount).toFixed(2)} CASE`}</td>
             <td className="tg-0lax">{`${(parseFloat(interestAmount) + parseFloat(stakeAmount)).toFixed(2)} CASE`}</td>
-            <td className="tg-0lax" style={{width:85}}><button disabled={chainId!=='42'} className="button referal-button" onClick={()=>handleWithdraw(idx)}>Claim Rewards</button></td>
+            <td className="tg-0lax" style={{width:85}}><button disabled={chainId!=='42'} className="button referal-button" onClick={()=>handleWithdraw(idx, calculate(interestAmount, stakeTimeInDays, stakeTimestamp, withdrawnInterestAmount).toFixed(2))}>Claim Rewards</button></td>
           </tr>
         ))}
         </tbody>

@@ -6,7 +6,7 @@ import styled from '@emotion/styled'
 export default function StakingModal(props) {
     const methods = useSelector(state => state.wallet.methods);
 
-    const {open, amount, days, referrer, setClose} = props;
+    const {open, amount, days, referrer, setClose, refetch} = props;
     const [isApproved, setIsApproved] = useState(0);
     const [txHash, setTxHash] = useState('');
     const [loading, setLoading] = useState(false);
@@ -90,13 +90,13 @@ export default function StakingModal(props) {
             </ModalBody>
             { isApproved !== 2 &&
             <ModalFooter style={{justifyContent: 'center'}}>
-                <button id="stake-case-button" className="button" disabled={isApproved || loading} onClick={(isApproved || loading) ? () => {} : () => {setLoading(true);handleApprove()}}>Approve</button>
-                <button id="stake-case-button" className="button" disabled={isApproved !== 1 || loading} onClick={(isApproved !== 1 || loading) ? () => {} : () => {setLoading(true); handleStake()}}>Stake</button>
+                <button id="stake-case-button" className="button" style={{width:85, fontSize:14}} disabled={isApproved || loading} onClick={(isApproved || loading) ? () => {} : () => {setLoading(true);handleApprove()}}>Approve</button>
+                <button id="stake-case-button" className="button" style={{width:85, fontSize:14}} disabled={isApproved !== 1 || loading} onClick={(isApproved !== 1 || loading) ? () => {} : () => {setLoading(true); handleStake()}}>Stake</button>
             </ModalFooter>
             }
             { isApproved === 2 &&
             <ModalFooter style={{justifyContent: 'center'}}>
-                <button id="stake-case-button" className="button"  onClick={()=>close()}>Close</button>
+                <button id="stake-case-button" className="button" style={{width:85, fontSize:14}} onClick={()=>close()}>Close</button>
             </ModalFooter>
             }
 
