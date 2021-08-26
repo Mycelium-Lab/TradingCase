@@ -30,11 +30,9 @@ function Stake(props) {
   const [ openAmount, setOpenAmount] = useState(false);
 
 
-  async function handleStake(amount, days) {
+  function handleStake(amount, days) {
     console.log(`%c staked ${amount} coins for ${days} days with ref ${referrer}`, 'color: green');
     setModalOpen(true);
-    //await methods.init();
-    //await methods.instanceStake(amount, days, referrer).then(function(error, result){console.log(error, result)});
   }
 
   const chainId = useSelector(state => state.wallet.chainId);

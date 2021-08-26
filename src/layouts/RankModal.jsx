@@ -3,20 +3,19 @@ import { Modal, ModalHeader, ModalBody, ModalFooter, Spinner } from 'reactstrap'
 import { useSelector } from 'react-redux'
 import styled from '@emotion/styled'
 
-export default function StakingModal(props) {
+export default function RankModal(props) {
     const methods = useSelector(state => state.wallet.methods);
 
-    const {open, amount, days, referrer, setClose} = props;
+    const {open, setClose, currentRank, nextRank} = props;
     const [isApproved, setIsApproved] = useState(0);
     const [txHash, setTxHash] = useState('');
     const [loading, setLoading] = useState(false);
 
-    async function handleApprove() {
+    async function handleRankUp() {
         console.log(loading);
-        console.log(`%c approve ${amount} coins`, 'color: green');
 
         await methods.init();
-        await methods.instanceApprove(amount).then(function(result) {
+        await methods.instanceRankUp().then(function(result) {
             if (result !== undefined) {
                 console.log(result);
                 setLoading(false);
@@ -29,19 +28,6 @@ export default function StakingModal(props) {
         });
     }
 
-    async function handleStake() {
-
-        console.log(`%c staked ${amount} coins for ${days} days with ref ${referrer}`, 'color: green');
-        //await methods.init();
-        await methods.instanceStake(amount, days, referrer).then(function(result) {
-            if (result !== undefined) {
-                console.log(result);
-                setTxHash(result);
-                setLoading(false);
-                setIsApproved(2);
-            }
-        });
-      }
 
     function close() {
         setTxHash('');
@@ -50,21 +36,12 @@ export default function StakingModal(props) {
         setClose();
     }
 
-    const Button = styled.button`
-        width: 7rem;
-        &:disabled {
-            opacity: 0.3;
-        }
-    `
-
     function getTextStatus() {
         switch (isApproved) {
             case 0:
-                return `Approve staking ${amount} CASE for ${days} days.`;
+                return `Rank up from ${currentRank} to ${nextRank}`
             case 1:
-                return `Approve successful. Stake ${amount} CASE for ${days} days.`;
-            case 2:
-                return `Successfully staked ${amount} CASE for ${days} days!`;
+                return `Successfully ranked up from ${currentRank} to ${nextRank}`;
             default:
                 return '';
         }
@@ -82,19 +59,13 @@ export default function StakingModal(props) {
                         loading ? 'Submitting transaction...' : getTextStatus()
                     }
                 </span>
-                {
-                    isApproved === 2 &&
-                    <a className='mt-2' href={`https://kovan.etherscan.io/tx/${txHash}`} style={{color:"#eabc4e"}}>View Transcation</a>
-                }
-
             </ModalBody>
-            { isApproved !== 2 &&
+            { isApproved !== 1 &&
             <ModalFooter style={{justifyContent: 'center'}}>
-                <button id="stake-case-button" className="button" disabled={isApproved || loading} onClick={(isApproved || loading) ? () => {} : () => {setLoading(true);handleApprove()}}>Approve</button>
-                <button id="stake-case-button" className="button" disabled={isApproved !== 1 || loading} onClick={(isApproved !== 1 || loading) ? () => {} : () => {setLoading(true); handleStake()}}>Stake</button>
+                <button id="stake-case-button" style={{width:85, fontSize:14}} className="button" disabled={loading} onClick={(loading) ? () => {} : () => {setLoading(true); handleRankUp()}}>Rank up</button>
             </ModalFooter>
             }
-            { isApproved === 2 &&
+            { isApproved === 1 &&
             <ModalFooter style={{justifyContent: 'center'}}>
                 <button id="stake-case-button" className="button"  onClick={()=>close()}>Close</button>
             </ModalFooter>
