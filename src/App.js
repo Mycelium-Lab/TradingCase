@@ -27,7 +27,7 @@ function App() {
   const [ref, setRef] = useState('0x0000000000000000000000000000000000000000');
 
   const dispatch = useDispatch()
-  const address = useSelector(state => state.wallet.address)
+  const address = useSelector(state => state.wallet.address);
   const info = useSelector(state => state.wallet.provider);
   const methods = useSelector(state => state.wallet.methods);
 
@@ -76,11 +76,7 @@ function App() {
       await methods.getBalance().then(function(result) {
         setBalance(result);
       });
-
-      await methods.canRankUp().then(function(result) {
-        setCanRankUp(result);
-        console.log(canRankUp);
-      });
+      
     }
   };
 

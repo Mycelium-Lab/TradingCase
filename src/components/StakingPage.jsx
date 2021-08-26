@@ -19,7 +19,7 @@ function Staiking(props) {
             <MainInfo />
             <div className="tc-tables tc-tables-referal">
 
-                <TableActiveStakes />
+                <TableActiveStakes refetch={refetch}/>
                 <TableRecentActivity />
 
             </div>

@@ -266,7 +266,7 @@ header {
     font-style: normal;
     display: flex;
     flex-direction: column;
-    /* width: 13vw; */
+    /*width: 13vw;*/
 }
 
 .tc-main-info-balance span:first-child {
@@ -308,11 +308,6 @@ header {
     -o-transition: 0.2s;
 }
 
-.button:hover {
-    background-color: #1b42e0;
-    border-color: #1a3fd5;
-}
-
 .tc-main-info-stake-button button {
     width: 10.208vw;
     height: 3.177vw;
@@ -326,8 +321,6 @@ header {
     -moz-border-radius: 0.208vw;
     -ms-border-radius: 0.208vw;
     -o-border-radius: 0.208vw;
-    /* width: 10.781vw;
-    height: 5.625vw; */
     padding: 1.3vw 1.123vw;
     display: flex;
     flex-direction: column;
@@ -1027,6 +1020,7 @@ header {
     margin-right: 1.094vw;
 }
 .referal-downlines-icon {
+    margin-left: 1vw;
     width: 1.250vw;
     height: 1.250vw;
 }
@@ -1077,13 +1071,10 @@ header {
     font-weight: unset;    
 }
 .referal-button:hover {
-    font-size: 0.625vw;
-    line-height: 0.938vw;
     background-color: #1b42e0;
     border-color: #1a3fd5;
     color: #fff;
     font-weight: unset;
-    border: 0.052vw solid #3B5DE7;
 }
 .referal-link-copy .referal-button {
     position: absolute;
@@ -1362,7 +1353,6 @@ header {
 }
 #stake-case-button {
     width: 100%;
-    background: #3B5DE7;
     margin-top: 0.729vw;
     color: #fff;
     font-size: 0.729vw;
@@ -1380,6 +1370,11 @@ header {
 .stake-case-order-details .stake-case-header {    
     margin-bottom: 2.865vw;
 }
+.stake-case-order-details-rewards .stake-case-order-details-info {
+    width: unset;
+    height: unset;
+    vertical-align: top;
+}
 .stake-case-order-details-rewards {
     display: flex;
     flex-direction: row;
@@ -1388,11 +1383,6 @@ header {
 }
 .stake-case-order-details-rewards:last-child {
     margin-bottom: 0;
-}
-.stake-case-order-details-rewards .stake-case-order-details-info {
-    width: unset;
-    height: unset;
-    vertical-align: top;
 }
 .stake-case-order-details div span {
     font-size: 0.938vw;
@@ -1454,13 +1444,11 @@ header {
         justify-content: unset;
     }
     #stake-case-button {
-        position: absolute;
         bottom: 21px;
         font-size: 10px;
         line-height: 1;
         height: 31px;
         margin-top: 0;
-        border: 1px solid #3B5DE7;
         border-radius: 3.2px;
         left: 0px;
         right: 0px;
@@ -1534,7 +1522,6 @@ header {
     .stake-case-order-details-info {
         width: 8px;
         height: 8px;
-        margin-left: 1vw;
     }
     .stake-case-faq {
         background: #FFFFFF;
@@ -1584,6 +1571,10 @@ header {
     background-size: 100%!important;
     transition: background 0s!important;
 }
+.button:disabled, .button[disabled] {
+    pointer-events: none;
+    opacity: 0.3;
+}
 
 
 .stake-case-faq-qa div:first-child {
@@ -1592,18 +1583,23 @@ header {
 .stake-case-faq-qa div:last-child {
     text-align: right;
 }
-.stake-case-amount, .stake-case-order-details {
-    margin-left: 0;
-    padding-bottom: 0;
-    width: 100%;
-}
 .referal-rank-next .rank-info div:nth-child(2), .referal-rank .rank-info div:nth-child(2) {
     text-align: left;
 }
 .referal-downlines {
     position: relative
 }
+.rank-up {
+   position: absolute;
+   left: 0
+}
+
 @media (max-width: 768px) {
+    .stake-case-amount, .stake-case-order-details {
+        margin-left: 0;
+        padding-bottom: 0;
+        width: 100%;
+    }
     .stake-case-faq-qa div:last-child {
         text-align: left;
     }

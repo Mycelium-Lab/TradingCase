@@ -10,6 +10,7 @@ function sum(arr, key) {
 
 function TableReferalSummary(props) {
 
+    const chainId = useSelector(state => state.wallet.chainId);
     const data = useSelector(state => state.info.user);
     let stakedCase = 0.00;
 
@@ -85,7 +86,7 @@ function TableReferalSummary(props) {
                     </span>
                   </td>) : (
                   <td className="tg-0lax tc-tables-referal-last-column">
-                    <button id="activate" className="button referal-button" onClick={()=>handleChange('stake')}>
+                    <button disabled={chainId!=='42'} id="activate" className="button referal-button" onClick={()=>handleChange('stake')}>
                       Activate
                     </button>
                   </td>

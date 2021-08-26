@@ -1,16 +1,21 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {rankList, cspToLevel} from '../constants';
 import { useSelector } from 'react-redux';
+import RankModal from './RankModal';
 
 function ReferalProgress(props) {
 
-  const { canRankUp, handleRankUp } = props;
   const data = useSelector(state => state.info.user);
+  const methods = useSelector(state => state.wallet.methods);
+  const wallet = useSelector(state => state.wallet.address);
+
   var csp = 0.00;
-  
+  var [canRankUp, setCanRankUp] = useState(false);
+  var [openModal, setModalOpen] = useState(false);
   var downlines = 0;
   var progress = 0;
   var rank = "0";
+
   if (Object.keys(data).length !== 0) {
     rank = data.rank;
     csp = parseFloat(data.careerValue*10000000000).toFixed(2);
@@ -18,6 +23,7 @@ function ReferalProgress(props) {
     console.log(progress);
     if (progress > 100) progress = 100;
   }
+
   if (rank === "0") downlines = 2;
   else {
     if (Object.keys(data).length !== 0) {
@@ -28,17 +34,45 @@ function ReferalProgress(props) {
       if (downlines>2) downlines = 2;
     }
   }
-  const wallet = useSelector(state => state.wallet.address);
 
+  var currentRank = rankList[rank].toUpperCase();
+  var nextRank = rankList[(parseInt(rank)+1).toString()].toUpperCase();
+  
+  const chainId = useSelector(state => state.wallet.chainId);
+  async function start() {
+    await methods.init();
+    await methods.canRankUp().then(function(result) {
+          setCanRankUp(result);
+          console.log(result);
+          console.log(canRankUp);
+        });
+  }
+
+  function rankUp() {
+    setModalOpen(true);
+  }
+
+  function setClose() {
+    start();
+    setModalOpen(false);
+  }
+
+  useEffect(()=>{
+    console.log('lol kek');
+    if (methods !== undefined) {
+      start();
+    }
+  },[methods]);
 
     return (
       <div className="tc-invite-referal">
+          <RankModal open={openModal} setClose={setClose} currentRank={currentRank} nextRank={nextRank}/>
           <div className="referal-title">The more you share, the more you get</div>
           <div className="referal-progress">
             <div className="referal-rank">
               <div className="rank-info">
                 <div>Now</div>
-                <div><span id="rank_info">{rankList[rank].toUpperCase()}</span> - <span id="cps_info">{csp}</span> <span> CSP</span></div>
+                <div><span id="rank_info">{currentRank}</span> - <span id="cps_info">{csp}</span> <span> CSP</span></div>
               </div>
             </div>
             <div className="referal-progress-line">
@@ -49,13 +83,13 @@ function ReferalProgress(props) {
             <div className="referal-rank-next">
               <div className="rank-info">
                 <div>Next</div>
-                <div>{(rank !='8') ? rankList[(parseInt(rank)+1).toString()].toUpperCase() : "MAX"}</div>
+                <div>{(rank !='8') ? nextRank : "MAX"}</div>
               </div>
             </div>
           </div>
           <div className="referal-downlines">
             { canRankUp &&
-              <button className="button referal-button rank-up" style={{marginRight:430}}onClick={()=>handleRankUp()}>RankUp</button>
+              <button disabled={chainId!=='42'} className="button referal-button rank-up" onClick={()=>rankUp()}>RankUp</button>
             }
             <div>Downlines for rank up:</div>
             <div>
