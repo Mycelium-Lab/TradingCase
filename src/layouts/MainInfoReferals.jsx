@@ -2,6 +2,7 @@ import React from 'react';
 import Tooltip from '@material-ui/core/Tooltip';
 import { useSelector } from 'react-redux';
 
+//сумма элементов списка
 function sum(arr, key) {
     var a = 0.00;
     arr.map((row)=>{

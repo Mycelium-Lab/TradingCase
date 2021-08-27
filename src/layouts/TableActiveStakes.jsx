@@ -27,7 +27,6 @@ function TableActiveStakes(props) {
   const { refetch } = props;
 
   var activeStakes = useSelector(state => state.info.user.stakeList);
-  const methods = useSelector(state => state.wallet.methods);
   const chainId = useSelector(state => state.wallet.chainId);
   const [Idx, setIdx] = useState(-1);
   const [Amount, setAmount] = useState(0);
@@ -72,7 +71,9 @@ function TableActiveStakes(props) {
 
   return (
     <div className="tc-info-block">
-      <WithdrawModal open={open} idx={Idx} amount={Amount} setClose={setClose} refetch={refetch}/>
+      { open &&
+        <WithdrawModal idx={Idx} amount={Amount} setClose={setClose} refetch={refetch}/>
+      }
       <span>Active Stakes</span>
       <table className="tg tg-scrollable-table tg-recent-activity" style={{textAlign:"center"}}>
         <thead>

@@ -1,21 +1,20 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Modal, ModalHeader, ModalBody, ModalFooter, Spinner } from 'reactstrap'
 import { useSelector } from 'react-redux'
-import styled from '@emotion/styled'
 
 export default function StakingModal(props) {
     const methods = useSelector(state => state.wallet.methods);
 
-    const {open, amount, days, referrer, setClose, refetch} = props;
+    const { amount, days, referrer, setClose} = props;
     const [isApproved, setIsApproved] = useState(0);
     const [txHash, setTxHash] = useState('');
     const [loading, setLoading] = useState(false);
 
+    // вызывает метод аппрува
     async function handleApprove() {
 
         await methods.instanceApprove(amount).then(function(result) {
             if (result !== undefined) {
-                console.log(result);
                 setLoading(false);
                 setIsApproved(1);
             }
@@ -25,6 +24,7 @@ export default function StakingModal(props) {
         });
     }
 
+    //вызывает метод стейкинга
     async function handleStake() {
 
         await methods.instanceStake(amount, days, referrer).then(function(result) {
@@ -36,20 +36,6 @@ export default function StakingModal(props) {
             }
         });
       }
-
-    function close() {
-        setTxHash('');
-        setLoading(false);
-        setIsApproved(0);
-        setClose();
-    }
-
-    const Button = styled.button`
-        width: 7rem;
-        &:disabled {
-            opacity: 0.3;
-        }
-    `
 
     function getTextStatus() {
         switch (isApproved) {
@@ -65,8 +51,8 @@ export default function StakingModal(props) {
     }
 
     return (
-        <Modal isOpen={open} toggle={close} centered={true} size='md' style={{padding: '1rem'}}>
-            <ModalHeader toggle={close}>    
+        <Modal isOpen={true} toggle={setClose} centered={true} size='md' style={{padding: '1rem'}}>
+            <ModalHeader toggle={setClose}>    
                 Confirm Staking
             </ModalHeader>
             <ModalBody style={{justifyContent: 'center', textAlign: 'center', display:'flex', alignItems: 'center', flexDirection: 'column'}}>
@@ -90,7 +76,7 @@ export default function StakingModal(props) {
             }
             { isApproved === 2 &&
             <ModalFooter style={{justifyContent: 'center'}}>
-                <button id="stake-case-button" className="button" style={{width:85, fontSize:14}} onClick={()=>close()}>Close</button>
+                <button id="stake-case-button" className="button" style={{width:85, fontSize:14}} onClick={()=>setClose()}>Close</button>
             </ModalFooter>
             }
 

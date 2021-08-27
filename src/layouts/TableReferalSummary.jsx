@@ -20,7 +20,7 @@ function TableReferalSummary(props) {
     if (Object.keys(data).length !== 0) {
       
       stakedCase = sum(data.stakeList,"stakeAmount");
-      for (var i=0; i<8; i++) {
+      for (let i=0; i<8; i++) {
         let td = {};
         td.lvl = (i+1).toString();
         td.counts = (data.referLevelUserCounts)[i];
@@ -30,7 +30,7 @@ function TableReferalSummary(props) {
       }
     }
     else {
-      for (var i=0; i<8; i++) {
+      for (let i=0; i<8; i++) {
         let td = {};
         td.lvl = (i+1).toString();
         td.counts = 0;

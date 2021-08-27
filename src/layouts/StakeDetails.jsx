@@ -60,7 +60,7 @@ export default function StakeDetails(props) {
 					</span>
 					<span>{RewardTotal.toFixed(4)}</span>
 				</div>
-				{ referrer != ZERO_ADDR && 
+				{ referrer !== ZERO_ADDR && 
 				<div className="stake-case-order-details-rewards">
 					<span>Referral bonus 
 						<Tooltip title="Your Bonus on the staked CASE of your referrals">
@@ -72,7 +72,7 @@ export default function StakeDetails(props) {
 					<span>3%</span>
 				</div>
 				}
-				{ referrer != ZERO_ADDR && 
+				{ referrer !== ZERO_ADDR && 
 				<div className="stake-case-order-details-rewards">
 					<span>Your referrer 
 						<Tooltip title="Your direct referrer address">

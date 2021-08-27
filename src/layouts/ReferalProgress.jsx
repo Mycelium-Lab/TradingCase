@@ -27,7 +27,7 @@ function ReferalProgress(props) {
   if (rank === "0") downlines = 2;
   else {
     if (Object.keys(data).length !== 0) {
-      data.referredUsers.map((row)=>{
+      data.referredUsers.map((row) => {
         if (parseInt(row.rank) >= parseInt(rank))
           downlines += 1;
       })
@@ -66,7 +66,9 @@ function ReferalProgress(props) {
 
     return (
       <div className="tc-invite-referal">
-          <RankModal open={openModal} setClose={setClose} currentRank={currentRank} nextRank={nextRank}/>
+          { openModal &&
+            <RankModal setClose={setClose} currentRank={currentRank} nextRank={nextRank}/>
+          }
           <div className="referal-title">The more you share, the more you get</div>
           <div className="referal-progress">
             <div className="referal-rank">
@@ -83,7 +85,7 @@ function ReferalProgress(props) {
             <div className="referal-rank-next">
               <div className="rank-info">
                 <div>Next</div>
-                <div>{(rank !='8') ? nextRank : "MAX"}</div>
+                <div>{(rank !=='8') ? nextRank : "MAX"}</div>
               </div>
             </div>
           </div>
