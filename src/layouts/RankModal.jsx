@@ -11,22 +11,20 @@ export default function RankModal(props) {
     const [txHash, setTxHash] = useState('');
     const [loading, setLoading] = useState(false);
 
+    // вызывает метод поднятия ранга по клику на кнопку
     async function handleRankUp() {
-        console.log(loading);
         await methods.instanceRankUp().then(function(result) {
             if (result !== undefined) {
-                console.log(result);
                 setLoading(false);
                 setIsApproved(1);
             }
             else {
-                console.log('undef');
                 setClose();
             }
         });
     }
 
-
+    //закрывает модальное окно и возвращает
     function close() {
         setTxHash('');
         setLoading(false);
@@ -34,6 +32,7 @@ export default function RankModal(props) {
         setClose();
     }
 
+    // текста
     function getTextStatus() {
         switch (isApproved) {
             case 0:

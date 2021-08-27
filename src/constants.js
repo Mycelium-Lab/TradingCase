@@ -25,9 +25,15 @@ const cspToLevel = [ 100, 200, 500, 1500, 5000, 10000, 50000];
 
 */
 
-const typeWithSpaces = {
-  "CreateStake": "Staked",
-  "WithdrawReward": "Withdrew Reward",
+const typeWithSpaces = (word) => {
+  switch (word) {
+            case "CreateStake":
+                return "Staked";
+            case "WithdrawReward":
+                return "Withdrew Reward";
+            default:
+                return "Withdrew Stake";
+        }
 }
 
 const abiProxy = [
