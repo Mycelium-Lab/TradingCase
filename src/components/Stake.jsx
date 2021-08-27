@@ -102,7 +102,9 @@ function Stake(props) {
 
   return (
       <div className="tc-wrapper" id="stake-window">
-      <StakingModal amount={stakeAmount} open={modalOpen} setClose={setClose} days={daysAmount} referrer={referrer} />
+      { modalOpen &&
+        <StakingModal amount={stakeAmount} setClose={setClose} days={daysAmount} referrer={referrer} />
+      }
       <div className="container">
         <div className="stake-case">
           <div className="stake-case-amount">

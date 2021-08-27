@@ -6,7 +6,7 @@ export default function RankModal(props) {
     const methods = useSelector(state => state.wallet.methods);
 
     const { refetch } = props;
-    const {open, setClose, idx, amount} = props;
+    const { setClose, idx, amount} = props;
     const [isApproved, setIsApproved] = useState(0);
     const [loading, setLoading] = useState(false);
     const [txHash, setTxHash] = useState('');
@@ -18,16 +18,9 @@ export default function RankModal(props) {
                 setTxHash(result.transactionHash);
                 setLoading(false);
                 setIsApproved(1);
+                refetch();
             }
         });
-    }
-
-
-    function close() {
-        setTxHash('');
-        setLoading(false);
-        setIsApproved(0);
-        setClose();
     }
 
     function getTextStatus() {
@@ -42,8 +35,8 @@ export default function RankModal(props) {
     }
 
     return (
-        <Modal isOpen={open} toggle={close} centered={true} size='md' style={{padding: '1rem'}}>
-            <ModalHeader toggle={close}>    
+        <Modal isOpen={true} toggle={setClose} centered={true} size='md' style={{padding: '1rem'}}>
+            <ModalHeader toggle={setClose}>    
                 Confirm Withdrawing
             </ModalHeader>
             <ModalBody style={{justifyContent: 'center', textAlign: 'center', display:'flex', alignItems: 'center', flexDirection: 'column'}}>
@@ -65,7 +58,7 @@ export default function RankModal(props) {
             }
             { isApproved === 1 &&
             <ModalFooter style={{justifyContent: 'center'}}>
-                <button id="stake-case-button" style={{width:85, fontSize:14}} className="button"  onClick={()=>close()}>Close</button>
+                <button id="stake-case-button" style={{width:85, fontSize:14}} className="button"  onClick={()=>setClose()}>Close</button>
             </ModalFooter>
             }
 

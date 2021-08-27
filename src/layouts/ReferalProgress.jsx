@@ -66,7 +66,9 @@ function ReferalProgress(props) {
 
     return (
       <div className="tc-invite-referal">
-          <RankModal open={openModal} setClose={setClose} currentRank={currentRank} nextRank={nextRank}/>
+          { openModal &&
+            <RankModal setClose={setClose} currentRank={currentRank} nextRank={nextRank}/>
+          }
           <div className="referal-title">The more you share, the more you get</div>
           <div className="referal-progress">
             <div className="referal-rank">

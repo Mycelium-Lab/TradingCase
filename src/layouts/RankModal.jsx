@@ -6,9 +6,8 @@ import styled from '@emotion/styled'
 export default function RankModal(props) {
     const methods = useSelector(state => state.wallet.methods);
 
-    const {open, setClose, currentRank, nextRank} = props;
+    const { setClose, currentRank, nextRank} = props;
     const [isApproved, setIsApproved] = useState(0);
-    const [txHash, setTxHash] = useState('');
     const [loading, setLoading] = useState(false);
 
     // вызывает метод поднятия ранга по клику на кнопку
@@ -24,14 +23,6 @@ export default function RankModal(props) {
         });
     }
 
-    //закрывает модальное окно и возвращает
-    function close() {
-        setTxHash('');
-        setLoading(false);
-        setIsApproved(0);
-        setClose();
-    }
-
     // текста
     function getTextStatus() {
         switch (isApproved) {
@@ -45,8 +36,8 @@ export default function RankModal(props) {
     }
 
     return (
-        <Modal isOpen={open} toggle={close} centered={true} size='md' style={{padding: '1rem'}}>
-            <ModalHeader toggle={close}>   
+        <Modal isOpen={true} toggle={setClose} centered={true} size='md' style={{padding: '1rem'}}>
+            <ModalHeader toggle={setClose}>   
                 Confirm Ranking Up
             </ModalHeader>
             <ModalBody style={{justifyContent: 'center', textAlign: 'center', display:'flex', alignItems: 'center', flexDirection: 'column'}}>
@@ -64,7 +55,7 @@ export default function RankModal(props) {
             }
             { isApproved === 1 &&
             <ModalFooter style={{justifyContent: 'center'}}>
-                <button id="stake-case-button" className="button"  onClick={()=>close()}>Close</button>
+                <button id="stake-case-button" className="button"  onClick={()=>setClose()}>Close</button>
             </ModalFooter>
             }
 

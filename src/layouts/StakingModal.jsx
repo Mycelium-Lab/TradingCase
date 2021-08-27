@@ -6,7 +6,7 @@ import styled from '@emotion/styled'
 export default function StakingModal(props) {
     const methods = useSelector(state => state.wallet.methods);
 
-    const {open, amount, days, referrer, setClose, refetch} = props;
+    const { amount, days, referrer, setClose, refetch} = props;
     const [isApproved, setIsApproved] = useState(0);
     const [txHash, setTxHash] = useState('');
     const [loading, setLoading] = useState(false);
@@ -38,13 +38,6 @@ export default function StakingModal(props) {
         });
       }
 
-    function close() {
-        setTxHash('');
-        setLoading(false);
-        setIsApproved(0);
-        setClose();
-    }
-
     function getTextStatus() {
         switch (isApproved) {
             case 0:
@@ -59,8 +52,8 @@ export default function StakingModal(props) {
     }
 
     return (
-        <Modal isOpen={open} toggle={close} centered={true} size='md' style={{padding: '1rem'}}>
-            <ModalHeader toggle={close}>    
+        <Modal isOpen={true} toggle={setClose} centered={true} size='md' style={{padding: '1rem'}}>
+            <ModalHeader toggle={setClose}>    
                 Confirm Staking
             </ModalHeader>
             <ModalBody style={{justifyContent: 'center', textAlign: 'center', display:'flex', alignItems: 'center', flexDirection: 'column'}}>
@@ -84,7 +77,7 @@ export default function StakingModal(props) {
             }
             { isApproved === 2 &&
             <ModalFooter style={{justifyContent: 'center'}}>
-                <button id="stake-case-button" className="button" style={{width:85, fontSize:14}} onClick={()=>close()}>Close</button>
+                <button id="stake-case-button" className="button" style={{width:85, fontSize:14}} onClick={()=>setClose()}>Close</button>
             </ModalFooter>
             }
 
