@@ -29,7 +29,6 @@ export class contractMethods {
                 return this.contractStake.methods.stake((amount*this.CASE_PRECISION).toString(), days.toString(), this.ZERO_ADDR).send({from: this.walletAddress})
                 .on('receipt', function(receipt) {
                     resolve(receipt.transactionHash);
-                    reject('rejected');
                 })
                 .on('error', function(error){console.log('error',error)});
             });
@@ -47,12 +46,9 @@ export class contractMethods {
     //метод аппрува стейкинга
     instanceApprove(amount) {
         return new Promise((resolve, reject) => {
-            return this.contractCase.methods.approve(stakeCase,(amount*this.CASE_PRECISION).toString()).send({from: this.walletAddress},function(error, receipt){
-                if (receipt === undefined) {
-                    resolve(receipt);
-                }
-            }).on('receipt', function(receipt) {
-                    resolve(receipt);
+            return this.contractCase.methods.approve(stakeCase,(amount*this.CASE_PRECISION).toString()).send({from: this.walletAddress})
+            .on('receipt', function(receipt) {
+                resolve(receipt);
             });
         });
     }
