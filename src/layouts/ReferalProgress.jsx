@@ -40,7 +40,6 @@ function ReferalProgress(props) {
   
   const chainId = useSelector(state => state.wallet.chainId);
   async function start() {
-    await methods.init();
     await methods.canRankUp().then(function(result) {
           setCanRankUp(result);
           console.log(result);

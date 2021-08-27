@@ -19,7 +19,7 @@ const calculate = (amount, days, timestamp, withdrawn) => {
   var today = new Date(); // сегодня
   var start = new Date(parseInt(timestamp)*1000);
   var ends = new Date(start.getTime()+1000*60*60*24*days);
-  return (parseInt(amount)*(today - start)/(ends-start)-withdrawn);
+  return (parseFloat(amount)*(today - start)/(ends-start)-withdrawn);
   }
 
 function TableActiveStakes(props) {
