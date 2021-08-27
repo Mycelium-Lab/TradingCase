@@ -27,7 +27,6 @@ function TableActiveStakes(props) {
   const { refetch } = props;
 
   var activeStakes = useSelector(state => state.info.user.stakeList);
-  const methods = useSelector(state => state.wallet.methods);
   const chainId = useSelector(state => state.wallet.chainId);
   const [Idx, setIdx] = useState(-1);
   const [Amount, setAmount] = useState(0);

@@ -103,10 +103,10 @@ function Stake(props) {
   }
 
   // действие при переходе на страницу
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     calculate(stakeAmount, daysAmount);
     window.scrollTo(0, 0);
-  }, [stakeAmount, daysAmount]);
+  }, []);
 
   return (
       <div className="tc-wrapper" id="stake-window">

@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Modal, ModalHeader, ModalBody, ModalFooter, Spinner } from 'reactstrap'
 import { useSelector } from 'react-redux'
-import styled from '@emotion/styled'
 
 export default function StakingModal(props) {
     const methods = useSelector(state => state.wallet.methods);
 
-    const { amount, days, referrer, setClose, refetch} = props;
+    const { amount, days, referrer, setClose} = props;
     const [isApproved, setIsApproved] = useState(0);
     const [txHash, setTxHash] = useState('');
     const [loading, setLoading] = useState(false);

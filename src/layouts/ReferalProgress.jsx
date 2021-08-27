@@ -27,7 +27,7 @@ function ReferalProgress(props) {
   if (rank === "0") downlines = 2;
   else {
     if (Object.keys(data).length !== 0) {
-      data.referredUsers.map((row)=>{
+      data.referredUsers.map((row) => {
         if (parseInt(row.rank) >= parseInt(rank))
           downlines += 1;
       })
@@ -85,7 +85,7 @@ function ReferalProgress(props) {
             <div className="referal-rank-next">
               <div className="rank-info">
                 <div>Next</div>
-                <div>{(rank !='8') ? nextRank : "MAX"}</div>
+                <div>{(rank !=='8') ? nextRank : "MAX"}</div>
               </div>
             </div>
           </div>
