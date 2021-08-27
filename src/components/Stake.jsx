@@ -106,7 +106,7 @@ function Stake(props) {
   React.useLayoutEffect(() => {
     calculate(stakeAmount, daysAmount);
     window.scrollTo(0, 0);
-  }, []);
+  });
 
   return (
       <div className="tc-wrapper" id="stake-window">

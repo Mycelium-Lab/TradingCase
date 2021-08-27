@@ -29,7 +29,6 @@ export class contractMethods {
                 return this.contractStake.methods.stake((amount*this.CASE_PRECISION).toString(), days.toString(), this.ZERO_ADDR).send({from: this.walletAddress})
                 .on('receipt', function(receipt) {
                     resolve(receipt.transactionHash);
-                    reject('rejected');
                 })
                 .on('error', function(error){console.log('error',error)});
             });
@@ -47,12 +46,9 @@ export class contractMethods {
     //метод аппрува стейкинга
     instanceApprove(amount) {
         return new Promise((resolve, reject) => {
-            return this.contractCase.methods.approve(stakeCase,(amount*this.CASE_PRECISION).toString()).send({from: this.walletAddress},function(error, receipt){
-                if (receipt === undefined) {
-                    resolve(receipt);
-                }
-            }).on('receipt', function(receipt) {
-                    resolve(receipt);
+            return this.contractCase.methods.approve(stakeCase,(amount*this.CASE_PRECISION).toString()).send({from: this.walletAddress})
+            .on('receipt', function(receipt) {
+                resolve(receipt);
             });
         });
     }
@@ -85,9 +81,11 @@ export class contractMethods {
     //метод для получения баланса
     async getBalance() {
         return new Promise((resolve, reject) => {
-            return this.contractCase.methods.balanceOf(this.walletAddress).call({from: this.walletAddress.toLowerCase()}, function(error, result) {
-                this.balanceCase = parseInt(result) / 10**8;
-                resolve(this.balanceCase);
+            return this.contractCase.methods.balanceOf(this.walletAddress.toLowerCase()).call({from: this.walletAddress.toLowerCase()}, function(error, result) {
+                console.log(result);
+                console.log(error);
+                let balanceCase = parseInt(result) / 10**8;
+                resolve(balanceCase);
             });
         })
     }         
