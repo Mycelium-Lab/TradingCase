@@ -1,3 +1,4 @@
+//Наименования уровней
 const rankList = {
 	"0":"NO RANK",
 	"1":"Partner",
@@ -9,9 +10,10 @@ const rankList = {
 	"7":"Regional Ambassador",
 	"8":"International Ambassador"
 };
-
+//сколько надо застейкать чтобы открыть уровень рефералки
 const levelCost = [0, 0, 5000, 10000, 15000, 17500, 20000, 22500, 25000];
 
+//сколько csp нужно получить чтобы перейти на следующий уровень
 const cspToLevel = [ 100, 200, 500, 1500, 5000, 10000, 50000];
 
 /*150000 CSP*2 Regional Ambassador
@@ -25,6 +27,7 @@ const cspToLevel = [ 100, 200, 500, 1500, 5000, 10000, 50000];
 
 */
 
+//преобразует значеня из контракта в более удобный вид (с пробелами)
 const typeWithSpaces = (word) => {
   switch (word) {
             case "CreateStake":
@@ -36,6 +39,7 @@ const typeWithSpaces = (word) => {
         }
 }
 
+// abi контрактов
 const abiProxy = [
     // balanceOf
     {

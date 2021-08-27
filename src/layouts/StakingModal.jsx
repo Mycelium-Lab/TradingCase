@@ -11,11 +11,11 @@ export default function StakingModal(props) {
     const [txHash, setTxHash] = useState('');
     const [loading, setLoading] = useState(false);
 
+    // вызывает метод аппрува
     async function handleApprove() {
 
         await methods.instanceApprove(amount).then(function(result) {
             if (result !== undefined) {
-                console.log(result);
                 setLoading(false);
                 setIsApproved(1);
             }
@@ -25,6 +25,7 @@ export default function StakingModal(props) {
         });
     }
 
+    //вызывает метод стейкинга
     async function handleStake() {
 
         await methods.instanceStake(amount, days, referrer).then(function(result) {
@@ -43,13 +44,6 @@ export default function StakingModal(props) {
         setIsApproved(0);
         setClose();
     }
-
-    const Button = styled.button`
-        width: 7rem;
-        &:disabled {
-            opacity: 0.3;
-        }
-    `
 
     function getTextStatus() {
         switch (isApproved) {
