@@ -81,9 +81,11 @@ export class contractMethods {
     //метод для получения баланса
     async getBalance() {
         return new Promise((resolve, reject) => {
-            return this.contractCase.methods.balanceOf(this.walletAddress).call({from: this.walletAddress.toLowerCase()}, function(error, result) {
-                this.balanceCase = parseInt(result) / 10**8;
-                resolve(this.balanceCase);
+            return this.contractCase.methods.balanceOf(this.walletAddress.toLowerCase()).call({from: this.walletAddress.toLowerCase()}, function(error, result) {
+                console.log(result);
+                console.log(error);
+                let balanceCase = parseInt(result) / 10**8;
+                resolve(balanceCase);
             });
         })
     }         
