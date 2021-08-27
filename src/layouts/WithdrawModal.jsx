@@ -11,6 +11,7 @@ export default function RankModal(props) {
     const [loading, setLoading] = useState(false);
     const [txHash, setTxHash] = useState('');
 
+    //вызов метода вывода средств
     async function handleWithdraw() {
 
         await methods.instanceWithdraw(idx).then(function(result) {
@@ -23,6 +24,7 @@ export default function RankModal(props) {
         });
     }
 
+    // дополнительный текст, в зависимости от состояния модального окна
     function getTextStatus() {
         switch (isApproved) {
             case 0:

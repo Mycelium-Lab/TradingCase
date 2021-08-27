@@ -12,7 +12,6 @@ const DAILYBREW = 15 * (10**14);
 const DAILYGREW = 10 ** 12;
 const ISLOPE = 2 * (10 ** 8);
 const PEAK_PRE = 10 ** 8;
-const Minted = 0;
 
 
 function Stake(props) {
@@ -30,16 +29,19 @@ function Stake(props) {
   const [ openAmount, setOpenAmount] = useState(false);
 
 
+  // устанавливает стейт для открытия модального окна
   function handleStake(amount, days) {
     console.log(`%c staked ${amount} coins for ${days} days with ref ${referrer}`, 'color: green');
     setModalOpen(true);
   }
 
+  // получаем данные из редакса
   const chainId = useSelector(state => state.wallet.chainId);
   const Minted = useSelector(state => state.info.global.mintedCaseTokens);
   const address = useSelector(state => state.wallet.address);
-  console.log(chainId);
 
+
+  // расчеты для калькулятора выгоды
   const calculate = (amount, days) => {
 
     console.log(amount, days);
@@ -57,10 +59,13 @@ function Stake(props) {
 
   }
 
+  // хендл закрытия модального окна
   function setClose() {
     setModalOpen(false);
   }
 
+  // следит за тем, чтобы значения количества токенов для стейкинга и срока стейкинга входили в диапазон
+  // если не входят - включается подсветка определенного инпута
   function preHandle() {
     if (daysAmount > 29 && daysAmount < 1001) { handleStake(stakeAmount, daysAmount); setOpenDays(false); }
     else setOpenDays(true);
@@ -69,6 +74,7 @@ function Stake(props) {
     else setOpenAmount(true);
   }
 
+  // хендлы изменения значений в инпутах
   function handleChangeStake(event) {
     if (event.target.value !== "" && Number.isInteger(parseInt(event.target.value))) {
       setStakeAmount(parseInt(event.target.value));
@@ -85,6 +91,7 @@ function Stake(props) {
     else setDaysAmount(1);
   }
 
+  // нажатия на кнопки Max
   function handleDaysMax() {
     setDaysAmount(1000);
     calculate(stakeAmount, 1000);
@@ -95,10 +102,11 @@ function Stake(props) {
     calculate(balance, daysAmount);
   }
 
+  // действие при переходе на страницу
   React.useEffect(() => {
     calculate(stakeAmount, daysAmount);
     window.scrollTo(0, 0);
-  });
+  }, [stakeAmount, daysAmount]);
 
   return (
       <div className="tc-wrapper" id="stake-window">
