@@ -13,8 +13,6 @@ export default function RankModal(props) {
 
     async function handleRankUp() {
         console.log(loading);
-
-        await methods.init();
         await methods.instanceRankUp().then(function(result) {
             if (result !== undefined) {
                 console.log(result);

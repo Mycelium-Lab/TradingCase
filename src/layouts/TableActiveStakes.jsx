@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import { useSelector } from 'react-redux';
 import WithdrawModal from './WithdrawModal';
 
+//функция расчета дней до окончания 
 function getDays(value, timestamp) {
   var today = new Date(); // сегодня
   var start = new Date(timestamp*1000);
@@ -12,6 +13,8 @@ function getDays(value, timestamp) {
   return `${days}d ${hours}h ${minutes}m`;
 }
 
+
+//функция расчета прибыли, которую можно вывести
 const calculate = (amount, days, timestamp, withdrawn) => {
   var today = new Date(); // сегодня
   var start = new Date(parseInt(timestamp)*1000);
@@ -32,17 +35,19 @@ function TableActiveStakes(props) {
 
   if (activeStakes === undefined) activeStakes = [];
 
+  // функция которая вызывает модальное окно
   function handleWithdraw(idx, amount) {
-    console.log('withdraw', methods);
     setIdx(idx);
     setAmount(amount);
     setOpen(true);
   }
 
+  //хэндл закрытия модального окна
   function setClose() {
     setOpen(false);
   }
 
+  //обновление таблицы каждые 2 секунды
   const calculateTimeLeft = () => {
     let seconds = new Date().getTime();
     const difference = +new Date(seconds) - +new Date();
@@ -82,7 +87,7 @@ function TableActiveStakes(props) {
           </tr>
         </thead>
         <tbody>
-        {activeStakes.map(({stakeAmount, apy, stakeTimeInDays, withdrawnInterestAmount, interestAmount, stakeTimestamp, idx}, index) => (
+        {activeStakes.filter(row=>row.active===true).map(({stakeAmount, apy, stakeTimeInDays, withdrawnInterestAmount, interestAmount, stakeTimestamp, idx}, index) => (
           <tr key={index}>
             <td className="tg-0lax">{`${stakeAmount} CASE`}</td>
             <td className="tg-0lax">{`${(100*parseFloat(apy)).toFixed(2)}%`}</td>

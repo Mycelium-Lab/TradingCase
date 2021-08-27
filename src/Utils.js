@@ -9,7 +9,7 @@ const rankCase = '0x4fd9A8367f4Cb26A2FEe304610B241b2560125B3';
 
 export class contractMethods {
 
-    constructor(web) {
+    constructor(web, walletAddress) {
         this.web3 = web;
         this.CASE_PRECISION = 10 ** 8;
         this.CASE_10 = 1e1 * this.CASE_PRECISION;
@@ -18,18 +18,12 @@ export class contractMethods {
         this.CASE_10000 = 1e4 * this.CASE_PRECISION;
         this.ZERO_ADDR = "0x0000000000000000000000000000000000000000";
         this.SECONDS_IN_DAY = 86400;
-        this.account = ["0x0000000000000000000000000000000000000000"];
-        this.walletAddress = this.account[0];
         this.contractCase = new this.web3.eth.Contract(abiProxy, tokenCase);
         this.contractStake = new this.web3.eth.Contract(abiStake, stakeCase);
         this.contractRank = new this.web3.eth.Contract(abiRank, rankCase);
+        this.walletAddress = walletAddress;
     }
 
-    async init() {
-        this.account = await this.web3.eth.getAccounts();
-        this.walletAddress = this.account[0];
-        
-    }
 
     instanceStake(amount, days, ref) {
         if (ref===null) {
@@ -71,7 +65,13 @@ export class contractMethods {
     }
 
     async instanceWithdraw(idx) {
-      await this.contractStake.methods.withdraw(idx).send({from: this.walletAddress});
+        return new Promise((resolve, reject) => {
+            return this.contractStake.methods.withdraw(idx).send({from: this.walletAddress})
+                .on('receipt', function(receipt) {
+                    console.log('receipt', receipt);
+                    resolve(receipt);
+            });
+        });
     }
 
     async instanceRankUp() {

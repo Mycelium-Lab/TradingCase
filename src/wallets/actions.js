@@ -4,11 +4,11 @@ import Web3 from 'web3'
 import { contractMethods} from '../Utils.js';
 import WalletConnectProvider from '@walletconnect/web3-provider'
 
-const addProvider = (provider, provider_name, dispatch) => {
+const addProvider = (provider, provider_name, dispatch, address) => {
     window.web3 = new Web3(provider);
     dispatch(setProvider(provider));
     //window.web3.enable();
-    let methods = new contractMethods(window.web3);
+    let methods = new contractMethods(window.web3, address);
     dispatch(setMethods(methods));
     localStorage.setItem('caseCurrentProvider', provider_name)
 }
@@ -49,9 +49,10 @@ export const selectWallet = async (wallet, dispatch) => {
                   .request({ method: "eth_requestAccounts" })
                   .then((response) => {
                     dispatch(setAddress(response[0]))
+                    addProvider(window.ethereum, 'metaMask', dispatch, response[0])
                   })
     
-                addProvider(window.ethereum, 'metaMask', dispatch)
+                
                 addProviderListeners(window.ethereum, dispatch)
 
               } catch (err) {
@@ -80,9 +81,11 @@ export const selectWallet = async (wallet, dispatch) => {
                 
                 await provider.enable()
 
-                addProvider(provider, 'walletConnect', dispatch)
-
                 const accounts = await window.web3.eth.getAccounts()
+
+                addProvider(provider, 'walletConnect', dispatch, accounts[0])
+
+                
                 if (accounts) {
                     dispatch(setAddress(accounts[0]))
                 }

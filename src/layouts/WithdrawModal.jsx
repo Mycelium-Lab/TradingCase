@@ -9,21 +9,22 @@ export default function RankModal(props) {
     const {open, setClose, idx, amount} = props;
     const [isApproved, setIsApproved] = useState(0);
     const [loading, setLoading] = useState(false);
+    const [txHash, setTxHash] = useState('');
 
     async function handleWithdraw() {
-        console.log(loading);
 
-        await methods.init();
         await methods.instanceWithdraw(idx).then(function(result) {
-                console.log(result);
+            if (result !== undefined) {
+                setTxHash(result.transactionHash);
                 setLoading(false);
                 setIsApproved(1);
-                refetch();
+            }
         });
     }
 
 
     function close() {
+        setTxHash('');
         setLoading(false);
         setIsApproved(0);
         setClose();
@@ -52,6 +53,10 @@ export default function RankModal(props) {
                         loading ? 'Submitting transaction...' : getTextStatus()
                     }
                 </span>
+                {
+                    isApproved === 1 &&
+                    <a className='mt-2' href={`https://kovan.etherscan.io/tx/${txHash}`} style={{color:"#eabc4e"}}>View Transcation</a>
+                }
             </ModalBody>
             { isApproved !== 1 &&
             <ModalFooter style={{justifyContent: 'center'}}>

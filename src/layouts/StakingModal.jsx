@@ -12,10 +12,7 @@ export default function StakingModal(props) {
     const [loading, setLoading] = useState(false);
 
     async function handleApprove() {
-        console.log(loading);
-        console.log(`%c approve ${amount} coins`, 'color: green');
 
-        await methods.init();
         await methods.instanceApprove(amount).then(function(result) {
             if (result !== undefined) {
                 console.log(result);
@@ -23,7 +20,6 @@ export default function StakingModal(props) {
                 setIsApproved(1);
             }
             else {
-                console.log('undef');
                 setClose();
             }
         });
@@ -31,8 +27,6 @@ export default function StakingModal(props) {
 
     async function handleStake() {
 
-        console.log(`%c staked ${amount} coins for ${days} days with ref ${referrer}`, 'color: green');
-        //await methods.init();
         await methods.instanceStake(amount, days, referrer).then(function(result) {
             if (result !== undefined) {
                 console.log(result);

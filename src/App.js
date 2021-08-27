@@ -28,10 +28,14 @@ function App() {
   const [ref, setRef] = useState('0x0000000000000000000000000000000000000000');
 
   const dispatch = useDispatch()
+
+  // получение данных из редакса
   const address = useSelector(state => state.wallet.address);
   const info = useSelector(state => state.wallet.provider);
   const methods = useSelector(state => state.wallet.methods);
 
+
+  //хук для получения данных или смены провайдера, также для получения реферальной ссылки 
   useEffect(() => {
     const lastProvider = localStorage.getItem('caseCurrentProvider')
     if (!lastProvider) dispatch(openModal())
@@ -54,14 +58,11 @@ function App() {
   });
 
 
-  console.log(`%c My src: ${ref}`, 'color: orange')
-
   useEffect(() => {  // хук для обновления данных
     if (error) console.error(error);
     if (loading) return(<div>Loading...</div>);
     if (!loading) {
       if (data.caseUser != null) {
-        console.log('dispatch', data.caseUser);
         dispatch(setUser(data.caseUser));
       }
       dispatch(setGlobal(data.caseStakingPool));
@@ -69,11 +70,8 @@ function App() {
   
   },[data, error, loading]);
 
-  const start = async() => {
+  const start = async() => { // инициализация и получение баланса
     if (info != null) {
-
-      await methods.init();
-
       await methods.getBalance().then(function(result) {
         setBalance(result);
       });
