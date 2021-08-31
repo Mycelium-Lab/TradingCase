@@ -90,7 +90,7 @@ function ReferalProgress(props) {
           </div>
           <div className="referal-downlines">
             { canRankUp &&
-              <button disabled={chainId!=='42'} className="button referal-button rank-up" onClick={()=>rankUp()}>RankUp</button>
+              <button disabled={chainId!=='56'} className="button referal-button rank-up" onClick={()=>rankUp()}>RankUp</button>
             }
             <div>Downlines for rank up:</div>
             <div>

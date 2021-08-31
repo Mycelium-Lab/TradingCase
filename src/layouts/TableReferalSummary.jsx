@@ -86,7 +86,7 @@ function TableReferalSummary(props) {
                     </span>
                   </td>) : (
                   <td className="tg-0lax tc-tables-referal-last-column">
-                    <button disabled={chainId!=='42'} id="activate" className="button referal-button" onClick={()=>handleChange('stake')}>
+                    <button disabled={chainId!=='56'} id="activate" className="button referal-button" onClick={()=>handleChange('stake')}>
                       Activate
                     </button>
                   </td>

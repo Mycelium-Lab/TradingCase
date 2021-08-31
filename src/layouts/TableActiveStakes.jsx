@@ -96,7 +96,7 @@ function TableActiveStakes(props) {
             <td className="tg-0lax">{`${calculate(interestAmount, stakeTimeInDays, stakeTimestamp, withdrawnInterestAmount).toFixed(8)} CASE`}</td>
             <td className="tg-0lax">{`${parseFloat(interestAmount).toFixed(2)} CASE`}</td>
             <td className="tg-0lax">{`${(parseFloat(interestAmount) + parseFloat(stakeAmount)).toFixed(2)} CASE`}</td>
-            <td className="tg-0lax" style={{width:85}}><button disabled={chainId!=='42'} className="button referal-button" onClick={()=>handleWithdraw(idx, calculate(interestAmount, stakeTimeInDays, stakeTimestamp, withdrawnInterestAmount).toFixed(2))}>Claim Rewards</button></td>
+            <td className="tg-0lax" style={{width:85}}><button disabled={chainId!=='56'} className="button referal-button" onClick={()=>handleWithdraw(idx, calculate(interestAmount, stakeTimeInDays, stakeTimestamp, withdrawnInterestAmount).toFixed(2))}>Claim Rewards</button></td>
           </tr>
         ))}
         </tbody>

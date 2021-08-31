@@ -134,7 +134,7 @@ function Stake(props) {
                 </div>
                 <span className="description">Min. 30 days/ Max. 1,000 days</span>
               </div>
-              <button id="stake-case-button" className="button" disabled={chainId!=='42' || address===''} onClick={() => preHandle()} >STAKE</button>
+              <button id="stake-case-button" className="button" disabled={chainId!=='56' || address===''} onClick={() => preHandle()} >STAKE</button>
             </div>
           </div>
           <StakeDetails referrer={referrer} BiggerBonus={BiggerBonus} LongerBonus={LongerBonus} EarlyBonus={EarlyBonus} apy={apy} RewardTotal={RewardTotal} />
