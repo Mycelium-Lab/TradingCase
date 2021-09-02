@@ -8,20 +8,24 @@ function sum(arr, key) {
 
 function threeCommas(str) {
   var num = str.toString().split('.');
-  return `${num[0].replace(/\B(?=(\d{3})+(?!\d))/g, " ")}.${num[1]!==undefined ? num[1].slice(0,2) : ''}`;
+  return `${num[0].replace(/\B(?=(\d{3})+(?!\d))/g, " ")}.${num[1]!==undefined ? num[1].slice(0,2) : '00'}`;
 }
 
 function MainInfo(props) {  
 
   const user = useSelector(state => state.info.user);
-  var totalStaked = useSelector(state => state.info.global.stakeAmount);
+  var total = useSelector(state => state.info.global);
 
   var avgAPY = 0.00;
   var totalInterest = 0.00;
   var lifetimeRewards = 0.00;
+  var totalStaked = 0.00
 
-  if (totalStaked === undefined) {
-    totalStaked = 0.00;
+  console.log(total)
+  if (total!==null){
+    if (Object.keys(total).length !== 0) {
+      totalStaked = total.stakeAmount;
+    }
   }
 
   if (Object.keys(user).length !== 0) {

@@ -127,7 +127,7 @@ header {
     margin-right: 5.938vw;
 }
 
-.header .menu li button {
+.header .menu li button,a {
     font-family: 'HelveticaNeueCyr';
     font-style: normal;
     font-weight: normal;
@@ -164,6 +164,21 @@ header {
     fill: #626262;
 }
 
+.header .menu li:last-child a {
+    margin-right: 0;
+}
+
+.header .menu li a:hover {
+    text-shadow: 0 0 0.042vw #CACACA, 0 0 0.042vw #CACACA;
+    color: #CACACA;
+}
+
+.header .menu li a .icon {
+    margin-right: 0.677vw;
+    display: flex;
+    fill: #626262;
+}
+
 .header .menu li:nth-child(1) button .icon {
     width: 0.521vw;
     height: 0.938vw;
@@ -180,6 +195,30 @@ header {
 }
 
 .header .menu button:hover .icon {
+    transition: 0.2s;
+    -webkit-transition: 0.2s;
+    -moz-transition: 0.2s;
+    -ms-transition: 0.2s;
+    -o-transition: 0.2s;
+    fill: #CACACA;
+}
+
+.header .menu li:nth-child(1) a .icon {
+    width: 0.521vw;
+    height: 0.938vw;
+}
+
+.header .menu li:nth-child(2) a .icon {
+    width: 1.042vw;
+    height: 0.781vw;
+}
+
+.header .menu li:nth-child(3) a .icon {
+    width: 1.042vw;
+    height: 0.781vw;
+}
+
+.header .menu a:hover .icon {
     transition: 0.2s;
     -webkit-transition: 0.2s;
     -moz-transition: 0.2s;
@@ -1296,7 +1335,7 @@ header {
 .stake-case-input {
     margin-bottom: 1.406vw
 }
-.stake-case-input span:first-child{
+.stake-case-input span:first-child {
     font-size: 0.938vw;
     line-height: 1.094vw;
     color: #8687A7;
@@ -1308,7 +1347,9 @@ header {
     line-height: 1.094vw;
     color: #000000;
 }
-.stake-case-input .description div {
+.stake-case-input .description a {
+    font-size: 0.625vw;
+    line-height: 1.094vw;
     color: #45CB85;
     display: inline;
 }

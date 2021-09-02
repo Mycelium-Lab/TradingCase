@@ -30,7 +30,7 @@ export default function RankModal(props) {
             case 0:
                 return `Withdraw ${amount} CASE`
             case 1:
-                return `Successfully withdrew ${amount}`;
+                return `Successfully withdrew ${amount} CASE`;
             default:
                 return '';
         }

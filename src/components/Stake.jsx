@@ -27,7 +27,7 @@ function Stake(props) {
   const [ RewardTotal, setRewardTotal ] =useState(0);
   const [ openDays, setOpenDays] = useState(false);
   const [ openAmount, setOpenAmount] = useState(false);
-
+  var Minted = 0;
 
   // устанавливает стейт для открытия модального окна
   function handleStake(amount, days) {
@@ -37,9 +37,21 @@ function Stake(props) {
 
   // получаем данные из редакса
   const chainId = useSelector(state => state.wallet.chainId);
-  const Minted = useSelector(state => state.info.global.mintedCaseTokens);
+  const total = useSelector(state => state.info.global);
   const address = useSelector(state => state.wallet.address);
 
+
+  if (total!==null){
+    if (Object.keys(total).length !== 0) {
+      Minted = total.mintedCaseTokens;
+    }
+  }
+
+  function handleChange(page) {
+    window.history.pushState(page, 'Title', `/${page}`);
+    const navEvent = new PopStateEvent('popstate');
+    window.dispatchEvent(navEvent);
+  }
 
   // расчеты для калькулятора выгоды
   const calculate = (amount, days) => {
@@ -62,6 +74,7 @@ function Stake(props) {
   // хендл закрытия модального окна
   function setClose() {
     setModalOpen(false);
+    handleChange('staking');
   }
 
   // следит за тем, чтобы значения количества токенов для стейкинга и срока стейкинга входили в диапазон
@@ -70,7 +83,7 @@ function Stake(props) {
     if (daysAmount > 29 && daysAmount < 1001) { handleStake(stakeAmount, daysAmount); setOpenDays(false); }
     else setOpenDays(true);
 
-    if (daysAmount > 1) { handleStake(stakeAmount, daysAmount); setOpenAmount(false); }
+    if (stakeAmount > 1) { handleStake(stakeAmount, daysAmount); setOpenAmount(false); }
     else setOpenAmount(true);
   }
 
@@ -110,7 +123,7 @@ function Stake(props) {
 
   return (
       <div className="tc-wrapper" id="stake-window">
-      { modalOpen &&
+      { (modalOpen && !openAmount && !openDays) &&
         <StakingModal amount={stakeAmount} setClose={setClose} days={daysAmount} referrer={referrer} />
       }
       <div className="container">
@@ -124,7 +137,11 @@ function Stake(props) {
                   <input type="text" value={stakeAmount} style={{boxShadow: openAmount ? `0 0 3px #CC0000` : 'none'}} onChange={handleChangeStake} />
                   <button className="button input-button" onClick={()=>handleStakeMax()}>MAX</button>
                 </div>
-                <span className="description">{balance + " CASE available - "}<div>Buy</div></span>
+                <span className="description">{balance + " CASE available - "}
+                  <a href="https://swapcase.io/">
+                    Buy
+                  </a>
+                </span>
               </div>
               <div className="stake-case-input">
                 <span>Stake time in days</span>

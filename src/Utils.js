@@ -4,9 +4,9 @@ export { findGetParameter,commissionToStaked };
 
 
 //адреса контрактов токенов
-const tokenCase = '0x33356568c72C1231897aE7B49a448BD0FE74B503';
-const stakeCase = '0x23F9D8f999D103265bE54596fF8C359dC5e3e970';
-const rankCase = '0x4fd9A8367f4Cb26A2FEe304610B241b2560125B3';
+const tokenCase = '0x5cafe85d8983f61C059df359c504F1Bab8009e9e';
+const stakeCase = '0x5a179BD986f1DCCbADd940A8c5DC6aa5Ce5dFF3C';
+const rankCase = '0x91Ac0cc63eA781fBe31CD925Ae7B94FA254E6ffA';
 
 
 export class contractMethods {
