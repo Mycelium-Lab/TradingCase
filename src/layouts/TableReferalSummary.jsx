@@ -41,7 +41,7 @@ function TableReferalSummary(props) {
     }
 
     function handleChange(page) {
-      window.history.pushState(page, 'Title', `/${page}`);
+      window.history.pushState(page, 'Title', `/staking/${page}`);
       const navEvent = new PopStateEvent('popstate');
       window.dispatchEvent(navEvent);
     }

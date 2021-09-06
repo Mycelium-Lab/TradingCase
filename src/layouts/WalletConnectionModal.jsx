@@ -86,7 +86,7 @@ export default function WalletConnectionModal() {
                     </div>
                 </WalletContainer>
                 <div className="mt-3 alert alert-warning" role="alert">
-                    Please also make sure that your selected network is  <a href="https://www.binance.org/en/smartChain" className="alert-link">Binance Smart Chain Mainnet</a> (ChainID: 56 / 0x38).
+                    Please also make sure that your selected network is  <span onClick={() => window.open('https://www.binance.org/en/smartChain')} className="alert-link">Binance Smart Chain Mainnet</span> (ChainID: 56 / 0x38).
                 </div>
             </ModalBody>
             <ModalFooter>
@@ -95,7 +95,7 @@ export default function WalletConnectionModal() {
                     { 
                         tipsOpen && 
                         <span className="span__wallet-explanation">
-                            Wallets are used to send, receive, and store digital assets like Ether. Wallets come in many forms. They are either built into your browser, an extension added to your browser, a piece of hardware plugged into your computer or even an app on your phone. For more information about wallets, see <a href="https://docs.ethhub.io/using-ethereum/wallets/intro-to-ethereum-wallets/">this</a> explanation.
+                            Wallets are used to send, receive, and store digital assets like Ether. Wallets come in many forms. They are either built into your browser, an extension added to your browser, a piece of hardware plugged into your computer or even an app on your phone. For more information about wallets, see <span style={{color: '#', fontWeight: 'bold'}} onClick={()=>window.open('https://docs.ethhub.io/using-ethereum/wallets/intro-to-ethereum-wallets/')}>this</span> explanation.
                         </span>
                     }
                 </TipsContainer>

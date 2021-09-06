@@ -88,17 +88,20 @@ function App() {
       <Route path="/staking">
         <Staking refetch={refetch}/>
       </Route>
-      <Route path="/">
+      <Route path="/staking/staking">
         <Staking refetch={refetch}/>
       </Route>
-      <Route path="/invite">
-        <Invite canRankUp={canRankUp} />
+      <Route path="/staking/">
+        <Staking refetch={refetch}/>
       </Route>
-      <Route path="/stake">
+      <Route path="/staking/invite">
+        <Invite/>
+      </Route>
+      <Route path="/staking/stake">
         <Stake balance={balance} referrer={ref} />
       </Route>
       <Route>
-        <NotFound/>
+        <NotFound />
       </Route>
     </div>
     

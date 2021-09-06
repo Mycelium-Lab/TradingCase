@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 const Route = ({ path, children }) => {
-    const paths = ['/', '/stake', '/staking', '/invite']
+    const paths = ['/staking/staking', '/staking/', '/staking', '/staking/invite','/staking/stake']
     const [currentPath, setCurrentPath] = useState(window.location.pathname);
     useEffect(() => {
         

@@ -47,12 +47,6 @@ function Stake(props) {
     }
   }
 
-  function handleChange(page) {
-    window.history.pushState(page, 'Title', `/${page}`);
-    const navEvent = new PopStateEvent('popstate');
-    window.dispatchEvent(navEvent);
-  }
-
   // расчеты для калькулятора выгоды
   const calculate = (amount, days) => {
 
@@ -74,7 +68,6 @@ function Stake(props) {
   // хендл закрытия модального окна
   function setClose() {
     setModalOpen(false);
-    handleChange('staking');
   }
 
   // следит за тем, чтобы значения количества токенов для стейкинга и срока стейкинга входили в диапазон

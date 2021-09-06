@@ -12,7 +12,7 @@ export default function StakeFaq(props) {
 	          </div>
 	          <div>
 	            <span>What are the benefits to stake CASE?</span>
-	            <span>When do I get the CASE Rewards?</span>
+	            <span>You earn additional CASE while staking.</span>
 	          </div>                    
 	        </div>
 	        <div className="stake-case-faq-qa">

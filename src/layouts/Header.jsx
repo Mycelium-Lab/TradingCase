@@ -44,7 +44,7 @@ function Header(props) {
   if (Object.keys(data).length === 0) validData = false;
 
   function handleChange(page) {
-    window.history.pushState(page, 'Title', `/${page}`);
+    window.history.pushState(page, 'Title', `/staking/${page}`);
     const navEvent = new PopStateEvent('popstate');
     window.dispatchEvent(navEvent);
   }

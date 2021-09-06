@@ -10,6 +10,12 @@ export default function StakingModal(props) {
     const [txHash, setTxHash] = useState('');
     const [loading, setLoading] = useState(false);
 
+    function handleChange(page) {
+        window.history.pushState(page, 'Title', `/staking/${page}`);
+        const navEvent = new PopStateEvent('popstate');
+        window.dispatchEvent(navEvent);
+      }
+
     // вызывает метод аппрува
     async function handleApprove() {
 
@@ -35,7 +41,12 @@ export default function StakingModal(props) {
                 setIsApproved(2);
             }
         });
-      }
+    }
+
+    function close() {
+        if (isApproved===2) handleChange('staking');
+        setClose();
+    }
 
     function getTextStatus() {
         switch (isApproved) {
@@ -51,8 +62,8 @@ export default function StakingModal(props) {
     }
 
     return (
-        <Modal isOpen={true} toggle={setClose} centered={true} size='md' style={{padding: '1rem'}}>
-            <ModalHeader toggle={setClose}>    
+        <Modal isOpen={true} toggle={close} centered={true} size='md' style={{padding: '1rem'}}>
+            <ModalHeader toggle={close}>    
                 Confirm Staking
             </ModalHeader>
             <ModalBody style={{justifyContent: 'center', textAlign: 'center', display:'flex', alignItems: 'center', flexDirection: 'column'}}>
@@ -76,7 +87,7 @@ export default function StakingModal(props) {
             }
             { isApproved === 2 &&
             <ModalFooter style={{justifyContent: 'center'}}>
-                <button id="stake-case-button" className="button" style={{width:85, fontSize:14}} onClick={()=>setClose()}>Close</button>
+                <button id="stake-case-button" className="button" style={{width:85, fontSize:14}} onClick={()=>close()}>Close</button>
             </ModalFooter>
             }
 

@@ -11,7 +11,7 @@ function threeCommas(str) {
   return `${num[0].replace(/\B(?=(\d{3})+(?!\d))/g, " ")}.${num[1]!==undefined ? num[1].slice(0,2) : '00'}`;
 }
 
-function MainInfo(props) {  
+function MainInfo(props) {
 
   const user = useSelector(state => state.info.user);
   var total = useSelector(state => state.info.global);
@@ -37,13 +37,11 @@ function MainInfo(props) {
   }
 
   function handleChange(page) {
-    window.history.pushState(page, 'Title', `/${page}`);
+    window.history.pushState(page, 'Title', `/staking/${page}`);
     const navEvent = new PopStateEvent('popstate');
     window.dispatchEvent(navEvent);
   }
 
-
-  
   return (
     <div className="tc-main-info">
           <div className="tc-main-info-balance">
