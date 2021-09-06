@@ -792,6 +792,16 @@ header {
         display: none;
     }
 
+    .header .menu li a {
+        font-size: 13px;
+        padding: 1.15rem 1.1rem;
+        margin-right: 0;
+    }
+
+    .header .menu li a .icon {
+        display: none;
+    }
+
     .nav-left img {
         display: none;
     }
