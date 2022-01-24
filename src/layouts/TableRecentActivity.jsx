@@ -25,7 +25,7 @@ function TableRecentActivity(props) {
               <tr key={index}>
                 <td className="tg-0lax">{unixToNormal(timestamp)[0]}<br/>{unixToNormal(timestamp)[1]}</td>
                 <td className="tg-0lax">{typeWithSpaces(type)}<br/>
-                  <a href={`https://kovan.etherscan.io/tx/${txHash}`} style={{color:"#eabc4e"}}>
+                  <a href={`https://bscscan.com/tx/${txHash}`} style={{color:"#eabc4e"}}>
                     Tx details&nbsp;
                     <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width={8} height={8} viewBox="0 0 16 16" fill="none">
                       <path d="M14 16v-11l-1 1v9h-12v-12h9l1-1h-11v14z" fill="#eabc4e"></path>

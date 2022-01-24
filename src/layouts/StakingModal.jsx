@@ -75,7 +75,7 @@ export default function StakingModal(props) {
                 </span>
                 {
                     isApproved === 2 &&
-                    <a className='mt-2' href={`https://kovan.etherscan.io/tx/${txHash}`} style={{color:"#eabc4e"}}>View Transcation</a>
+                    <a className='mt-2' href={`https://bscscan.com/tx/${txHash}`} style={{color:"#eabc4e"}}>View Transcation</a>
                 }
 
             </ModalBody>

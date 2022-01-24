@@ -78,12 +78,12 @@ function TableActiveStakes(props) {
       <table className="tg tg-scrollable-table tg-recent-activity" style={{textAlign:"center"}}>
         <thead>
           <tr>
-            <th className="tg-0pky">Staked Case</th>
-            <th className="tg-0lax">Apy</th>
-            <th className="tg-0lax">Lock - Up Left</th>
+            <th className="tg-0pky">Staked CASE</th>
+            <th className="tg-0lax">APY</th>
+            <th className="tg-0lax">Estimate TVL</th>
             <th className="tg-0lax">Claimable Rewards</th>
             <th className="tg-0lax">Total Rewards</th>
-            <th className="tg-0lax">Total Case</th>
+            <th className="tg-0lax">Total CASE</th>
             <th className="tg-0lax tc-tables-referal-last-column" style={{width:85}}>Actions</th>
           </tr>
         </thead>

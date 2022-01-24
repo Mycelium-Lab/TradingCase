@@ -106,7 +106,7 @@ function ReferalProgress(props) {
           </div>
           <div className="referal-link-copy">
             <div>Referal link:</div>
-            <div id="copy-referal-link">{`http://${window.location.host}/?src=${wallet.toLowerCase()}`}</div>
+            <div id="copy-referal-link">{`https://${window.location.host}/staking?src=${wallet.toLowerCase()}`}</div>
             <button id="referal-copy" className="button referal-button" onClick={()=>{navigator.clipboard.writeText(`http://${window.location.host}/?src=${wallet.toLowerCase()}`)}}>Copy</button>
           </div>
         </div>
