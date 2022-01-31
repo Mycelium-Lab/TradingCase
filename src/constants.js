@@ -33,9 +33,9 @@ const typeWithSpaces = (word) => {
             case "CreateStake":
                 return "Staked";
             case "WithdrawReward":
-                return "Withdrew Reward";
+                return "Withdraw reward";
             default:
-                return "Withdrew Stake";
+                return "Withdraw stake";
         }
 }
 

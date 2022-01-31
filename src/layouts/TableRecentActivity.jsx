@@ -11,7 +11,7 @@ function TableRecentActivity(props) {
   return (
   
         <div className="tc-info-block">
-          <span>Recent Activity</span>
+          <span>Recent activity</span>
           <table className="tg tg-recent-activity">
             <thead>
               <tr>

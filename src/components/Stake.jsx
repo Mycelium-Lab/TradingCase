@@ -137,7 +137,7 @@ function Stake(props) {
                 </span>
               </div>
               <div className="stake-case-input">
-                <span>Stake time in days</span>
+                <span>Stake time</span>
                 <div>
                   <input type="text" value={ daysAmount } style={{boxShadow: openDays ? `0 0 3px #CC0000` : 'none'}} min={30} max={1000} onChange={ handleChangeDays }/>
                   <button className="button input-button" onClick={()=>handleDaysMax()}>MAX</button>
