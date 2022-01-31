@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux'
 export default function StakingModal(props) {
     const methods = useSelector(state => state.wallet.methods);
 
-    const { amount, days, referrer, setClose} = props;
+    const { amount, days, referrer, setClose, start } = props;
     const [isApproved, setIsApproved] = useState(0);
     const [txHash, setTxHash] = useState('');
     const [loading, setLoading] = useState(false);
@@ -39,6 +39,8 @@ export default function StakingModal(props) {
                 setTxHash(result);
                 setLoading(false);
                 setIsApproved(2);
+                start();
+
             }
         });
     }

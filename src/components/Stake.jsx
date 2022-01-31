@@ -16,7 +16,7 @@ const PEAK_PRE = 10 ** 8;
 
 function Stake(props) {
 
-  const { balance, referrer } = props;
+  const { balance, referrer, start } = props;
   const [modalOpen, setModalOpen] = useState(false);
   const [ daysAmount, setDaysAmount ] = useState(1000);
   const [ stakeAmount, setStakeAmount ] = useState(10);
@@ -117,7 +117,7 @@ function Stake(props) {
   return (
       <div className="tc-wrapper" id="stake-window">
       { (modalOpen && !openAmount && !openDays) &&
-        <StakingModal amount={stakeAmount} setClose={setClose} days={daysAmount} referrer={referrer} />
+        <StakingModal amount={stakeAmount} setClose={setClose} days={daysAmount} referrer={referrer} start={start}/>
       }
       <div className="container">
         <div className="stake-case">

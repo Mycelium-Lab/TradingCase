@@ -98,7 +98,7 @@ function App() {
         <Invite/>
       </Route>
       <Route path="/staking/stake">
-        <Stake balance={balance} referrer={ref} />
+        <Stake balance={balance} referrer={ref} start={start}/>
       </Route>
       <Route>
         <NotFound />
